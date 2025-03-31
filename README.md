@@ -2,6 +2,8 @@
 
 A robust, enterprise-grade PowerShell framework for automating Microsoft Graph API operations across multiple tenant environments. Designed specifically for Managed Service Providers (MSPs) and organizations managing multiple Microsoft 365 tenants, this solution provides comprehensive security and compliance reporting, advanced error handling, and seamless resumability for mission-critical operations.
 
+Created by Louis de Klerk (Netsurit) on 31 March 2025.
+
 ## Table of Contents
 
 - [Features](#features)
