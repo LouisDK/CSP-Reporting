@@ -13,6 +13,7 @@ A robust, enterprise-grade PowerShell framework for automating Microsoft Graph A
 - [Report Types](#report-types)
 - [Scheduling](#scheduling)
 - [Resilient Operations](#resilient-operations)
+- [User Experience Enhancements](#user-experience-enhancements)
 - [Troubleshooting](#troubleshooting)
 - [Security Considerations](#security-considerations)
 - [Additional Documentation](#additional-documentation)
@@ -33,6 +34,9 @@ A robust, enterprise-grade PowerShell framework for automating Microsoft Graph A
 - **Certificate Management**: Automatic certificate validation and renewal detection
 - **Modular Design**: Easily extend with additional report types or custom functionality
 - **Tenant Isolation**: Errors in one tenant don't affect operations in others
+- **Enhanced Module Management**: Automatic detection, installation, and updating of required modules
+- **Color-Coded Output**: Visual indicators for status, errors, and progress
+- **Automated Consent**: Streamlined admin consent process for multi-tenant deployments
 
 ## Prerequisites
 
@@ -44,7 +48,20 @@ A robust, enterprise-grade PowerShell framework for automating Microsoft Graph A
 ## Installation
 
 1. Clone or download this repository to your local machine
-2. Install required PowerShell modules:
+2. Use our enhanced module management script to set up all required modules:
+
+```powershell
+.\Initialize-CSPModules.ps1
+```
+
+This script will:
+- Check for all required modules
+- Install any missing modules
+- Update modules if newer versions are available
+- Remove older versions of modules
+- Report detailed status of module management
+
+Alternatively, you can install modules manually:
 
 ```powershell
 Install-Module -Name Microsoft.Graph -Scope CurrentUser -Force
@@ -246,6 +263,24 @@ Client secret authentication is simpler to set up but requires periodic secret r
 
 For more details, see the [App Registration Guide - Client Secret Authentication](AppRegistration-Guide.md#option-b-client-secret-authentication-alternative) section.
 
+### Admin Consent Automation
+
+Our enhanced `Grant-CSPAdminConsent.ps1` script now provides automated consent capabilities:
+
+```powershell
+# Test admin consent status only
+.\Grant-CSPAdminConsent.ps1 -TestOnly
+
+# Attempt automated consent for all tenants
+.\Grant-CSPAdminConsent.ps1 -AutoConsent
+```
+
+This automated process:
+- Tests if admin consent has already been granted
+- Automatically submits admin consent requests
+- Provides fallback manual consent URLs if automation fails
+- Reports detailed consent status for each tenant
+
 ## Report Types
 
 ### MFA Status Report
@@ -338,6 +373,30 @@ Real-time progress tracking provides visibility into long-running operations:
 - **Time Estimates**: Estimated time remaining for operations
 - **Tenant Isolation**: Separate progress tracking for each tenant
 
+## User Experience Enhancements
+
+The framework includes several user experience enhancements for better usability and visual feedback:
+
+### Module Management
+
+The framework includes comprehensive module management to ensure all dependencies are properly installed and updated:
+
+```powershell
+# Check and initialize specific modules
+$requiredModules = @("Microsoft.Graph", "Az.Accounts")
+Initialize-CSPModules -ModuleNames $requiredModules
+
+# Force reinstallation of modules
+Initialize-CSPModules -ModuleNames $requiredModules -Force
+```
+
+This functionality:
+- Automatically detects missing modules
+- Installs required modules
+- Updates modules to the latest version
+- Removes older versions to prevent conflicts
+- Provides detailed status reporting
+
 ## Troubleshooting
 
 ### Common Issues
@@ -372,6 +431,7 @@ The solution provides comprehensive logging for troubleshooting:
 - **Verbosity Control**: Configure the level of detail in logs
 - **Transcript Logging**: Full transcript of operations for debugging
 - **Console Output**: Real-time status information during execution
+- **Color-Coded Logs**: Visual categorization of log messages by severity
 
 Log files are stored in the `Logs` directory by default, and each run creates a transcript log with detailed information. Use the `-Verbose` parameter for more detailed console output.
 
@@ -391,8 +451,11 @@ For comprehensive security best practices, refer to the [App Registration Guide 
 - [App Registration Guide](AppRegistration-Guide.md) - Detailed guide for creating and configuring the App Registration, including security best practices and troubleshooting
 - [Setup-CSPCertificates.ps1](Setup-CSPCertificates.ps1) - Script for setting up certificates for authentication
 - [Grant-CSPAdminConsent.ps1](Grant-CSPAdminConsent.ps1) - Script for granting admin consent in each tenant
+- [Initialize-CSPModules.ps1](Initialize-CSPModules.ps1) - Script for managing module dependencies
 - [Examples/Generate-TenantReport.ps1](Examples/Generate-TenantReport.ps1) - Example script for generating reports for a specific tenant
 - [Examples/Export-ReportsToDB.ps1](Examples/Export-ReportsToDB.ps1) - Example script for exporting reports to a SQL database
+- [Examples/Write-CSPColorDemo.ps1](Examples/Write-CSPColorDemo.ps1) - Demonstration of color-coded terminal output
+- [Enhancements.md](Enhancements.md) - Detailed documentation of recent enhancements
 - [Design.md](Design.md) - Detailed design documentation for the framework
 
 ## Contributing
@@ -408,5 +471,6 @@ The framework is designed to be easily extended with additional functionality:
 - **Integration Points**: Integrate with other systems via the extensible output mechanisms
 - **Custom Authentication**: Add support for additional authentication methods
 - **Pipeline Integration**: Incorporate into CI/CD pipelines for automated compliance checks
+- **UI Customization**: Leverage the color-coding capabilities for enhanced visual output
 
 This modular architecture allows you to adapt the framework to your specific requirements without modifying the core components.

@@ -20,6 +20,10 @@ $script:ProcessState = @{
     LastProgressUpdate = $null
 }
 
+# Store the original terminal colors
+$script:OriginalForegroundColor = $null
+$script:OriginalBackgroundColor = $null
+
 #region Public Functions
 function Initialize-CSPProcessState {
     <#
@@ -501,14 +505,17 @@ function Write-CSPLog {
         [string]$Message,
         
         [Parameter(Mandatory = $false)]
-        [ValidateSet("INFO", "WARNING", "ERROR", "DEBUG")]
+        [ValidateSet("INFO", "WARNING", "ERROR", "DEBUG", "SUCCESS")]
         [string]$Level = "INFO",
         
         [Parameter(Mandatory = $false)]
         [string]$LogFilePath,
         
         [Parameter(Mandatory = $false)]
-        [switch]$NoConsole
+        [switch]$NoConsole,
+        
+        [Parameter(Mandatory = $false)]
+        [switch]$UseColor
     )
     
     try {
@@ -518,21 +525,26 @@ function Write-CSPLog {
         
         # Write to console if not suppressed
         if (-not $NoConsole) {
-            switch ($Level) {
-                "INFO" {
-                    Write-Host $logMessage -ForegroundColor White
+            if ($UseColor) {
+                # Use color coding based on level
+                switch ($Level) {
+                    "INFO" { Write-CSPColorMessage -Message $logMessage -ForegroundColor White }
+                    "WARNING" { Write-CSPColorMessage -Message $logMessage -ForegroundColor Yellow }
+                    "ERROR" { Write-CSPColorMessage -Message $logMessage -ForegroundColor Red }
+                    "DEBUG" { Write-CSPColorMessage -Message $logMessage -ForegroundColor Gray }
+                    "SUCCESS" { Write-CSPColorMessage -Message $logMessage -ForegroundColor Green }
+                    default { Write-Host $logMessage }
                 }
-                "WARNING" {
-                    Write-Host $logMessage -ForegroundColor Yellow
-                }
-                "ERROR" {
-                    Write-Host $logMessage -ForegroundColor Red
-                }
-                "DEBUG" {
-                    Write-Host $logMessage -ForegroundColor Gray
-                }
-                default {
-                    Write-Host $logMessage
+            }
+            else {
+                # Use standard Write-Host with colors
+                switch ($Level) {
+                    "INFO" { Write-Host $logMessage -ForegroundColor White }
+                    "WARNING" { Write-Host $logMessage -ForegroundColor Yellow }
+                    "ERROR" { Write-Host $logMessage -ForegroundColor Red }
+                    "DEBUG" { Write-Host $logMessage -ForegroundColor Gray }
+                    "SUCCESS" { Write-Host $logMessage -ForegroundColor Green }
+                    default { Write-Host $logMessage }
                 }
             }
         }
@@ -817,7 +829,551 @@ function Test-CSPModuleAvailability {
         return $null
     }
 }
+
+#region New Functions from Alternative Script
+
+function Initialize-CSPTerminalColors {
+    <#
+    .SYNOPSIS
+        Initializes the terminal colors for color-coded output.
+    
+    .DESCRIPTION
+        Saves the current terminal foreground and background colors to restore them later.
+    
+    .EXAMPLE
+        Initialize-CSPTerminalColors
+    #>
+    [CmdletBinding()]
+    param()
+    
+    try {
+        $script:OriginalForegroundColor = $Host.UI.RawUI.ForegroundColor
+        $script:OriginalBackgroundColor = $Host.UI.RawUI.BackgroundColor
+        
+        Write-Verbose "Initialized terminal colors. Original FG: $($script:OriginalForegroundColor), BG: $($script:OriginalBackgroundColor)"
+        
+        return $true
+    }
+    catch {
+        Write-Error "Error initializing terminal colors: $_"
+        return $false
+    }
+}
+
+function Set-CSPTerminalColors {
+    <#
+    .SYNOPSIS
+        Sets the terminal colors for color-coded output.
+    
+    .DESCRIPTION
+        Sets the foreground and/or background colors of the terminal.
+    
+    .PARAMETER ForegroundColor
+        The foreground color to set.
+    
+    .PARAMETER BackgroundColor
+        The background color to set.
+    
+    .PARAMETER RestoreOriginal
+        If specified, restores the original terminal colors.
+    
+    .EXAMPLE
+        Set-CSPTerminalColors -ForegroundColor White -BackgroundColor Blue
+    #>
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $false)]
+        [System.ConsoleColor]$ForegroundColor,
+        
+        [Parameter(Mandatory = $false)]
+        [System.ConsoleColor]$BackgroundColor,
+        
+        [Parameter(Mandatory = $false)]
+        [switch]$RestoreOriginal
+    )
+    
+    try {
+        if ($RestoreOriginal) {
+            if ($script:OriginalForegroundColor -ne $null) {
+                $Host.UI.RawUI.ForegroundColor = $script:OriginalForegroundColor
+            }
+            
+            if ($script:OriginalBackgroundColor -ne $null) {
+                $Host.UI.RawUI.BackgroundColor = $script:OriginalBackgroundColor
+            }
+        }
+        else {
+            if ($PSBoundParameters.ContainsKey('ForegroundColor')) {
+                $Host.UI.RawUI.ForegroundColor = $ForegroundColor
+            }
+            
+            if ($PSBoundParameters.ContainsKey('BackgroundColor')) {
+                $Host.UI.RawUI.BackgroundColor = $BackgroundColor
+            }
+        }
+        
+        return $true
+    }
+    catch {
+        Write-Error "Error setting terminal colors: $_"
+        return $false
+    }
+}
+
+function Write-CSPColorMessage {
+    <#
+    .SYNOPSIS
+        Writes a colored message to the console.
+    
+    .DESCRIPTION
+        Writes a message to the console with the specified colors, restoring the original colors afterward.
+    
+    .PARAMETER Message
+        The message to write.
+    
+    .PARAMETER ForegroundColor
+        The foreground color for the message.
+    
+    .PARAMETER BackgroundColor
+        The background color for the message.
+    
+    .PARAMETER Type
+        A predefined color scheme type. Valid values are "Info", "Warning", "Error", "Success".
+    
+    .EXAMPLE
+        Write-CSPColorMessage -Message "This is an error" -Type Error
+    
+    .EXAMPLE
+        Write-CSPColorMessage -Message "Custom colors" -ForegroundColor Yellow -BackgroundColor Blue
+    #>
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, Position = 0)]
+        [string]$Message,
+        
+        [Parameter(Mandatory = $false)]
+        [System.ConsoleColor]$ForegroundColor,
+        
+        [Parameter(Mandatory = $false)]
+        [System.ConsoleColor]$BackgroundColor,
+        
+        [Parameter(Mandatory = $false)]
+        [ValidateSet("Info", "Warning", "Error", "Success")]
+        [string]$Type
+    )
+    
+    try {
+        # Initialize colors if not already done
+        if ($script:OriginalForegroundColor -eq $null -or $script:OriginalBackgroundColor -eq $null) {
+            Initialize-CSPTerminalColors
+        }
+        
+        # Save current colors to restore
+        $currentFG = $Host.UI.RawUI.ForegroundColor
+        $currentBG = $Host.UI.RawUI.BackgroundColor
+        
+        # Set colors based on type or parameters
+        if ($Type) {
+            switch ($Type) {
+                "Info" {
+                    $Host.UI.RawUI.ForegroundColor = [System.ConsoleColor]::Black
+                    $Host.UI.RawUI.BackgroundColor = [System.ConsoleColor]::Cyan
+                }
+                "Warning" {
+                    $Host.UI.RawUI.ForegroundColor = [System.ConsoleColor]::Black
+                    $Host.UI.RawUI.BackgroundColor = [System.ConsoleColor]::Yellow
+                }
+                "Error" {
+                    $Host.UI.RawUI.ForegroundColor = [System.ConsoleColor]::Black
+                    $Host.UI.RawUI.BackgroundColor = [System.ConsoleColor]::Red
+                }
+                "Success" {
+                    $Host.UI.RawUI.ForegroundColor = [System.ConsoleColor]::Black
+                    $Host.UI.RawUI.BackgroundColor = [System.ConsoleColor]::Green
+                }
+            }
+        }
+        else {
+            if ($PSBoundParameters.ContainsKey('ForegroundColor')) {
+                $Host.UI.RawUI.ForegroundColor = $ForegroundColor
+            }
+            
+            if ($PSBoundParameters.ContainsKey('BackgroundColor')) {
+                $Host.UI.RawUI.BackgroundColor = $BackgroundColor
+            }
+        }
+        
+        # Write the message
+        Write-Host $Message
+        
+        # Restore colors
+        $Host.UI.RawUI.ForegroundColor = $currentFG
+        $Host.UI.RawUI.BackgroundColor = $currentBG
+        
+        return $true
+    }
+    catch {
+        # In case of error, try to restore colors
+        try {
+            $Host.UI.RawUI.ForegroundColor = $currentFG
+            $Host.UI.RawUI.BackgroundColor = $currentBG
+        }
+        catch {}
+        
+        Write-Error "Error writing colored message: $_"
+        return $false
+    }
+}
+
+function Initialize-CSPModules {
+    <#
+    .SYNOPSIS
+        Initializes required PowerShell modules for CSP reporting.
+    
+    .DESCRIPTION
+        Checks if required modules are installed, installs them if not, removes older versions,
+        checks for updates, and imports the modules. This provides a more comprehensive module
+        management approach compared to Test-CSPModuleAvailability.
+    
+    .PARAMETER ModuleNames
+        An array of module names to initialize.
+    
+    .PARAMETER Force
+        Forces reinstallation of modules even if they already exist.
+    
+    .EXAMPLE
+        Initialize-CSPModules -ModuleNames "Microsoft.Graph", "Az.Accounts"
+    #>
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $true)]
+        [string[]]$ModuleNames,
+        
+        [Parameter(Mandatory = $false)]
+        [switch]$Force
+    )
+    
+    try {
+        # Initialize results
+        $results = @()
+        
+        # Process each module
+        foreach ($moduleName in $ModuleNames) {
+            Write-CSPLog -Message "Checking if module '$moduleName' is installed..." -Level "INFO" -UseColor
+            
+            try {
+                # Check if module is installed
+                $moduleInstalled = Get-InstalledModule -Name $moduleName -ErrorAction SilentlyContinue
+                
+                if (!$moduleInstalled -or $Force) {
+                    Write-CSPLog -Message "Module '$moduleName' is not installed or reinstall forced. Installing now..." -Level "WARNING" -UseColor
+                    
+                    # Ensure NuGet provider is installed
+                    if (-not (Get-PackageProvider -Name NuGet -ListAvailable -ErrorAction SilentlyContinue)) {
+                        Write-CSPLog -Message "Installing NuGet package provider..." -Level "INFO" -UseColor
+                        Install-PackageProvider -Name NuGet -Force -Scope CurrentUser | Out-Null
+                    }
+                    
+                    # Set PSGallery as trusted
+                    $galleryStatus = Get-PSRepository -Name PSGallery -ErrorAction SilentlyContinue
+                    if ($galleryStatus.InstallationPolicy -ne "Trusted") {
+                        Write-CSPLog -Message "Setting PSGallery as trusted repository..." -Level "INFO" -UseColor
+                        Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+                    }
+                    
+                    # Install the module
+                    Install-Module -Name $moduleName -Scope CurrentUser -Force -AllowClobber -ErrorAction Stop
+                    Write-CSPLog -Message "Module '$moduleName' installed successfully" -Level "SUCCESS" -UseColor
+                    
+                    $moduleInstalled = Get-InstalledModule -Name $moduleName -ErrorAction SilentlyContinue
+                    $results += [PSCustomObject]@{
+                        ModuleName = $moduleName
+                        Status = "Installed"
+                        Version = $moduleInstalled.Version
+                        LatestVersion = $moduleInstalled.Version
+                    }
+                }
+                else {
+                    Write-CSPLog -Message "Module '$moduleName' is already installed" -Level "SUCCESS" -UseColor
+                    
+                    # Check for duplicate versions
+                    Write-CSPLog -Message "Checking for duplicate versions of module '$moduleName'..." -Level "INFO" -UseColor
+                    $moduleVersions = Get-InstalledModule -Name $moduleName -AllVersions
+                    
+                    if ($moduleVersions.Count -gt 1) {
+                        Write-CSPLog -Message "Found $($moduleVersions.Count) versions of module '$moduleName'. Removing older versions..." -Level "WARNING" -UseColor
+                        $latestVersion = $moduleVersions | Sort-Object -Property Version -Descending | Select-Object -First 1
+                        $olderVersions = $moduleVersions | Where-Object { $_.Version -ne $latestVersion.Version }
+                        
+                        foreach ($olderVersion in $olderVersions) {
+                            Write-CSPLog -Message "Removing version $($olderVersion.Version) of module '$moduleName'..." -Level "INFO" -UseColor
+                            Uninstall-Module -Name $moduleName -RequiredVersion $olderVersion.Version -Force -ErrorAction SilentlyContinue
+                        }
+                        
+                        Write-CSPLog -Message "Older versions of module '$moduleName' removed" -Level "SUCCESS" -UseColor
+                    }
+                    else {
+                        Write-CSPLog -Message "Only one version of module '$moduleName' found" -Level "INFO" -UseColor
+                    }
+                    
+                    # Check for updates
+                    Write-CSPLog -Message "Checking for updates to module '$moduleName'..." -Level "INFO" -UseColor
+                    $currentVersion = $moduleInstalled.Version
+                    $latestVersion = (Find-Module -Name $moduleName -ErrorAction SilentlyContinue).Version
+                    
+                    if ($latestVersion -gt $currentVersion) {
+                        Write-CSPLog -Message "Update available for module '$moduleName'. Current: $currentVersion, Latest: $latestVersion" -Level "WARNING" -UseColor
+                        Write-CSPLog -Message "Installing latest version of module '$moduleName'..." -Level "INFO" -UseColor
+                        
+                        # Install the latest version
+                        Install-Module -Name $moduleName -Scope CurrentUser -Force -AllowClobber
+                        Write-CSPLog -Message "Module '$moduleName' updated to version $latestVersion" -Level "SUCCESS" -UseColor
+                        
+                        $results += [PSCustomObject]@{
+                            ModuleName = $moduleName
+                            Status = "Updated"
+                            Version = $latestVersion
+                            PreviousVersion = $currentVersion
+                        }
+                    }
+                    else {
+                        Write-CSPLog -Message "Module '$moduleName' is up to date (version $currentVersion)" -Level "SUCCESS" -UseColor
+                        
+                        $results += [PSCustomObject]@{
+                            ModuleName = $moduleName
+                            Status = "UpToDate"
+                            Version = $currentVersion
+                            LatestVersion = $latestVersion
+                        }
+                    }
+                }
+                
+                # Import the module
+                Write-CSPLog -Message "Importing module '$moduleName'..." -Level "INFO" -UseColor
+                
+                if (-not (Get-Module -Name $moduleName)) {
+                    Import-Module -Name $moduleName -ErrorAction Stop
+                    Write-CSPLog -Message "Module '$moduleName' imported successfully" -Level "SUCCESS" -UseColor
+                }
+                else {
+                    Write-CSPLog -Message "Module '$moduleName' is already imported" -Level "SUCCESS" -UseColor
+                }
+            }
+            catch {
+                Write-CSPLog -Message "Error processing module '$moduleName': $($_.Exception.Message)" -Level "ERROR" -UseColor
+                $results += [PSCustomObject]@{
+                    ModuleName = $moduleName
+                    Status = "Error"
+                    ErrorMessage = $_.Exception.Message
+                }
+            }
+        }
+        
+        return $results
+    }
+    catch {
+        Write-CSPLog -Message "Error in Initialize-CSPModules: $($_.Exception.Message)" -Level "ERROR" -UseColor
+        throw
+    }
+}
+
+function Invoke-CSPAdminConsent {
+    <#
+    .SYNOPSIS
+        Grants admin consent for the app in a customer tenant.
+    
+    .DESCRIPTION
+        Automates the process of granting admin consent for a multi-tenant app in a customer tenant,
+        similar to the consent automation in the alternative script.
+    
+    .PARAMETER ClientId
+        The application (client) ID of the CSP application.
+    
+    .PARAMETER ClientSecret
+        The client secret of the CSP application. Required for client secret authentication.
+    
+    .PARAMETER CertificatePath
+        The path to the certificate file for certificate-based authentication.
+    
+    .PARAMETER CertificatePassword
+        The password for the certificate. Required for certificate-based authentication.
+    
+    .PARAMETER PartnerTenantId
+        The tenant ID of the partner (CSP) tenant.
+    
+    .PARAMETER CustomerTenantId
+        The tenant ID of the customer tenant where consent is needed.
+    
+    .PARAMETER AppDisplayName
+        The display name to use for the app in the customer tenant.
+    
+    .PARAMETER RequiredScopes
+        Array of required Microsoft Graph API permission scopes.
+    
+    .EXAMPLE
+        Invoke-CSPAdminConsent -ClientId "00000000-0000-0000-0000-000000000000" -ClientSecret $secureClientSecret -PartnerTenantId "partner.onmicrosoft.com" -CustomerTenantId "customer.onmicrosoft.com" -AppDisplayName "CSP Reporting App"
+    #>
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$ClientId,
+        
+        [Parameter(Mandatory = $false)]
+        [SecureString]$ClientSecret,
+        
+        [Parameter(Mandatory = $false)]
+        [string]$CertificatePath,
+        
+        [Parameter(Mandatory = $false)]
+        [SecureString]$CertificatePassword,
+        
+        [Parameter(Mandatory = $true)]
+        [string]$PartnerTenantId,
+        
+        [Parameter(Mandatory = $true)]
+        [string]$CustomerTenantId,
+        
+        [Parameter(Mandatory = $false)]
+        [string]$AppDisplayName = "CSP Reporting App",
+        
+        [Parameter(Mandatory = $false)]
+        [string[]]$RequiredScopes = @(
+            "Directory.Read.All",
+            "Directory.AccessAsUser.All",
+            "User.Read",
+            "AuditLog.Read.All",
+            "Reports.Read.All"
+        )
+    )
+    
+    try {
+        # Verify that one authentication method is provided
+        if ((-not $ClientSecret) -and (-not ($CertificatePath -and $CertificatePassword))) {
+            throw "Either ClientSecret or CertificatePath and CertificatePassword must be provided"
+        }
+        
+        Write-CSPLog -Message "Starting admin consent process for app $ClientId in tenant $CustomerTenantId" -Level "INFO" -UseColor
+        
+        # Check if Microsoft Graph Authentication module is available
+        Write-CSPLog -Message "Checking for required PowerShell modules..." -Level "INFO" -UseColor
+        $requiredModules = @("Microsoft.Graph.Authentication", "Microsoft.Graph.Applications")
+        $missingModules = $requiredModules | Where-Object { -not (Get-Module -Name $_ -ListAvailable) }
+        
+        if ($missingModules) {
+            Write-CSPLog -Message "Installing required modules: $($missingModules -join ', ')" -Level "WARNING" -UseColor
+            foreach ($module in $missingModules) {
+                Install-Module -Name $module -Scope CurrentUser -Force
+            }
+        }
+        
+        # Get admin consent URL
+        $baseUrl = "https://login.microsoftonline.com/$CustomerTenantId/adminconsent"
+        $params = @{
+            client_id = $ClientId
+            redirect_uri = "https://portal.azure.com"
+            state = [Guid]::NewGuid().ToString()
+        }
+        
+        $queryString = [System.Web.HttpUtility]::ParseQueryString([String]::Empty)
+        foreach ($key in $params.Keys) {
+            $queryString.Add($key, $params[$key])
+        }
+        
+        $uriBuilder = New-Object System.UriBuilder($baseUrl)
+        $uriBuilder.Query = $queryString.ToString()
+        $consentUrl = $uriBuilder.Uri.ToString()
+        
+        Write-CSPLog -Message "Admin consent URL for manual consent (if automation fails):" -Level "INFO" -UseColor
+        Write-CSPLog -Message $consentUrl -Level "INFO" -UseColor
+        
+        # Get access token for partner tenant
+        Write-CSPLog -Message "Authenticating to partner tenant ($PartnerTenantId)..." -Level "INFO" -UseColor
+        
+        if ($ClientSecret) {
+            # Client secret auth
+            $tokenBody = @{
+                grant_type    = "client_credentials"
+                client_id     = $ClientId
+                client_secret = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($ClientSecret))
+                scope         = "https://graph.microsoft.com/.default"
+            }
+            
+            $tokenResponse = Invoke-RestMethod -Uri "https://login.microsoftonline.com/$PartnerTenantId/oauth2/v2.0/token" -Method Post -Body $tokenBody
+            $accessToken = $tokenResponse.access_token
+        }
+        else {
+            # Certificate auth
+            $cert = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2
+            $cert.Import($CertificatePath, $CertificatePassword, [System.Security.Cryptography.X509Certificates.X509KeyStorageFlags]::Exportable)
+            
+            Connect-MgGraph -ClientId $ClientId -TenantId $PartnerTenantId -Certificate $cert
+            $accessToken = (Get-MgContext).AccessToken
+        }
+        
+        if (-not $accessToken) {
+            throw "Failed to obtain access token from partner tenant"
+        }
+        
+        Write-CSPLog -Message "Successfully authenticated to partner tenant" -Level "SUCCESS" -UseColor
+        
+        # Build HTTP request to grant consent
+        Write-CSPLog -Message "Requesting admin consent for app in customer tenant..." -Level "INFO" -UseColor
+        
+        $headers = @{
+            "Authorization" = "Bearer $accessToken"
+            "Content-Type"  = "application/json"
+        }
+        
+        # Format scopes as required by the API
+        $formattedScopes = $RequiredScopes | ForEach-Object { "https://graph.microsoft.com/$_" }
+        
+        $body = @{
+            clientId    = $ClientId
+            displayName = $AppDisplayName
+            scopes      = $formattedScopes
+        } | ConvertTo-Json
+        
+        # Make the API call to grant consent
+        $url = "https://graph.microsoft.com/v1.0/tenants/$CustomerTenantId/adminConsentRequests"
+        
+        try {
+            $response = Invoke-RestMethod -Uri $url -Headers $headers -Method Post -Body $body
+            Write-CSPLog -Message "Admin consent request submitted successfully" -Level "SUCCESS" -UseColor
+            Write-CSPLog -Message "Request ID: $($response.id)" -Level "INFO" -UseColor
+            
+            return @{
+                Success = $true
+                RequestId = $response.id
+                Message = "Admin consent request submitted successfully"
+            }
+        }
+        catch {
+            $statusCode = $_.Exception.Response.StatusCode.value__
+            $message = $_.ErrorDetails.Message
+            
+            Write-CSPLog -Message "Failed to submit admin consent request. Status code: $statusCode" -Level "ERROR" -UseColor
+            Write-CSPLog -Message "Error message: $message" -Level "ERROR" -UseColor
+            Write-CSPLog -Message "Please use the manual consent URL provided earlier" -Level "WARNING" -UseColor
+            
+            return @{
+                Success = $false
+                StatusCode = $statusCode
+                Message = $message
+                ManualConsentUrl = $consentUrl
+            }
+        }
+    }
+    catch {
+        Write-CSPLog -Message "Error in Invoke-CSPAdminConsent: $($_.Exception.Message)" -Level "ERROR" -UseColor
+        return @{
+            Success = $false
+            Error = $_.Exception.Message
+            ManualConsentUrl = $consentUrl
+        }
+    }
+}
+
 #endregion
 
 # Export public functions
-Export-ModuleMember -Function Write-CSPLog, Test-CSPAdminConsent, New-CSPSelfSignedCertificate, Get-CSPCertificateThumbprint, Test-CSPModuleAvailability, Initialize-CSPProcessState, Update-CSPProcessState, Get-CSPProcessState, Write-CSPProgress, Invoke-CSPWithRetry
+Export-ModuleMember -Function Write-CSPLog, Test-CSPAdminConsent, New-CSPSelfSignedCertificate, Get-CSPCertificateThumbprint, Test-CSPModuleAvailability, Initialize-CSPProcessState, Update-CSPProcessState, Get-CSPProcessState, Write-CSPProgress, Invoke-CSPWithRetry, Initialize-CSPTerminalColors, Set-CSPTerminalColors, Write-CSPColorMessage, Initialize-CSPModules, Invoke-CSPAdminConsent
