@@ -45,30 +45,61 @@ $ModulesPath = Join-Path -Path $ScriptPath -ChildPath "Modules"
 try {
     Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "Utilities.psm1") -Force
     
-    # Check if Microsoft Graph module is installed
-    if (-not (Get-Module -Name Microsoft.Graph -ListAvailable)) {
-        Write-Warning "Microsoft Graph PowerShell SDK is not installed. Installing..."
-        Install-Module -Name Microsoft.Graph -Scope CurrentUser -Force
+    # Use our utility function to check and install required modules
+    $requiredModules = @("Microsoft.Graph")
+    $moduleCheck = Test-CSPModuleAvailability -ModuleNames $requiredModules -InstallIfMissing
+    
+    if ($moduleCheck | Where-Object { -not $_.Available }) {
+        $missingModules = $moduleCheck | Where-Object { -not $_.Available } | Select-Object -ExpandProperty ModuleName
+        throw "One or more required modules could not be installed: $($missingModules -join ', ')"
     }
 }
 catch {
-    Write-Error "Failed to import required modules: $_"
+    Write-CSPLog -Message "Failed to import required modules: $($_.Exception.Message)" -Level "ERROR"
     exit 1
 }
 #endregion
 
 #region Load Configuration
 try {
-    Write-Verbose "Loading configuration from $ConfigPath"
+    Write-CSPLog -Message "Loading configuration from $ConfigPath" -Level "INFO"
+    
+    if (-not (Test-Path -Path $ConfigPath)) {
+        throw "Configuration file not found at path: $ConfigPath"
+    }
+    
     $Config = Import-PowerShellDataFile -Path $ConfigPath
     
-    # Validate configuration
-    if (-not $Config.ContainsKey("TenantConfigs")) {
-        throw "Required configuration setting 'TenantConfigs' is missing"
+    # Validate configuration more thoroughly
+    $requiredSettings = @("TenantConfigs", "AppRegistration")
+    foreach ($setting in $requiredSettings) {
+        if (-not $Config.ContainsKey($setting)) {
+            throw "Required configuration setting '$setting' is missing"
+        }
+    }
+    
+    # Validate app registration
+    if (-not $Config.AppRegistration.ContainsKey("ClientId")) {
+        throw "Required configuration setting 'AppRegistration.ClientId' is missing"
+    }
+    
+    # Validate tenant configs
+    if ($Config.TenantConfigs.Count -eq 0) {
+        throw "No tenant configurations found in configuration file"
+    }
+    
+    foreach ($tenantConfig in $Config.TenantConfigs) {
+        if (-not $tenantConfig.ContainsKey("TenantId")) {
+            throw "Required configuration setting 'TenantId' is missing in one of the tenant configurations"
+        }
+        
+        if (-not $tenantConfig.ContainsKey("TenantName")) {
+            throw "Required configuration setting 'TenantName' is missing in tenant configuration for $($tenantConfig.TenantId)"
+        }
     }
 }
 catch {
-    Write-Error "Failed to load configuration: $_"
+    Write-CSPLog -Message "Failed to load configuration: $($_.Exception.Message)" -Level "ERROR"
     exit 1
 }
 #endregion
@@ -78,74 +109,189 @@ try {
     # Create certificates directory if it doesn't exist
     if (-not (Test-Path -Path $CertificatesPath)) {
         New-Item -Path $CertificatesPath -ItemType Directory -Force | Out-Null
-        Write-Verbose "Created certificates directory: $CertificatesPath"
+        Write-CSPLog -Message "Created certificates directory: $CertificatesPath" -Level "INFO"
     }
     
     # Prompt for certificate password if not provided
     if (-not $CertificatePassword) {
         $CertificatePassword = Read-Host -Prompt "Enter certificate password" -AsSecureString
+        
+        if ($null -eq $CertificatePassword -or $CertificatePassword.Length -eq 0) {
+            throw "Certificate password is required"
+        }
     }
+    
+    # Calculate total tenants for progress reporting
+    $tenantCount = ($Config.TenantConfigs | Where-Object {
+        -not $_.ContainsKey("AuthMethod") -or $_.AuthMethod -eq "Certificate"
+    }).Count
+    
+    $currentTenant = 0
+    $successCount = 0
+    $skippedCount = 0
+    $failedCount = 0
     
     # Process each tenant
     foreach ($tenantConfig in $Config.TenantConfigs) {
         try {
-            Write-Host "Processing tenant: $($tenantConfig.TenantName)" -ForegroundColor Cyan
-            
             # Skip tenants not using certificate authentication
-            if ($tenantConfig.AuthMethod -ne "Certificate") {
-                Write-Host "  Tenant $($tenantConfig.TenantName) is not using certificate authentication. Skipping." -ForegroundColor Yellow
+            $authMethod = if ($tenantConfig.ContainsKey("AuthMethod")) {
+                $tenantConfig.AuthMethod
+            } else {
+                $Config.DefaultAuthMethod
+            }
+            
+            if ($authMethod -ne "Certificate") {
+                Write-CSPLog -Message "Tenant $($tenantConfig.TenantName) is not using certificate authentication. Skipping." -Level "INFO"
+                $skippedCount++
                 continue
             }
+            
+            $currentTenant++
+            $percentComplete = [Math]::Floor(($currentTenant / $tenantCount) * 100)
+            
+            Write-CSPLog -Message "Processing tenant: $($tenantConfig.TenantName) ($currentTenant of $tenantCount)" -Level "INFO"
+            Write-Progress -Activity "Setting up certificates" -Status "Processing tenant $($tenantConfig.TenantName)" -PercentComplete $percentComplete
             
             # Determine certificate path
             $certFileName = "CSP_$($tenantConfig.TenantName -replace '[^a-zA-Z0-9]', '_').pfx"
             $certPath = Join-Path -Path $CertificatesPath -ChildPath $certFileName
+            $publicCertPath = $certPath -replace '\.pfx$', '.cer'
             
-            # Check if certificate already exists
+            # Check if certificate already exists and validate it
+            $certificateExists = $false
+            $certificateValid = $false
+            
             if (Test-Path -Path $certPath) {
+                $certificateExists = $true
+                
+                # Check if the certificate is valid and not expired
+                try {
+                    $cert = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2
+                    $cert.Import($certPath, $CertificatePassword, [System.Security.Cryptography.X509Certificates.X509KeyStorageFlags]::Exportable)
+                    
+                    if ($cert.NotAfter -gt (Get-Date)) {
+                        $certificateValid = $true
+                        $expiresIn = ($cert.NotAfter - (Get-Date)).Days
+                        
+                        Write-CSPLog -Message "Certificate for tenant $($tenantConfig.TenantName) already exists and is valid for $expiresIn more days." -Level "INFO"
+                    }
+                    else {
+                        Write-CSPLog -Message "Certificate for tenant $($tenantConfig.TenantName) exists but has expired. Will be regenerated." -Level "WARNING"
+                    }
+                }
+                catch {
+                    Write-CSPLog -Message "Certificate for tenant $($tenantConfig.TenantName) exists but could not be loaded (incorrect password?). Will be regenerated if -Force is specified." -Level "WARNING"
+                }
+            }
+            
+            # Determine if we need to generate a new certificate
+            $generateNew = $false
+            
+            if (-not $certificateExists) {
+                $generateNew = $true
+                Write-CSPLog -Message "No certificate exists for tenant $($tenantConfig.TenantName). Will generate new certificate." -Level "INFO"
+            }
+            elseif (-not $certificateValid) {
                 if ($Force) {
-                    Write-Host "  Certificate already exists. Overwriting..." -ForegroundColor Yellow
+                    $generateNew = $true
+                    Write-CSPLog -Message "Certificate for tenant $($tenantConfig.TenantName) is invalid or expired. Will generate new certificate." -Level "INFO"
                 }
                 else {
-                    Write-Host "  Certificate already exists. Use -Force to overwrite." -ForegroundColor Yellow
+                    Write-CSPLog -Message "Certificate for tenant $($tenantConfig.TenantName) is invalid or expired. Use -Force to regenerate." -Level "WARNING"
+                    $skippedCount++
+                    continue
+                }
+            }
+            elseif ($Force) {
+                $generateNew = $true
+                Write-CSPLog -Message "Certificate for tenant $($tenantConfig.TenantName) is valid, but -Force flag is set. Will regenerate." -Level "INFO"
+            }
+            else {
+                Write-CSPLog -Message "Certificate for tenant $($tenantConfig.TenantName) is valid. Skipping generation." -Level "INFO"
+                
+                # Update configuration to ensure certificate path is set correctly
+                if ($tenantConfig.CertificatePath -ne $certPath) {
+                    Write-CSPLog -Message "Updating configuration with correct certificate path." -Level "INFO"
+                    $tenantConfig.CertificatePath = $certPath
+                }
+                
+                $successCount++
+                continue
+            }
+            
+            # Generate certificate if needed
+            if ($generateNew) {
+                Write-CSPLog -Message "Generating certificate for tenant $($tenantConfig.TenantName)..." -Level "INFO"
+                
+                # Use retry logic for certificate generation
+                $retries = 0
+                $maxRetries = 2
+                $success = $false
+                
+                while (-not $success -and $retries -le $maxRetries) {
+                    try {
+                        if ($retries -gt 0) {
+                            Write-CSPLog -Message "Retry attempt $retries for certificate generation..." -Level "INFO"
+                        }
+                        
+                        $certResult = New-CSPSelfSignedCertificate -CertificateName "CSP_$($tenantConfig.TenantName)" -CertificatePath $certPath -CertificatePassword $CertificatePassword -ExpiryYears $ExpiryYears
+                        
+                        if (-not $certResult.Success) {
+                            throw "Certificate generation failed: $($certResult.Error)"
+                        }
+                        
+                        $success = $true
+                    }
+                    catch {
+                        $retries++
+                        if ($retries -le $maxRetries) {
+                            Write-CSPLog -Message "Error during certificate generation: $($_.Exception.Message). Retrying..." -Level "WARNING"
+                            Start-Sleep -Seconds 2
+                        }
+                        else {
+                            throw
+                        }
+                    }
+                }
+                
+                # Export public certificate for Azure AD upload
+                try {
+                    $cert = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2
+                    $cert.Import($certPath, $CertificatePassword, [System.Security.Cryptography.X509Certificates.X509KeyStorageFlags]::Exportable)
+                    $certData = $cert.Export([System.Security.Cryptography.X509Certificates.X509ContentType]::Cert)
+                    [System.IO.File]::WriteAllBytes($publicCertPath, $certData)
+                    
+                    Write-CSPLog -Message "Certificate for tenant $($tenantConfig.TenantName) generated successfully:" -Level "INFO"
+                    Write-CSPLog -Message "  Private Key (PFX): $certPath" -Level "INFO"
+                    Write-CSPLog -Message "  Public Key (CER): $publicCertPath" -Level "INFO"
+                    Write-CSPLog -Message "  Thumbprint: $($certResult.Thumbprint)" -Level "INFO"
+                    Write-CSPLog -Message "  Valid Until: $($certResult.NotAfter)" -Level "INFO"
+                    
+                    # Update configuration
+                    $tenantConfig.CertificatePath = $certPath
+                    $successCount++
+                }
+                catch {
+                    Write-CSPLog -Message "Error exporting public certificate: $($_.Exception.Message)" -Level "ERROR"
+                    $failedCount++
                     continue
                 }
             }
             
-            # Generate certificate
-            Write-Host "  Generating certificate for tenant $($tenantConfig.TenantName)..." -ForegroundColor Yellow
-            $certResult = New-CSPSelfSignedCertificate -CertificateName "CSP_$($tenantConfig.TenantName)" -CertificatePath $certPath -CertificatePassword $CertificatePassword -ExpiryYears $ExpiryYears
-            
-            if (-not $certResult.Success) {
-                Write-Error "Failed to generate certificate for tenant $($tenantConfig.TenantName): $($certResult.Error)"
-                continue
-            }
-            
-            # Export public certificate for Azure AD upload
-            $publicCertPath = $certPath -replace '\.pfx$', '.cer'
-            $cert = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2
-            $cert.Import($certPath, $CertificatePassword, [System.Security.Cryptography.X509Certificates.X509KeyStorageFlags]::Exportable)
-            $certData = $cert.Export([System.Security.Cryptography.X509Certificates.X509ContentType]::Cert)
-            [System.IO.File]::WriteAllBytes($publicCertPath, $certData)
-            
-            Write-Host "  Certificate generated successfully:" -ForegroundColor Green
-            Write-Host "    Private Key (PFX): $certPath" -ForegroundColor Green
-            Write-Host "    Public Key (CER): $publicCertPath" -ForegroundColor Green
-            Write-Host "    Thumbprint: $($certResult.Thumbprint)" -ForegroundColor Green
-            Write-Host "    Valid Until: $($certResult.NotAfter)" -ForegroundColor Green
-            
-            # Update configuration
-            Write-Host "  Updating configuration..." -ForegroundColor Yellow
-            $tenantConfig.CertificatePath = $certPath
-            
-            Write-Host "  Next steps:" -ForegroundColor Cyan
-            Write-Host "    1. Upload the public certificate ($publicCertPath) to your app registration in Azure AD" -ForegroundColor Cyan
-            Write-Host "    2. Grant admin consent for the application in tenant $($tenantConfig.TenantId)" -ForegroundColor Cyan
+            # Display next steps
+            Write-CSPLog -Message "Next steps for tenant $($tenantConfig.TenantName):" -Level "INFO"
+            Write-CSPLog -Message "  1. Upload the public certificate ($publicCertPath) to your app registration in Azure AD" -Level "INFO"
+            Write-CSPLog -Message "  2. Grant admin consent for the application in tenant $($tenantConfig.TenantId)" -Level "INFO"
         }
         catch {
-            Write-Error "Error processing tenant $($tenantConfig.TenantName): $_"
+            Write-CSPLog -Message "Error processing tenant $($tenantConfig.TenantName): $($_.Exception.Message)" -Level "ERROR"
+            $failedCount++
         }
     }
+    
+    # Complete progress bar
+    Write-Progress -Activity "Setting up certificates" -Completed
     
     # Save updated configuration
     Write-Host "Saving updated configuration..." -ForegroundColor Yellow
@@ -265,13 +411,53 @@ try {
 }
 "@
 
-    # Save the updated configuration
-    $configContent | Out-File -FilePath $ConfigPath -Encoding UTF8 -Force
+    # Create a backup of the original config file
+    $backupPath = "$ConfigPath.bak"
+    try {
+        Copy-Item -Path $ConfigPath -Destination $backupPath -Force
+        Write-CSPLog -Message "Created backup of original configuration at $backupPath" -Level "INFO"
+    }
+    catch {
+        Write-CSPLog -Message "Warning: Could not create backup of original configuration: $($_.Exception.Message)" -Level "WARNING"
+    }
     
-    Write-Host "Certificate setup completed successfully." -ForegroundColor Green
-    Write-Host "Remember to upload the public certificates to your app registration in Azure AD and grant admin consent in each tenant." -ForegroundColor Green
+    # Save the updated configuration with error handling
+    try {
+        $configContent | Out-File -FilePath $ConfigPath -Encoding UTF8 -Force
+        Write-CSPLog -Message "Updated configuration file saved successfully" -Level "INFO"
+    }
+    catch {
+        Write-CSPLog -Message "Error saving updated configuration: $($_.Exception.Message)" -Level "ERROR"
+        
+        # Try to restore from backup
+        if (Test-Path -Path $backupPath) {
+            try {
+                Copy-Item -Path $backupPath -Destination $ConfigPath -Force
+                Write-CSPLog -Message "Restored original configuration from backup" -Level "INFO"
+            }
+            catch {
+                Write-CSPLog -Message "Failed to restore configuration from backup: $($_.Exception.Message)" -Level "ERROR"
+            }
+        }
+    }
+    
+    # Display summary
+    Write-CSPLog -Message "Certificate setup completed" -Level "INFO"
+    Write-CSPLog -Message "Summary:" -Level "INFO"
+    Write-CSPLog -Message "  Total tenants processed: $tenantCount" -Level "INFO"
+    Write-CSPLog -Message "  Certificates created/updated: $successCount" -Level "INFO"
+    Write-CSPLog -Message "  Tenants skipped: $skippedCount" -Level "INFO"
+    Write-CSPLog -Message "  Failures: $failedCount" -Level "INFO"
+    
+    if ($successCount -gt 0) {
+        Write-CSPLog -Message "Next steps:" -Level "INFO"
+        Write-CSPLog -Message "1. Upload the public certificates (.cer files) to your app registration in Azure AD" -Level "INFO"
+        Write-CSPLog -Message "2. Use Grant-CSPAdminConsent.ps1 to grant admin consent in each tenant" -Level "INFO"
+    }
 }
 catch {
-    Write-Error "An error occurred during certificate setup: $_"
+    Write-CSPLog -Message "An error occurred during certificate setup: $($_.Exception.Message)" -Level "ERROR"
+    Write-Progress -Activity "Setting up certificates" -Status "Error" -Completed
+    exit 1
 }
 #endregion
