@@ -404,7 +404,10 @@ function Invoke-CSPWithRetry {
         [int[]]$RetryStatusCodes = @(429, 503, 504),
         
         [Parameter(Mandatory = $false)]
-        [string]$ActivityName = "API Operation"
+        [string]$ActivityName = "API Operation",
+        
+        [Parameter(Mandatory = $false)]
+        [object]$ArgumentList
     )
     
     try {
@@ -425,7 +428,11 @@ function Invoke-CSPWithRetry {
                 }
                 
                 # Execute the command
-                $result = & $ScriptBlock
+                if ($ArgumentList) {
+                    $result = & $ScriptBlock $ArgumentList
+                } else {
+                    $result = & $ScriptBlock
+                }
                 $success = $true
             }
             catch {
@@ -1059,6 +1066,8 @@ function Initialize-CSPModules {
         
         # Process each module
         foreach ($moduleName in $ModuleNames) {
+            # Capture output but don't add to results
+            $null = Write-CSPLog -Message "Checking if module '$moduleName' is installed..." -Level "INFO" -UseColor
             Write-CSPLog -Message "Checking if module '$moduleName' is installed..." -Level "INFO" -UseColor
             
             try {
@@ -1066,24 +1075,24 @@ function Initialize-CSPModules {
                 $moduleInstalled = Get-InstalledModule -Name $moduleName -ErrorAction SilentlyContinue
                 
                 if (!$moduleInstalled -or $Force) {
-                    Write-CSPLog -Message "Module '$moduleName' is not installed or reinstall forced. Installing now..." -Level "WARNING" -UseColor
+                    $null = Write-CSPLog -Message "Module '$moduleName' is not installed or reinstall forced. Installing now..." -Level "WARNING" -UseColor
                     
                     # Ensure NuGet provider is installed
                     if (-not (Get-PackageProvider -Name NuGet -ListAvailable -ErrorAction SilentlyContinue)) {
-                        Write-CSPLog -Message "Installing NuGet package provider..." -Level "INFO" -UseColor
+                        $null = Write-CSPLog -Message "Installing NuGet package provider..." -Level "INFO" -UseColor
                         Install-PackageProvider -Name NuGet -Force -Scope CurrentUser | Out-Null
                     }
                     
                     # Set PSGallery as trusted
                     $galleryStatus = Get-PSRepository -Name PSGallery -ErrorAction SilentlyContinue
                     if ($galleryStatus.InstallationPolicy -ne "Trusted") {
-                        Write-CSPLog -Message "Setting PSGallery as trusted repository..." -Level "INFO" -UseColor
+                        $null = Write-CSPLog -Message "Setting PSGallery as trusted repository..." -Level "INFO" -UseColor
                         Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
                     }
                     
                     # Install the module
                     Install-Module -Name $moduleName -Scope CurrentUser -Force -AllowClobber -ErrorAction Stop
-                    Write-CSPLog -Message "Module '$moduleName' installed successfully" -Level "SUCCESS" -UseColor
+                    $null = Write-CSPLog -Message "Module '$moduleName' installed successfully" -Level "SUCCESS" -UseColor
                     
                     $moduleInstalled = Get-InstalledModule -Name $moduleName -ErrorAction SilentlyContinue
                     $results += [PSCustomObject]@{
@@ -1094,40 +1103,40 @@ function Initialize-CSPModules {
                     }
                 }
                 else {
-                    Write-CSPLog -Message "Module '$moduleName' is already installed" -Level "SUCCESS" -UseColor
+                    $null = Write-CSPLog -Message "Module '$moduleName' is already installed" -Level "SUCCESS" -UseColor
                     
                     # Check for duplicate versions
-                    Write-CSPLog -Message "Checking for duplicate versions of module '$moduleName'..." -Level "INFO" -UseColor
+                    $null = Write-CSPLog -Message "Checking for duplicate versions of module '$moduleName'..." -Level "INFO" -UseColor
                     $moduleVersions = Get-InstalledModule -Name $moduleName -AllVersions
                     
                     if ($moduleVersions.Count -gt 1) {
-                        Write-CSPLog -Message "Found $($moduleVersions.Count) versions of module '$moduleName'. Removing older versions..." -Level "WARNING" -UseColor
+                        $null = Write-CSPLog -Message "Found $($moduleVersions.Count) versions of module '$moduleName'. Removing older versions..." -Level "WARNING" -UseColor
                         $latestVersion = $moduleVersions | Sort-Object -Property Version -Descending | Select-Object -First 1
                         $olderVersions = $moduleVersions | Where-Object { $_.Version -ne $latestVersion.Version }
                         
                         foreach ($olderVersion in $olderVersions) {
-                            Write-CSPLog -Message "Removing version $($olderVersion.Version) of module '$moduleName'..." -Level "INFO" -UseColor
+                            $null = Write-CSPLog -Message "Removing version $($olderVersion.Version) of module '$moduleName'..." -Level "INFO" -UseColor
                             Uninstall-Module -Name $moduleName -RequiredVersion $olderVersion.Version -Force -ErrorAction SilentlyContinue
                         }
                         
-                        Write-CSPLog -Message "Older versions of module '$moduleName' removed" -Level "SUCCESS" -UseColor
+                        $null = Write-CSPLog -Message "Older versions of module '$moduleName' removed" -Level "SUCCESS" -UseColor
                     }
                     else {
-                        Write-CSPLog -Message "Only one version of module '$moduleName' found" -Level "INFO" -UseColor
+                        $null = Write-CSPLog -Message "Only one version of module '$moduleName' found" -Level "INFO" -UseColor
                     }
                     
                     # Check for updates
-                    Write-CSPLog -Message "Checking for updates to module '$moduleName'..." -Level "INFO" -UseColor
+                    $null = Write-CSPLog -Message "Checking for updates to module '$moduleName'..." -Level "INFO" -UseColor
                     $currentVersion = $moduleInstalled.Version
                     $latestVersion = (Find-Module -Name $moduleName -ErrorAction SilentlyContinue).Version
                     
                     if ($latestVersion -gt $currentVersion) {
-                        Write-CSPLog -Message "Update available for module '$moduleName'. Current: $currentVersion, Latest: $latestVersion" -Level "WARNING" -UseColor
-                        Write-CSPLog -Message "Installing latest version of module '$moduleName'..." -Level "INFO" -UseColor
+                        $null = Write-CSPLog -Message "Update available for module '$moduleName'. Current: $currentVersion, Latest: $latestVersion" -Level "WARNING" -UseColor
+                        $null = Write-CSPLog -Message "Installing latest version of module '$moduleName'..." -Level "INFO" -UseColor
                         
                         # Install the latest version
                         Install-Module -Name $moduleName -Scope CurrentUser -Force -AllowClobber
-                        Write-CSPLog -Message "Module '$moduleName' updated to version $latestVersion" -Level "SUCCESS" -UseColor
+                        $null = Write-CSPLog -Message "Module '$moduleName' updated to version $latestVersion" -Level "SUCCESS" -UseColor
                         
                         $results += [PSCustomObject]@{
                             ModuleName = $moduleName
@@ -1137,7 +1146,7 @@ function Initialize-CSPModules {
                         }
                     }
                     else {
-                        Write-CSPLog -Message "Module '$moduleName' is up to date (version $currentVersion)" -Level "SUCCESS" -UseColor
+                        $null = Write-CSPLog -Message "Module '$moduleName' is up to date (version $currentVersion)" -Level "SUCCESS" -UseColor
                         
                         $results += [PSCustomObject]@{
                             ModuleName = $moduleName
@@ -1149,18 +1158,18 @@ function Initialize-CSPModules {
                 }
                 
                 # Import the module
-                Write-CSPLog -Message "Importing module '$moduleName'..." -Level "INFO" -UseColor
+                $null = Write-CSPLog -Message "Importing module '$moduleName'..." -Level "INFO" -UseColor
                 
                 if (-not (Get-Module -Name $moduleName)) {
                     Import-Module -Name $moduleName -ErrorAction Stop
-                    Write-CSPLog -Message "Module '$moduleName' imported successfully" -Level "SUCCESS" -UseColor
+                    $null = Write-CSPLog -Message "Module '$moduleName' imported successfully" -Level "SUCCESS" -UseColor
                 }
                 else {
-                    Write-CSPLog -Message "Module '$moduleName' is already imported" -Level "SUCCESS" -UseColor
+                    $null = Write-CSPLog -Message "Module '$moduleName' is already imported" -Level "SUCCESS" -UseColor
                 }
             }
             catch {
-                Write-CSPLog -Message "Error processing module '$moduleName': $($_.Exception.Message)" -Level "ERROR" -UseColor
+                $null = Write-CSPLog -Message "Error processing module '$moduleName': $($_.Exception.Message)" -Level "ERROR" -UseColor
                 $results += [PSCustomObject]@{
                     ModuleName = $moduleName
                     Status = "Error"
@@ -1169,10 +1178,42 @@ function Initialize-CSPModules {
             }
         }
         
-        return $results
+        # Validate results before returning
+        $null = Write-CSPLog -Message "Validating module results before returning..." -Level "INFO" -UseColor
+        $validatedResults = @()
+        foreach ($result in $results) {
+            if ($null -eq $result) {
+                $null = Write-CSPLog -Message "Found null result in module results" -Level "WARNING" -UseColor
+                continue
+            }
+            # Ensure Status property exists
+            if (-not (Get-Member -InputObject $result -Name "Status" -MemberType Properties)) {
+                $null = Write-CSPLog -Message "Result for module does not have Status property, adding default Error status" -Level "WARNING" -UseColor
+                $result | Add-Member -MemberType NoteProperty -Name "Status" -Value "Error" -Force
+                $result | Add-Member -MemberType NoteProperty -Name "ErrorMessage" -Value "Status property was missing" -Force
+            }
+            
+            $validatedResults += $result
+        }
+        
+        $null = Write-CSPLog -Message "Returning $($validatedResults.Count) validated module results" -Level "INFO" -UseColor
+        
+        # Restore original Write-CSPLog function
+        if (Test-Path "Function:\script:OriginalWrite-CSPLog") {
+            Copy-Item -Path "Function:\script:OriginalWrite-CSPLog" -Destination "Function:\Write-CSPLog" -Force
+            Remove-Item -Path "Function:\script:OriginalWrite-CSPLog" -Force
+        }
+        
+        return $validatedResults
     }
     catch {
-        Write-CSPLog -Message "Error in Initialize-CSPModules: $($_.Exception.Message)" -Level "ERROR" -UseColor
+        # Restore original Write-CSPLog function even if there's an error
+        if (Test-Path "Function:\script:OriginalWrite-CSPLog") {
+            Copy-Item -Path "Function:\script:OriginalWrite-CSPLog" -Destination "Function:\Write-CSPLog" -Force
+            Remove-Item -Path "Function:\script:OriginalWrite-CSPLog" -Force
+        }
+        
+        $null = Write-CSPLog -Message "Error in Initialize-CSPModules: $($_.Exception.Message)" -Level "ERROR" -UseColor
         throw
     }
 }

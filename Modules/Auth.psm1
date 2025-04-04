@@ -64,7 +64,7 @@ function Connect-CSPTenant {
         [SecureString]$CertificatePassword,
         
         [Parameter(Mandatory = $false)]
-        [SecureString]$ClientSecret,
+        [PSCredential]$ClientSecretCredential,
         
         [Parameter(Mandatory = $false)]
         [ValidateSet("Certificate", "ClientSecret")]
@@ -114,13 +114,25 @@ function Connect-CSPTenant {
                 }
             }
             "ClientSecret" {
-                if (-not $ClientSecret) {
-                    throw "Client secret is required for client secret authentication"
+                if (-not $ClientSecretCredential) {
+                    throw "Client secret credential is required for client secret authentication"
                 }
                 
                 try {
-                    # Connect to Microsoft Graph
-                    $connection = Connect-MgGraph -TenantId $TenantId -ClientId $ClientId -ClientSecret $ClientSecret -Scopes $requiredScopes
+                    # Extract client ID and secret from the credential
+                    $clientId = $ClientSecretCredential.UserName
+                    $clientSecret = $ClientSecretCredential.GetNetworkCredential().Password
+                    
+                    Write-Verbose "Connecting with Client Secret: TenantId=$TenantId, ClientId=$clientId"
+                    
+                    # Create a secure string from the client secret
+                    $secureClientSecret = ConvertTo-SecureString -String $clientSecret -AsPlainText -Force
+                    
+                    # Create a PSCredential object with the client ID as the username and the client secret as the password
+                    $credential = New-Object System.Management.Automation.PSCredential($clientId, $secureClientSecret)
+                    
+                    # Connect to Microsoft Graph using the credential
+                    $connection = Connect-MgGraph -TenantId $TenantId -ClientSecretCredential $credential -Scopes $requiredScopes
                     
                     $result.Success = $true
                     $result.Connection = $connection

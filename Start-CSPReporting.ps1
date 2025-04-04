@@ -245,7 +245,10 @@ try {
                 $authParams = @{
                     TenantId = $tenantConfig.TenantId
                     ClientId = $Config.AppRegistration.ClientId
+                    Verbose = $true  # Add verbose output for debugging
                 }
+                
+                Write-CSPLog -Message "Using ClientId: $($Config.AppRegistration.ClientId)" -Level "DEBUG"
                 
                 # Add authentication method parameters
                 $authMethod = if ($tenantConfig.ContainsKey("AuthMethod")) { 
@@ -260,14 +263,61 @@ try {
                     $authParams.AuthMethod = "Certificate"
                 }
                 else {
-                    $authParams.ClientSecret = $tenantConfig.ClientSecret
+                    # Create a PSCredential object for client secret authentication
+                    if ($tenantConfig.ClientSecret -is [string]) {
+                        $secureSecret = ConvertTo-SecureString -String $tenantConfig.ClientSecret -AsPlainText -Force
+                        $authParams.ClientSecretCredential = New-Object System.Management.Automation.PSCredential($Config.AppRegistration.ClientId, $secureSecret)
+                    } elseif ($tenantConfig.ClientSecret -is [SecureString]) {
+                        $authParams.ClientSecretCredential = New-Object System.Management.Automation.PSCredential($Config.AppRegistration.ClientId, $tenantConfig.ClientSecret)
+                    } else {
+                        throw "ClientSecret must be either a string or a SecureString"
+                    }
                     $authParams.AuthMethod = "ClientSecret"
                 }
                 
-                # Use retry logic for authentication
-                $authResult = Invoke-CSPWithRetry -ScriptBlock {
-                    Connect-CSPTenant @authParams
-                } -ActivityName "Authenticate to tenant $($tenantConfig.TenantName)" -MaxRetries 2
+                # For ClientSecret authentication, bypass Connect-CSPTenant and use Connect-MgGraph directly
+                if ($authMethod -eq "ClientSecret") {
+                    try {
+                        Write-CSPLog -Message "Attempting direct authentication with Connect-MgGraph using ClientId method..." -Level "DEBUG"
+                        
+                        # Based on our test, Method 2 (using ClientId parameter directly) works best
+                        $clientId = $Config.AppRegistration.ClientId
+                        $tenantId = $tenantConfig.TenantId
+                        
+                        Write-CSPLog -Message "Connecting with ClientId=$clientId, TenantId=$tenantId" -Level "DEBUG"
+                        Connect-MgGraph -ClientId $clientId -TenantId $tenantId
+                        
+                        # Create success result
+                        $authResult = @{
+                            Success = $true
+                            Connection = Get-MgContext
+                        }
+                        
+                        Write-CSPLog -Message "Direct authentication with Connect-MgGraph successful" -Level "DEBUG"
+                    }
+                    catch {
+                        Write-CSPLog -Message "Direct authentication with Connect-MgGraph failed: $_" -Level "ERROR"
+                        $authResult = @{
+                            Success = $false
+                            ErrorMessage = "Direct authentication with Connect-MgGraph failed: $_"
+                        }
+                    }
+                }
+                else {
+                    # Use Connect-CSPTenant for certificate authentication
+                    try {
+                        Write-CSPLog -Message "Attempting authentication with Connect-CSPTenant..." -Level "DEBUG"
+                        $authResult = Connect-CSPTenant @authParams
+                        Write-CSPLog -Message "Authentication with Connect-CSPTenant successful" -Level "DEBUG"
+                    }
+                    catch {
+                        Write-CSPLog -Message "Authentication with Connect-CSPTenant failed: $_" -Level "ERROR"
+                        $authResult = @{
+                            Success = $false
+                            ErrorMessage = "Authentication with Connect-CSPTenant failed: $_"
+                        }
+                    }
+                }
                 
                 if (-not $authResult.Success) {
                     Write-CSPLog -Message "Authentication failed for tenant $($tenantConfig.TenantName): $($authResult.ErrorMessage)" -Level "ERROR"
