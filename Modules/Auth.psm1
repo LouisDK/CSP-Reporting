@@ -99,11 +99,14 @@ function Connect-CSPTenant {
                 
                 try {
                     # Load the certificate
-                    $certificate = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2
-                    $certificate.Import($CertificatePath, $CertificatePassword, [System.Security.Cryptography.X509Certificates.X509KeyStorageFlags]::Exportable)
+                    $certificate = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2(
+                        $CertificatePath,
+                        $CertificatePassword,
+                        [System.Security.Cryptography.X509Certificates.X509KeyStorageFlags]::Exportable
+                    )
                     
                     # Connect to Microsoft Graph
-                    $connection = Connect-MgGraph -TenantId $TenantId -ClientId $ClientId -Certificate $certificate -Scopes $requiredScopes
+                    $connection = Connect-MgGraph -TenantId $TenantId -ClientId $ClientId -Certificate $certificate
                     
                     $result.Success = $true
                     $result.Connection = $connection

@@ -84,10 +84,9 @@ try {
     
     # Validate configuration - extended validation for all required settings
     $requiredSettings = @(
-        "TenantConfigs", 
-        "OutputPath", 
-        "DefaultAuthMethod", 
-        "AppRegistration", 
+        "TenantConfigs",
+        "OutputPath",
+        "DefaultAuthMethod",
         "ReportSettings"
     )
     
@@ -97,9 +96,11 @@ try {
         }
     }
     
-    # Validate app registration settings
-    if (-not $Config.AppRegistration.ContainsKey("ClientId")) {
-        throw "Required configuration setting 'AppRegistration.ClientId' is missing"
+    # Validate per-tenant app registration settings
+    foreach ($tenantConfig in $Config.TenantConfigs) {
+        if (-not $tenantConfig.ContainsKey("ClientId")) {
+            throw "Required configuration setting 'ClientId' is missing in tenant configuration for $($tenantConfig.TenantName)"
+        }
     }
     
     # Validate tenant configurations
@@ -222,6 +223,17 @@ try {
     
     # Process each tenant
     foreach ($tenantConfig in $Config.TenantConfigs) {
+    
+        # Determine reports to run for this tenant
+        $tenantReportsToRun = if ($tenantConfig.ContainsKey("ReportsToRun")) {
+            if ($tenantConfig.ReportsToRun -contains "All") {
+                @("MFA", "AuditLog", "DirectoryInfo", "UsageReports")
+            } else {
+                $tenantConfig.ReportsToRun
+            }
+        } else {
+            $reportsToRun
+        }
         try {
             # Update process state for this tenant
             if ($StatePath) {
@@ -244,11 +256,17 @@ try {
                 # Authenticate to the tenant
                 $authParams = @{
                     TenantId = $tenantConfig.TenantId
-                    ClientId = $Config.AppRegistration.ClientId
+                    ClientId = $tenantConfig.ClientId
                     Verbose = $true  # Add verbose output for debugging
                 }
                 
-                Write-CSPLog -Message "Using ClientId: $($Config.AppRegistration.ClientId)" -Level "DEBUG"
+                Write-CSPLog -Message "Using ClientId: $($tenantConfig.ClientId)" -Level "DEBUG"
+                Write-CSPLog -Message "TenantId: $($tenantConfig.TenantId)" -Level "DEBUG"
+                Write-CSPLog -Message "TenantName: $($tenantConfig.TenantName)" -Level "DEBUG"
+                Write-CSPLog -Message "AuthMethod: $authMethod" -Level "DEBUG"
+                Write-CSPLog -Message "CertificatePath: $($tenantConfig.CertificatePath)" -Level "DEBUG"
+                Write-CSPLog -Message "CertificatePassword: $($tenantConfig.CertificatePassword)" -Level "DEBUG"
+                Write-CSPLog -Message "ClientSecret: $($tenantConfig.ClientSecret)" -Level "DEBUG"
                 
                 # Add authentication method parameters
                 $authMethod = if ($tenantConfig.ContainsKey("AuthMethod")) { 
@@ -259,14 +277,24 @@ try {
                 
                 if ($authMethod -eq "Certificate") {
                     $authParams.CertificatePath = $tenantConfig.CertificatePath
-                    $authParams.CertificatePassword = $tenantConfig.CertificatePassword
+
+                    # Convert plain text password to SecureString if necessary
+                    if ($tenantConfig.CertificatePassword -is [string]) {
+                        $secureCertPassword = ConvertTo-SecureString -String $tenantConfig.CertificatePassword -AsPlainText -Force
+                        $authParams.CertificatePassword = $secureCertPassword
+                    } elseif ($tenantConfig.CertificatePassword -is [System.Security.SecureString]) {
+                        $authParams.CertificatePassword = $tenantConfig.CertificatePassword
+                    } else {
+                        throw "CertificatePassword must be either a plain text string or a SecureString"
+                    }
+
                     $authParams.AuthMethod = "Certificate"
                 }
                 else {
                     # Create a PSCredential object for client secret authentication
                     if ($tenantConfig.ClientSecret -is [string]) {
                         $secureSecret = ConvertTo-SecureString -String $tenantConfig.ClientSecret -AsPlainText -Force
-                        $authParams.ClientSecretCredential = New-Object System.Management.Automation.PSCredential($Config.AppRegistration.ClientId, $secureSecret)
+                        $authParams.ClientSecretCredential = New-Object System.Management.Automation.PSCredential($tenantConfig.ClientId, $secureSecret)
                     } elseif ($tenantConfig.ClientSecret -is [SecureString]) {
                         $authParams.ClientSecretCredential = New-Object System.Management.Automation.PSCredential($Config.AppRegistration.ClientId, $tenantConfig.ClientSecret)
                     } else {
@@ -329,13 +357,19 @@ try {
                         }
                     }
                     
+                # Verify connected tenant context
+                $connectionTest = Test-CSPConnection
+                if (-not $connectionTest.Connected -or $connectionTest.TenantId -ne $tenantConfig.TenantId) {
+                    Write-CSPLog -Message "Connected tenant '$($connectionTest.TenantId)' does not match expected tenant '$($tenantConfig.TenantId)'. Skipping this tenant." -Level "ERROR"
+                    continue
+                }
                     continue
                 }
                 
                 Write-CSPLog -Message "Successfully authenticated to tenant $($tenantConfig.TenantName)" -Level "INFO"
                 
                 # Generate reports
-                foreach ($reportType in $reportsToRun) {
+                foreach ($reportType in $tenantReportsToRun) {
                     $currentOperation++
                     $overallProgress = [Math]::Floor(($currentOperation / $totalReports) * 100)
                     

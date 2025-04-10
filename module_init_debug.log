@@ -1,0 +1,198 @@
+Debug log started at 04/04/2025 09:38:56
+===== CSP Reporting Module Initialization =====
+This script will check and initialize all required modules for the CSP Reporting framework.
+
+Module results type: System.Object[]
+Module results count: 12
+Module results dump:
+Result [0]:
+  - Properties: None (object type: System.Boolean)
+  - Properties: No properties found
+  - Cannot check for specific properties as object has no properties
+  - JSON: true
+Result [1]:
+  - Properties: None (object type: System.Boolean)
+  - Properties: No properties found
+  - Cannot check for specific properties as object has no properties
+  - JSON: true
+Result [2]:
+  - Properties: None (object type: System.Boolean)
+  - Properties: No properties found
+  - Cannot check for specific properties as object has no properties
+  - JSON: true
+Result [3]:
+  - Properties: None (object type: System.Boolean)
+  - Properties: No properties found
+  - Cannot check for specific properties as object has no properties
+  - JSON: true
+Result [4]:
+  - Properties: None (object type: System.Boolean)
+  - Properties: No properties found
+  - Cannot check for specific properties as object has no properties
+  - JSON: true
+Result [5]:
+  - Properties: None (object type: System.Boolean)
+  - Properties: No properties found
+  - Cannot check for specific properties as object has no properties
+  - JSON: true
+Result [6]:
+  - Properties: LatestVersion, ModuleName, Status, Version
+  - Properties: LatestVersion, ModuleName, Status, Version
+  - ModuleName: Microsoft.Graph.Authentication
+  - Status: UpToDate
+  - JSON: {
+  "ModuleName": "Microsoft.Graph.Authentication",
+  "Status": "UpToDate",
+  "Version": "2.26.1",
+  "LatestVersion": "2.26.1"
+}
+Result [7]:
+  - Properties: LatestVersion, ModuleName, Status, Version
+  - Properties: LatestVersion, ModuleName, Status, Version
+  - ModuleName: Microsoft.Graph.Applications
+  - Status: UpToDate
+  - JSON: {
+  "ModuleName": "Microsoft.Graph.Applications",
+  "Status": "UpToDate",
+  "Version": "2.26.1",
+  "LatestVersion": "2.26.1"
+}
+Result [8]:
+  - Properties: LatestVersion, ModuleName, Status, Version
+  - Properties: LatestVersion, ModuleName, Status, Version
+  - ModuleName: Microsoft.Graph.Identity.DirectoryManagement
+  - Status: UpToDate
+  - JSON: {
+  "ModuleName": "Microsoft.Graph.Identity.DirectoryManagement",
+  "Status": "UpToDate",
+  "Version": "2.26.1",
+  "LatestVersion": "2.26.1"
+}
+Result [9]:
+  - Properties: LatestVersion, ModuleName, Status, Version
+  - Properties: LatestVersion, ModuleName, Status, Version
+  - ModuleName: Microsoft.Graph.Users
+  - Status: UpToDate
+  - JSON: {
+  "ModuleName": "Microsoft.Graph.Users",
+  "Status": "UpToDate",
+  "Version": "2.26.1",
+  "LatestVersion": "2.26.1"
+}
+Result [10]:
+  - Properties: LatestVersion, ModuleName, Status, Version
+  - Properties: LatestVersion, ModuleName, Status, Version
+  - ModuleName: Microsoft.Graph.Reports
+  - Status: UpToDate
+  - JSON: {
+  "ModuleName": "Microsoft.Graph.Reports",
+  "Status": "UpToDate",
+  "Version": "2.26.1",
+  "LatestVersion": "2.26.1"
+}
+Result [11]:
+  - Properties: LatestVersion, ModuleName, Status, Version
+  - Properties: LatestVersion, ModuleName, Status, Version
+  - ModuleName: Microsoft.Graph.Identity.SignIns
+  - Status: UpToDate
+  - JSON: {
+  "ModuleName": "Microsoft.Graph.Identity.SignIns",
+  "Status": "UpToDate",
+  "Version": "2.26.1",
+  "LatestVersion": "2.26.1"
+}
+Found 6 valid module objects with Status property
+ERROR: An error occurred during module initialization: The property 'Count' cannot be found on this object. Verify that the property exists.
+ERROR: Error type: System.Management.Automation.PropertyNotFoundException
+ERROR: Error position: At D:\Clients\Netsurit\CSP Reporting\Initialize-CSPModules.ps1:155 char:9
++         $installedCount = ($validModules | Where-Object { $_.Status - …
++         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ERROR: Full exception: PropertyNotFoundException: D:\Clients\Netsurit\CSP Reporting\Initialize-CSPModules.ps1:155:9
+Line |
+ 155 |          $installedCount = ($validModules | Where-Object { $_.Status - …
+     |          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+
+
+ERROR: This appears to be a property access error. Check if all objects have the expected properties.
+Module results inspection in error handler:
+Module results type: System.Object[]
+Module results count: 12
+Error handler - Result [0]:
+  - Properties: None (object type: System.Boolean)
+  - ToString: True
+  - GetType: System.Boolean
+  - No properties to access
+Error handler - Result [1]:
+  - Properties: None (object type: System.Boolean)
+  - ToString: True
+  - GetType: System.Boolean
+  - No properties to access
+Error handler - Result [2]:
+  - Properties: None (object type: System.Boolean)
+  - ToString: True
+  - GetType: System.Boolean
+  - No properties to access
+Error handler - Result [3]:
+  - Properties: None (object type: System.Boolean)
+  - ToString: True
+  - GetType: System.Boolean
+  - No properties to access
+Error handler - Result [4]:
+  - Properties: None (object type: System.Boolean)
+  - ToString: True
+  - GetType: System.Boolean
+  - No properties to access
+Error handler - Result [5]:
+  - Properties: None (object type: System.Boolean)
+  - ToString: True
+  - GetType: System.Boolean
+  - No properties to access
+Error handler - Result [6]:
+  - Properties: LatestVersion, ModuleName, Status, Version
+  - ToString: 
+  - GetType: System.Management.Automation.PSCustomObject
+  - LatestVersion = 2.26.1
+  - ModuleName = Microsoft.Graph.Authentication
+  - Status = UpToDate
+  - Version = 2.26.1
+Error handler - Result [7]:
+  - Properties: LatestVersion, ModuleName, Status, Version
+  - ToString: 
+  - GetType: System.Management.Automation.PSCustomObject
+  - LatestVersion = 2.26.1
+  - ModuleName = Microsoft.Graph.Applications
+  - Status = UpToDate
+  - Version = 2.26.1
+Error handler - Result [8]:
+  - Properties: LatestVersion, ModuleName, Status, Version
+  - ToString: 
+  - GetType: System.Management.Automation.PSCustomObject
+  - LatestVersion = 2.26.1
+  - ModuleName = Microsoft.Graph.Identity.DirectoryManagement
+  - Status = UpToDate
+  - Version = 2.26.1
+Error handler - Result [9]:
+  - Properties: LatestVersion, ModuleName, Status, Version
+  - ToString: 
+  - GetType: System.Management.Automation.PSCustomObject
+  - LatestVersion = 2.26.1
+  - ModuleName = Microsoft.Graph.Users
+  - Status = UpToDate
+  - Version = 2.26.1
+Error handler - Result [10]:
+  - Properties: LatestVersion, ModuleName, Status, Version
+  - ToString: 
+  - GetType: System.Management.Automation.PSCustomObject
+  - LatestVersion = 2.26.1
+  - ModuleName = Microsoft.Graph.Reports
+  - Status = UpToDate
+  - Version = 2.26.1
+Error handler - Result [11]:
+  - Properties: LatestVersion, ModuleName, Status, Version
+  - ToString: 
+  - GetType: System.Management.Automation.PSCustomObject
+  - LatestVersion = 2.26.1
+  - ModuleName = Microsoft.Graph.Identity.SignIns
+  - Status = UpToDate
+  - Version = 2.26.1

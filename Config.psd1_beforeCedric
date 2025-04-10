@@ -15,26 +15,32 @@
 #>
 
 @{
+    # App Registration Details
+    AppRegistration = @{
+        # The application (client) ID of the app registration
+        ClientId = "00000000-0000-0000-0000-000000000000"
+        
+        # The name of the app registration (for reference only)
+        AppName = "CSP Reporting App"
+    }
     
     # Tenant Configurations
     # Each tenant entry contains the details needed to connect to that tenant
     TenantConfigs = @(
+        # Example tenant with certificate authentication
         @{
             # The tenant ID (GUID) or domain name
-            TenantId = "83cf691f-ded3-4441-ad78-e4a088441fc0" #"charteredgroup.onmicrosoft.com"
+            TenantId = "tenant1.onmicrosoft.com"
             
             # The display name of the tenant (for reporting purposes)
-            TenantName = "Chartered Group"
-
-            # The application (client) ID of the App Registration in this tenant
-            ClientId = "09a8682e-8cf3-4960-aba2-377a056dc6ef"
+            TenantName = "Tenant 1"
             
             # The path to the certificate file (.pfx) for certificate-based authentication
-            CertificatePath = ".\Certificates\CSPauditCertPP.pfx"
+            CertificatePath = ".\Certificates\Tenant1.pfx"
             
             # The password for the certificate file (should be a secure string in production)
             # Use: $securePassword = ConvertTo-SecureString -String "YourPassword" -AsPlainText -Force
-            CertificatePassword = ""
+            CertificatePassword = $null
             
             # The authentication method to use for this tenant
             # Valid values: "Certificate", "ClientSecret"
@@ -43,17 +49,15 @@
             # The client secret for client secret authentication (if using ClientSecret method)
             # Use: $secureSecret = ConvertTo-SecureString -String "YourClientSecret" -AsPlainText -Force
             ClientSecret = $null
-
-            # Optional: List of reports to run for this tenant. Valid options: "MFA", "AuditLog", "DirectoryInfo", "UsageReports", "All"
-            ReportsToRun = @("DirectoryInfo")
-        }
+        },
         
-        #@{
-        #     TenantId = "harith.onmicrosoft.com"
-        #     TenantName = "Harith"
-        #     AuthMethod = "ClientSecret"
-        #     ClientSecret = ""  # Should be a secure string in production
-        # }
+        # Example tenant with client secret authentication
+        @{
+            TenantId = "tenant2.onmicrosoft.com"
+            TenantName = "Tenant 2"
+            AuthMethod = "ClientSecret"
+            ClientSecret = $null  # Should be a secure string in production
+        }
         
         # Add more tenant configurations as needed
     )
