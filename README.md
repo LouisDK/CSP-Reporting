@@ -1,478 +1,245 @@
-# Multi-Tenant Microsoft Graph API Reporting Framework
+# Multi-Tenant Microsoft Graph API Reporting Framework v2
 
-A robust, enterprise-grade PowerShell framework for automating Microsoft Graph API operations across multiple tenant environments. Designed specifically for Managed Service Providers (MSPs) and organizations managing multiple Microsoft 365 tenants, this solution provides comprehensive security and compliance reporting, advanced error handling, and seamless resumability for mission-critical operations.
+A modular, enterprise-grade PowerShell framework for **deep security and compliance insights** across multiple Microsoft 365 tenants. Designed for MSPs and multi-tenant admins, it combines **comprehensive data extraction** with an **intelligent analysis engine** that generates **actionable, LLM-ready insights**.
 
-Created by Louis de Klerk (Netsurit) on 31 March 2025.
+Created by Louis de Klerk (Netsurit), April 2025.
+
+---
 
 ## Table of Contents
 
-- [Features](#features)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Usage](#usage)
-- [Authentication Methods](#authentication-methods)
-- [Report Types](#report-types)
-- [Scheduling](#scheduling)
-- [Resilient Operations](#resilient-operations)
-- [User Experience Enhancements](#user-experience-enhancements)
-- [Troubleshooting](#troubleshooting)
-- [Security Considerations](#security-considerations)
-- [Additional Documentation](#additional-documentation)
-- [Contributing](#contributing)
+- [Multi-Tenant Microsoft Graph API Reporting Framework v2](#multi-tenant-microsoft-graph-api-reporting-framework-v2)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Configuration](#configuration)
+  - [Usage](#usage)
+    - [Basic Run](#basic-run)
+    - [Options](#options)
+    - [What it does](#what-it-does)
+  - [Data Extraction \& Analysis](#data-extraction--analysis)
+  - [Insights JSON Structure](#insights-json-structure)
+  - [Scheduling](#scheduling)
+  - [Resilient Operations](#resilient-operations)
+  - [Troubleshooting](#troubleshooting)
+  - [Security Considerations](#security-considerations)
+  - [Additional Documentation](#additional-documentation)
+  - [Contributing](#contributing)
+
+---
 
 ## Features
 
-- **Multi-tenant Support**: Connect to multiple Microsoft 365 tenants using a single application registration
-- **Flexible Authentication**: Support for both certificate-based and client secret authentication
-- **Comprehensive Reporting**: Generate reports for MFA status, audit logs, directory information, and usage
-- **Resumable Operations**: Automatically resume operations from where they left off after interruptions
-- **Intelligent Pagination**: Handle large datasets efficiently with automatic pagination and batch processing
-- **Robust Error Handling**: Advanced retry logic with exponential backoff for API rate limiting
-- **Progress Reporting**: Detailed progress tracking for long-running operations
-- **Incremental Saving**: Prevent data loss by saving report data incrementally
-- **Customizable Output**: Export reports in CSV, JSON, or both formats
-- **Automated Scheduling**: Set up scheduled tasks to automate report generation
-- **Certificate Management**: Automatic certificate validation and renewal detection
-- **Modular Design**: Easily extend with additional report types or custom functionality
-- **Tenant Isolation**: Errors in one tenant don't affect operations in others
-- **Enhanced Module Management**: Automatic detection, installation, and updating of required modules
-- **Color-Coded Output**: Visual indicators for status, errors, and progress
-- **Automated Consent**: Streamlined admin consent process for multi-tenant deployments
+- **Multi-tenant Support**: Automate reporting across unlimited tenants
+- **Modular Architecture**: Clean separation of data extraction and analysis layers
+- **Deep Data Coverage**:
+  - Users, MFA, Guest activity
+  - Privileged roles & PIM assignments
+  - Conditional Access policies
+  - Applications, Service Principals, permissions, credentials
+  - Device compliance (Intune)
+  - Identity Protection risk data
+  - Tenant configuration & domains
+  - Audit logs & sign-ins
+- **Intelligent Analysis Engine**:
+  - Configurable rules & thresholds
+  - Generates structured **Insights JSON** with findings & metrics
+  - Designed for LLM summarization
+- **Config-Driven**: Customize rules, toggles, thresholds in `Config.psd1`
+- **Flexible Authentication**: Certificate or client secret
+- **Resumable & Robust**: Resume after failures, detailed logging, retry logic
+- **Customizable Output**: CSV, JSON, Insights JSON
+- **Automated Consent**: Streamlined admin consent process
+- **Scheduling Support**: Automate via scheduled tasks
+- **Color-coded Logging**: Visual feedback during execution
+
+---
 
 ## Prerequisites
 
-- PowerShell Core 7.0 or later
+- PowerShell Core 7.0+
 - Microsoft Graph PowerShell SDK
-- Administrative access to create an app registration in Azure AD
-- Appropriate permissions granted in each tenant
+- Azure AD App Registration with:
+  - `User.Read.All`, `Directory.Read.All`, `AuditLog.Read.All`, `Reports.Read.All`
+  - `Policy.Read.All`, `Application.Read.All`, `RoleManagement.Read.Directory`
+  - `IdentityRiskyUser.Read.All`, `IdentityRiskEvent.Read.All`
+- Admin consent granted in each tenant
+- Appropriate licenses (P1/P2, Intune) for some data
+
+---
 
 ## Installation
 
-1. Clone or download this repository to your local machine
-2. Use our enhanced module management script to set up all required modules:
+1. Clone or download this repo
+2. Run:
 
 ```powershell
 .\Initialize-CSPModules.ps1
 ```
 
-This script will:
-- Check for all required modules
-- Install any missing modules
-- Update modules if newer versions are available
-- Remove older versions of modules
-- Report detailed status of module management
+3. Create an App Registration (see [App Registration Guide](AppRegistration-Guide.md))
+4. Configure `Config.psd1` with tenants, auth, rules, toggles
 
-Alternatively, you can install modules manually:
-
-```powershell
-Install-Module -Name Microsoft.Graph -Scope CurrentUser -Force
-```
-
-3. Create an app registration in Azure AD with the required permissions (see [App Registration Setup](#app-registration-setup))
-4. Update the `Config.psd1` file with your app registration and tenant details
+---
 
 ## Configuration
 
-### App Registration Setup
+Edit `Config.psd1`:
 
-For detailed instructions on creating and configuring the App Registration, please refer to our comprehensive [App Registration Guide](AppRegistration-Guide.md).
+- **AppRegistration**: ClientId, cert path or secret
+- **TenantConfigs**: List of tenants, auth method, cert/secret
+- **ReportSettings**: DaysBack, include disabled/guest users
+- **Analysis**:
+  - `EnabledChecks`: Identity, Policies, Apps, Devices, Security
+  - `StaleGuestThresholdDays`
+  - `CredentialExpiryWarningDays`
+  - `AdminRoles`
+  - `HighRiskAppPermissions`
+- **DataExtractionToggles**: IncludeDeviceData, IncludeRiskData, IncludeAuditLogs
+- **Reporting**: GenerateInsightsJson, SaveRawDataFiles, OutputPath
+- **LoggingSettings**: Log file path, level
 
-1. Sign in to the [Azure Portal](https://portal.azure.com)
-2. Navigate to **Azure Active Directory** > **App registrations**
-3. Click **New registration**
-4. Enter a name for the application (e.g., "CSP Reporting")
-5. Set the supported account type to **Accounts in any organizational directory (Any Azure AD directory - Multitenant)**
-6. Click **Register**
-7. Note the **Application (client) ID** for use in the configuration file
+See example in repo.
 
-### Required Permissions
-
-Add the following application permissions to your app registration:
-
-- `User.Read.All` - For user information and MFA status
-- `AuditLog.Read.All` - For audit log data
-- `Directory.Read.All` - For tenant directory information
-- `Reports.Read.All` - For usage reports
-
-After adding the permissions, grant admin consent in each tenant where you want to use the application.
-
-### Certificate Authentication Setup (Recommended)
-
-For a streamlined certificate setup process, use our dedicated script:
-
-```powershell
-.\Setup-CSPCertificates.ps1 -CertificatePassword (ConvertTo-SecureString -String "YourSecurePassword" -AsPlainText -Force)
-```
-
-This enhanced script now includes:
-- Certificate validation to detect expired certificates
-- Automatic renewal detection
-- Configuration backup before making changes
-- Detailed progress reporting
-
-Alternatively, you can manually generate a certificate:
-
-```powershell
-Import-Module .\Modules\Utilities.psm1
-$certPassword = ConvertTo-SecureString -String "YourSecurePassword" -AsPlainText -Force
-New-CSPSelfSignedCertificate -CertificateName "CSPReporting" -CertificatePath ".\Certificates\CSPReporting.pfx" -CertificatePassword $certPassword -ExpiryYears 2
-```
-
-Then upload the certificate to your app registration in Azure AD:
-- In the Azure Portal, navigate to your app registration
-- Go to **Certificates & secrets**
-- Click **Upload certificate**
-- Select the public certificate file (.cer) and upload it
-
-### Configuration File
-
-Update the `Config.psd1` file with your app registration and tenant details:
-
-```powershell
-# App Registration Details
-AppRegistration = @{
-    ClientId = "YOUR_APPLICATION_CLIENT_ID"
-    AppName = "CSP Reporting App"
-}
-
-# Tenant Configurations
-TenantConfigs = @(
-    @{
-        TenantId = "tenant1.onmicrosoft.com"
-        TenantName = "Tenant 1"
-        CertificatePath = ".\Certificates\Tenant1.pfx"
-        CertificatePassword = $null  # Set this in your script
-        AuthMethod = "Certificate"
-    },
-    @{
-        TenantId = "tenant2.onmicrosoft.com"
-        TenantName = "Tenant 2"
-        AuthMethod = "ClientSecret"
-        ClientSecret = $null  # Set this in your script
-    }
-)
-
-# Report Settings
-ReportSettings = @{
-    # Number of days back to retrieve audit logs
-    DaysBack = 30
-    
-    # Include disabled users in MFA report
-    IncludeDisabledUsers = $false
-    
-    # Include guest users in MFA report
-    IncludeGuestUsers = $true
-}
-
-# Logging Settings
-LoggingSettings = @{
-    # Enable logging
-    EnableLogging = $true
-    
-    # Log file path
-    LogFilePath = ".\Logs\CSPReporting.log"
-    
-    # Log level
-    LogLevel = "INFO"
-}
-```
+---
 
 ## Usage
 
-### Basic Usage
-
-Run the main script to generate reports for all configured tenants:
+### Basic Run
 
 ```powershell
 .\Start-CSPReporting.ps1
 ```
 
-### Specify Report Types
+### Options
 
-Generate specific report types:
+- `-ConfigPath` to specify config file
+- `-ReportTypes` to limit legacy CSV reports
+- `-OutputFormat` CSV, JSON, Both
+- `-StatePath` for resumability
+- `-Resume` to continue from last run
 
-```powershell
-.\Start-CSPReporting.ps1 -ReportTypes MFA,AuditLog
+### What it does
+
+- Authenticates to each tenant
+- Extracts **all data areas** via modular functions
+- Runs **analysis engine** to generate **Insights JSON**
+- Saves Insights JSON per tenant (e.g., `Reports/TenantName_Insights.json`)
+- Optionally generates legacy CSV reports
+
+---
+
+## Data Extraction & Analysis
+
+- **Extraction**: Modular, paged, retrying, defensive
+- **Analysis**:
+  - Cross-references MFA, roles, PIM, guests
+  - Flags risky apps, expiring credentials
+  - Analyzes CA policies for gaps
+  - Summarizes risky users, risk detections
+  - Checks device compliance
+  - Reviews tenant config (Security Defaults, domains)
+- **Configurable rules** drive findings
+- **Outputs** structured JSON ready for LLM summarization
+
+---
+
+## Insights JSON Structure
+
+Example:
+
+```json
+{
+  "TenantId": "tenant1.onmicrosoft.com",
+  "TenantName": "Tenant 1",
+  "ReportTimestamp": "2025-04-10T19:00:00Z",
+  "SummaryMetrics": {
+    "TotalUsers": 550,
+    "EnabledUsers": 520,
+    "GuestUsers": 35,
+    "MFAEnabledPercent": 85.5,
+    "AdminRoleAssignments": 15,
+    "AdminsWithoutMFA": 2,
+    "ConditionalAccessPolicies": 10,
+    "RiskyCAPolicies": 1,
+    "HighRiskApps": 3,
+    "StaleGuests": 5,
+    "SecurityDefaultsEnabled": false,
+    "LegacyAuthBlocked": true,
+    "CompliantDevicePercent": 92.0
+  },
+  "Findings": [
+    {
+      "FindingID": "ADM-001",
+      "Category": "Privileged Access",
+      "Severity": "Critical",
+      "Title": "Global Administrator Account Without MFA",
+      "Description": "...",
+      "Details": { ... },
+      "Recommendation": "..."
+    },
+    {
+      "FindingID": "APP-001",
+      "Category": "Application Security",
+      "Severity": "High",
+      "Title": "Application with Excessive Permissions",
+      "Description": "...",
+      "Details": { ... },
+      "Recommendation": "..."
+    }
+    // More findings...
+  ]
+}
 ```
 
-Available report types:
-- `MFA` - MFA status report
-- `AuditLog` - Audit log report
-- `DirectoryInfo` - Directory information report
-- `UsageReports` - Usage reports
-- `All` - All report types (default)
-
-### Specify Output Format
-
-Choose the output format:
-
-```powershell
-.\Start-CSPReporting.ps1 -OutputFormat JSON
-```
-
-Available output formats:
-- `CSV` - CSV format (default)
-- `JSON` - JSON format
-- `Both` - Both CSV and JSON formats
-
-### Resumable Operations
-
-Enable resumable operations to continue from where you left off after interruptions:
-
-```powershell
-# Initial run with state path specified
-.\Start-CSPReporting.ps1 -StatePath ".\State\CSPReporting_State.xml"
-
-# Resume from previous state
-.\Start-CSPReporting.ps1 -StatePath ".\State\CSPReporting_State.xml" -Resume
-```
-
-### Use a Different Configuration File
-
-Specify a different configuration file:
-
-```powershell
-.\Start-CSPReporting.ps1 -ConfigPath ".\CustomConfig.psd1"
-```
-
-## Authentication Methods
-
-The solution supports two authentication methods:
-
-### Certificate-Based Authentication (Recommended)
-
-Certificate-based authentication is more secure and doesn't require periodic secret rotation. To use certificate-based authentication:
-
-1. Generate a self-signed certificate (see [Certificate Authentication Setup](#certificate-authentication-setup-recommended))
-2. Upload the certificate to your app registration
-3. Configure the tenant to use certificate authentication in the configuration file
-
-For detailed guidance on certificate management, refer to the [App Registration Guide - Certificate Authentication](AppRegistration-Guide.md#option-a-certificate-authentication-recommended) section.
-
-### Client Secret Authentication
-
-Client secret authentication is simpler to set up but requires periodic secret rotation. To use client secret authentication:
-
-1. Create a client secret in your app registration:
-   - In the Azure Portal, navigate to your app registration
-   - Go to **Certificates & secrets**
-   - Click **New client secret**
-   - Enter a description and select an expiration period
-   - Click **Add**
-   - Copy the secret value (you won't be able to see it again)
-2. Configure the tenant to use client secret authentication in the configuration file
-
-For more details, see the [App Registration Guide - Client Secret Authentication](AppRegistration-Guide.md#option-b-client-secret-authentication-alternative) section.
-
-### Admin Consent Automation
-
-Our enhanced `Grant-CSPAdminConsent.ps1` script now provides automated consent capabilities:
-
-```powershell
-# Test admin consent status only
-.\Grant-CSPAdminConsent.ps1 -TestOnly
-
-# Attempt automated consent for all tenants
-.\Grant-CSPAdminConsent.ps1 -AutoConsent
-```
-
-This automated process:
-- Tests if admin consent has already been granted
-- Automatically submits admin consent requests
-- Provides fallback manual consent URLs if automation fails
-- Reports detailed consent status for each tenant
-
-## Report Types
-
-### MFA Status Report
-
-The MFA status report provides information about the MFA status of users in the tenant, including:
-
-- User display name and UPN
-- Account status (enabled/disabled)
-- User type (member/guest)
-- MFA status (enabled/disabled)
-- MFA methods used
-
-### Audit Log Report
-
-The audit log report provides information about audit events in the tenant, including:
-
-- Activity date and time
-- Activity display name
-- Category
-- Initiated by (user or application)
-- Result and reason
-
-### Directory Information Report
-
-The directory information report provides information about the tenant, including:
-
-- Tenant name and ID
-- Verified and unverified domains
-- User, group, and application counts
-- Technical and security notification emails
-
-### Usage Reports
-
-The usage reports provide information about Microsoft 365 service usage, including:
-
-- User principal name and display name
-- Last activation and activity dates
-- Products assigned and used
+---
 
 ## Scheduling
 
-Use the scheduling script to set up automated report generation:
+Use `Schedule-CSPReporting.ps1` to automate runs via Windows Task Scheduler.
 
-```powershell
-# Create a daily scheduled task to run at 3:00 AM
-.\Schedule-CSPReporting.ps1 -Action Create -Frequency Daily -Time "03:00" -ReportTypes All
-
-# Update an existing scheduled task
-.\Schedule-CSPReporting.ps1 -Action Update -Frequency Weekly -Time "04:00" -ReportTypes MFA,AuditLog -StatePath ".\State\CSPReporting_State.xml"
-
-# Remove a scheduled task
-.\Schedule-CSPReporting.ps1 -Action Remove
-```
+---
 
 ## Resilient Operations
 
-This framework implements several features to ensure reliable operation, even in challenging scenarios:
+- **Resumable** with state tracking
+- **Retry logic** with backoff
+- **Handles API throttling**
+- **Logs errors, warnings, info, debug**
 
-### Automatic Resumability
-
-The framework continuously tracks progress during report generation, allowing operations to be resumed from where they left off after interruptions:
-
-- **State Management**: Detailed state tracking for each tenant and report type
-- **Incremental Saving**: Report data is saved incrementally to prevent data loss
-- **Checkpoint System**: Progress checkpoints enable precise resumption
-
-### Intelligent Pagination
-
-For large datasets, the framework automatically handles pagination to prevent memory issues:
-
-- **Batch Processing**: Data is processed in batches to maintain performance
-- **Efficient Memory Usage**: Streaming data processing avoids loading entire datasets into memory
-- **Automatic Buffer Management**: Buffer sizes adjust dynamically based on data volume
-
-### Advanced Error Handling
-
-The framework includes sophisticated error handling capabilities:
-
-- **Retry Logic**: Automatic retries with exponential backoff for transient errors
-- **Rate Limit Management**: Intelligent handling of API rate limiting
-- **Error Isolation**: Errors in one tenant don't affect operations in others
-- **Detailed Diagnostics**: Comprehensive error information for troubleshooting
-
-### Progress Reporting
-
-Real-time progress tracking provides visibility into long-running operations:
-
-- **Operation Status**: Current status of each operation
-- **Progress Percentage**: Completion percentage for each report
-- **Time Estimates**: Estimated time remaining for operations
-- **Tenant Isolation**: Separate progress tracking for each tenant
-
-## User Experience Enhancements
-
-The framework includes several user experience enhancements for better usability and visual feedback:
-
-### Module Management
-
-The framework includes comprehensive module management to ensure all dependencies are properly installed and updated:
-
-```powershell
-# Check and initialize specific modules
-$requiredModules = @("Microsoft.Graph", "Az.Accounts")
-Initialize-CSPModules -ModuleNames $requiredModules
-
-# Force reinstallation of modules
-Initialize-CSPModules -ModuleNames $requiredModules -Force
-```
-
-This functionality:
-- Automatically detects missing modules
-- Installs required modules
-- Updates modules to the latest version
-- Removes older versions to prevent conflicts
-- Provides detailed status reporting
+---
 
 ## Troubleshooting
 
-### Common Issues
+- Check logs in `Logs/`
+- Use `-Verbose` for more output
+- Verify app permissions and admin consent
+- Check licenses for PIM, Intune, Risk data
+- See [App Registration Guide](AppRegistration-Guide.md)
 
-#### Authentication Failures
-
-- Verify that the app registration has the required permissions
-- Ensure that admin consent has been granted in each tenant
-- Check that the certificate or client secret is valid and not expired
-- Verify that the tenant ID is correct
-
-For detailed troubleshooting steps, see the [App Registration Guide - Troubleshooting Common Issues](AppRegistration-Guide.md#part-5-troubleshooting-common-issues) section.
-
-#### Missing Data in Reports
-
-- Verify that the app registration has the required permissions
-- Check the log files for any errors or warnings
-- Ensure that the tenant has the required licenses for the data you're trying to retrieve
-
-#### API Rate Limiting
-
-The framework automatically handles rate limiting, but you can fine-tune:
-- Consider spreading large operations across multiple time periods
-- Lower batch sizes for very large tenants
-- Check logs for persistent rate limiting issues
-
-### Logging
-
-The solution provides comprehensive logging for troubleshooting:
-
-- **Structured Logging**: All operations produce detailed logs with severity levels
-- **Verbosity Control**: Configure the level of detail in logs
-- **Transcript Logging**: Full transcript of operations for debugging
-- **Console Output**: Real-time status information during execution
-- **Color-Coded Logs**: Visual categorization of log messages by severity
-
-Log files are stored in the `Logs` directory by default, and each run creates a transcript log with detailed information. Use the `-Verbose` parameter for more detailed console output.
+---
 
 ## Security Considerations
 
-- **Secure Storage**: Store certificates and client secrets securely
-- **Least Privilege**: Grant only the required permissions to the app registration
-- **Regular Rotation**: Rotate client secrets regularly
-- **Audit Logging**: Monitor access to the reports and configuration files
-- **Secure Transmission**: Ensure that reports are transmitted securely
-- **Certificate Management**: Monitor certificate expiry and rotation
+- Store secrets/certs securely
+- Use least privilege
+- Rotate secrets/certs regularly
+- Monitor access to reports
+- Enable Security Defaults or equivalent CA policies
 
-For comprehensive security best practices, refer to the [App Registration Guide - Security Best Practices](AppRegistration-Guide.md#part-4-security-best-practices) section.
+---
 
 ## Additional Documentation
 
-- [App Registration Guide](AppRegistration-Guide.md) - Detailed guide for creating and configuring the App Registration, including security best practices and troubleshooting
-- [Setup-CSPCertificates.ps1](Setup-CSPCertificates.ps1) - Script for setting up certificates for authentication
-- [Grant-CSPAdminConsent.ps1](Grant-CSPAdminConsent.ps1) - Script for granting admin consent in each tenant
-- [Initialize-CSPModules.ps1](Initialize-CSPModules.ps1) - Script for managing module dependencies
-- [Examples/Generate-TenantReport.ps1](Examples/Generate-TenantReport.ps1) - Example script for generating reports for a specific tenant
-- [Examples/Export-ReportsToDB.ps1](Examples/Export-ReportsToDB.ps1) - Example script for exporting reports to a SQL database
-- [Examples/Write-CSPColorDemo.ps1](Examples/Write-CSPColorDemo.ps1) - Demonstration of color-coded terminal output
-- [Enhancements.md](Enhancements.md) - Detailed documentation of recent enhancements
-- [Design.md](Design.md) - Detailed design documentation for the framework
+- [App Registration Guide](AppRegistration-Guide.md)
+- [Setup-CSPCertificates.ps1](Setup-CSPCertificates.ps1)
+- [Grant-CSPAdminConsent.ps1](Grant-CSPAdminConsent.ps1)
+- [Initialize-CSPModules.ps1](Initialize-CSPModules.ps1)
+- [Design Documents](Design/)
+
+---
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## Extensibility
-
-The framework is designed to be easily extended with additional functionality:
-
-- **Custom Report Types**: Add new report types by creating additional functions in the Reports module
-- **Data Enrichment**: Extend reports with additional data from other sources
-- **Integration Points**: Integrate with other systems via the extensible output mechanisms
-- **Custom Authentication**: Add support for additional authentication methods
-- **Pipeline Integration**: Incorporate into CI/CD pipelines for automated compliance checks
-- **UI Customization**: Leverage the color-coding capabilities for enhanced visual output
-
-This modular architecture allows you to adapt the framework to your specific requirements without modifying the core components.
+Contributions welcome! Fork, improve, and submit PRs.

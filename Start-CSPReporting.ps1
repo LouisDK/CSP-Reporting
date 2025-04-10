@@ -60,9 +60,25 @@ $ModulesPath = Join-Path -Path $ScriptPath -ChildPath "Modules"
 # Import required modules
 try {
     Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "Auth.psm1") -Force
-    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "Reports.psm1") -Force
-    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "Utilities.psm1") -Force
-    
+
+    # Import utility modules
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "StateManagement.psm1") -Force
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "LoggingAndProgress.psm1") -Force
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "ApiHelpers.psm1") -Force
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "CertificateUtils.psm1") -Force
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "ModuleManagement.psm1") -Force
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "ConsentUtils.psm1") -Force
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "ReportingUtils.psm1") -Force
+
+    # Import data extraction modules
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "DataExtraction/Identity.psm1") -Force
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "DataExtraction/SecurityPosture.psm1") -Force
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "DataExtraction/PrivilegedAccess.psm1") -Force
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "DataExtraction/Applications.psm1") -Force
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "DataExtraction/DeviceManagement.psm1") -Force
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "DataExtraction/RiskAndAudit.psm1") -Force
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "DataExtraction/Usage.psm1") -Force
+
     # Check if Microsoft Graph module is installed using our utility function
     $requiredModules = @("Microsoft.Graph")
     $moduleCheck = Test-CSPModuleAvailability -ModuleNames $requiredModules -InstallIfMissing
@@ -368,6 +384,56 @@ try {
                 
                 Write-CSPLog -Message "Successfully authenticated to tenant $($tenantConfig.TenantName)" -Level "INFO"
                 
+                # v2 Data Extraction
+                $tenantRawData = @{}
+                $tenantRawData.TenantId = $tenantConfig.TenantId
+                $tenantRawData.TenantName = $tenantConfig.TenantName
+
+                Write-CSPLog -Message "Starting v2 data extraction for tenant $($tenantConfig.TenantName)" -Level "INFO"
+
+                # Tenant Info
+                $tenantRawData.TenantInfo = Get-CSPTenantInfo
+                $tenantRawData.DomainInfo = Get-CSPDomainInfo
+                $tenantRawData.OrganizationInfo = Get-CSPOrganizationInfo
+
+                # Users and related
+                $tenantRawData.Users = Get-CSPUserData
+                $tenantRawData.UserAuthMethods = Get-CSPUserAuthMethods -Users $tenantRawData.Users
+                $tenantRawData.DirectoryRoles = Get-CSPDirectoryRoles
+                $tenantRawData.PIMAssignments = Get-CSPPIMAssignments
+
+                # Policies
+                $tenantRawData.ConditionalAccessPolicies = Get-CSPConditionalAccessPolicies
+                # TODO: Add Auth Method Policies, Auth Strengths, Authorization Policy
+
+                # Applications
+                $tenantRawData.Applications = Get-CSPApplicationData
+                $tenantRawData.ServicePrincipals = Get-CSPServicePrincipalData
+                # TODO: Add App Role Assignments
+
+                # Devices
+                $tenantRawData.Devices = Get-CSPManagedDeviceData
+
+                # Security
+                $tenantRawData.RiskyUsers = Get-CSPRiskyUsers
+                $tenantRawData.RiskDetections = Get-CSPRiskDetections
+                $tenantRawData.SecurityDefaults = Get-CSPSecurityDefaults
+
+                # Audit Logs
+                $tenantRawData.DirectoryAuditLogs = Get-CSPDirectoryAuditLogs -DaysBack $Config.ReportSettings.DaysBack
+                $tenantRawData.SignInLogs = Get-CSPSignInLogs -DaysBack $Config.ReportSettings.DaysBack
+
+                # Optionally save raw data to disk (future enhancement)
+
+                # Run Analysis
+                Write-CSPLog -Message "Starting v2 analysis for tenant $($tenantConfig.TenantName)" -Level "INFO"
+                $insights = Invoke-CSPTenantAnalysis -RawData $tenantRawData -Config $Config
+
+                # Save Insights JSON
+                $insightsPath = Join-Path -Path $Config.OutputPath -ChildPath "$($tenantConfig.TenantName)_Insights.json"
+                $insights | ConvertTo-Json -Depth 10 | Out-File -FilePath $insightsPath -Encoding UTF8
+                Write-CSPLog -Message "Saved Insights JSON to $insightsPath" -Level "INFO"
+
                 # Generate reports
                 foreach ($reportType in $tenantReportsToRun) {
                     $currentOperation++

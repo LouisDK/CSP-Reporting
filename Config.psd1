@@ -34,7 +34,7 @@
             
             # The password for the certificate file (should be a secure string in production)
             # Use: $securePassword = ConvertTo-SecureString -String "YourPassword" -AsPlainText -Force
-            CertificatePassword = ""
+            CertificatePassword = "D9)fnQ7C1*P5cd%B5D0)F1y,sB3O"
             
             # The authentication method to use for this tenant
             # Valid values: "Certificate", "ClientSecret"
@@ -45,7 +45,7 @@
             ClientSecret = $null
 
             # Optional: List of reports to run for this tenant. Valid options: "MFA", "AuditLog", "DirectoryInfo", "UsageReports", "All"
-            ReportsToRun = @("DirectoryInfo")
+            ReportsToRun = @("MFA")
         }
         
         #@{
