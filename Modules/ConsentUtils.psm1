@@ -71,8 +71,5 @@ function Test-CSPAdminConsent {
     }
 }
 
-function Invoke-CSPAdminConsent {
-<...full function content from previous extraction...>
-}
 
-Export-ModuleMember -Function Test-CSPAdminConsent, Invoke-CSPAdminConsent
+Export-ModuleMember -Function Test-CSPAdminConsent

@@ -18,7 +18,7 @@ function Get-CSPUserData {
     $allUsers = @()
     $baseUrl = "https://graph.microsoft.com/v1.0/users"
     $selectProps = "id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity"
-    $url = "$baseUrl`?\$select=$selectProps&`$count=true"
+    $url = "$baseUrl`?$select=$selectProps&$count=true"
     $headers = @{ "ConsistencyLevel" = "eventual" }
 
     try {
@@ -200,7 +200,13 @@ function Get-CSPPIMAssignments {
         return $result
     }
     catch {
-        Write-Warning "Error retrieving PIM assignments: $($_.Exception.Message)"
+        $msg = $_.Exception.Message
+        if ($msg -match "AadPremiumLicenseRequired" -or $msg -match "license") {
+            Write-Warning "PIM assignments skipped: required Microsoft Entra ID P2 or Governance license not present."
+            $result.SkippedReason = "License missing"
+        } else {
+            Write-Warning "Error retrieving PIM assignments: $msg"
+        }
         return $result
     }
 }

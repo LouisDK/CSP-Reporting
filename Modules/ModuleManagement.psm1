@@ -72,8 +72,5 @@ function Test-CSPModuleAvailability {
     }
 }
 
-function Initialize-CSPModules {
-<...full function content from previous extraction...>
-}
 
-Export-ModuleMember -Function Test-CSPModuleAvailability, Initialize-CSPModules
+Export-ModuleMember -Function Test-CSPModuleAvailability

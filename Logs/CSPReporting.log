@@ -2993,3 +2993,2140 @@ True
 PowerShell transcript end
 End time: 20250410184324
 **********************
+**********************
+PowerShell transcript start
+Start time: 20250410220544
+Username: DESKTOP-FK2I144\louis
+RunAs User: DESKTOP-FK2I144\louis
+Configuration Name: 
+Machine: DESKTOP-FK2I144 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\louis\.vscode\extensions\ms-vscode.powershell-2025.0.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2025.0.0' -BundledModulesPath 'c:\Users\louis\.vscode\extensions\ms-vscode.powershell-2025.0.0\modules' -EnableConsoleRepl -StartupBanner "PowerShell Extension v2025.0.0
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/vscode-powershell
+Type 'help' to get help.
+" -LogLevel 'Warning' -LogPath 'c:\Users\louis\AppData\Roaming\Code\logs\20250410T205854\window1\exthost\ms-vscode.powershell' -SessionDetailsPath 'c:\Users\louis\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell\sessions\PSES-VSCode-10824-598010.json' -FeatureFlags @() 
+Process ID: 31520
+PSVersion: 7.5.0
+PSEdition: Core
+GitCommitId: 7.5.0
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is .\Logs\CSPReporting.log
+[2025-04-10 22:05:44] [INFO] Starting CSP Reporting process at 04/10/2025 22:05:44
+[2025-04-10 22:05:44] [INFO] Processing tenant: Chartered Group
+[2025-04-10 22:05:44] [DEBUG] Using ClientId: 09a8682e-8cf3-4960-aba2-377a056dc6ef
+[2025-04-10 22:05:44] [DEBUG] TenantId: 83cf691f-ded3-4441-ad78-e4a088441fc0
+[2025-04-10 22:05:44] [DEBUG] TenantName: Chartered Group
+[2025-04-10 22:05:44] [DEBUG] AuthMethod: Certificate
+[2025-04-10 22:05:44] [DEBUG] CertificatePath: .\Certificates\CSPauditCertPP.pfx
+[2025-04-10 22:05:44] [DEBUG] CertificatePassword: D9)fnQ7C1*P5cd%B5D0)F1y,sB3O
+[2025-04-10 22:05:44] [DEBUG] ClientSecret:
+[2025-04-10 22:05:44] [DEBUG] Attempting authentication with Connect-CSPTenant...
+VERBOSE: Connecting to tenant 83cf691f-ded3-4441-ad78-e4a088441fc0 using Certificate authentication
+[2025-04-10 22:05:45] [DEBUG] Authentication with Connect-CSPTenant successful
+[2025-04-10 22:05:45] [INFO] Successfully authenticated to tenant Chartered Group
+[2025-04-10 22:05:45] [INFO] Generating MFA report for tenant Chartered Group...
+[2025-04-10 22:05:45] [ERROR] Error processing tenant Chartered Group: The term 'Get-CSPMFAReport' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+
+ClientId               : 09a8682e-8cf3-4960-aba2-377a056dc6ef
+TenantId               : 83cf691f-ded3-4441-ad78-e4a088441fc0
+Scopes                 : {Policy.Read.ConditionalAccess, DeviceManagementManagedDevices.Read.All, UserAuthenticationMethod.Read.All, PrivilegedAccess.Read.AzureAD…}
+AuthType               : AppOnly
+TokenCredentialType    : ClientCertificate
+CertificateThumbprint  : 
+CertificateSubjectName : 
+SendCertificateChain   : False
+Account                : 
+AppName                : Netsurit Reporting
+ContextScope           : Process
+Certificate            : [Subject]
+                           CN=cspaudit.netsurit.com
+
+                         [Issuer]
+                           CN=cspaudit.netsurit.com
+
+                         [Serial Number]
+                           18E79363640B46B6BFE8B7A8D30F5978
+
+                         [Not Before]
+                           2025/04/02 10:07:21
+
+                         [Not After]
+                           2027/04/02 10:17:21
+
+                         [Thumbprint]
+                           1D38D5C4A9913CFF21F4AB6B6D3528998E4A6D99
+
+PSHostVersion          : 2025.0.0
+ManagedIdentityId      : 
+ClientSecret           : 
+Environment            : Global
+
+True
+[2025-04-10 22:05:45] [INFO] CSP Reporting process completed at 04/10/2025 22:05:45
+**********************
+PowerShell transcript end
+End time: 20250410220545
+**********************
+**********************
+PowerShell transcript start
+Start time: 20250410220823
+Username: DESKTOP-FK2I144\louis
+RunAs User: DESKTOP-FK2I144\louis
+Configuration Name: 
+Machine: DESKTOP-FK2I144 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\louis\.vscode\extensions\ms-vscode.powershell-2025.0.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2025.0.0' -BundledModulesPath 'c:\Users\louis\.vscode\extensions\ms-vscode.powershell-2025.0.0\modules' -EnableConsoleRepl -StartupBanner "PowerShell Extension v2025.0.0
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/vscode-powershell
+Type 'help' to get help.
+" -LogLevel 'Warning' -LogPath 'c:\Users\louis\AppData\Roaming\Code\logs\20250410T205854\window1\exthost\ms-vscode.powershell' -SessionDetailsPath 'c:\Users\louis\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell\sessions\PSES-VSCode-10824-598010.json' -FeatureFlags @() 
+Process ID: 31520
+PSVersion: 7.5.0
+PSEdition: Core
+GitCommitId: 7.5.0
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is .\Logs\CSPReporting.log
+[2025-04-10 22:08:23] [INFO] Starting CSP Reporting process at 04/10/2025 22:08:23
+[2025-04-10 22:08:23] [INFO] Processing tenant: Chartered Group
+[2025-04-10 22:08:23] [DEBUG] Using ClientId: 09a8682e-8cf3-4960-aba2-377a056dc6ef
+[2025-04-10 22:08:23] [DEBUG] TenantId: 83cf691f-ded3-4441-ad78-e4a088441fc0
+[2025-04-10 22:08:23] [DEBUG] TenantName: Chartered Group
+[2025-04-10 22:08:23] [DEBUG] AuthMethod: Certificate
+[2025-04-10 22:08:23] [DEBUG] CertificatePath: .\Certificates\CSPauditCertPP.pfx
+[2025-04-10 22:08:23] [DEBUG] CertificatePassword: D9)fnQ7C1*P5cd%B5D0)F1y,sB3O
+[2025-04-10 22:08:23] [DEBUG] ClientSecret:
+[2025-04-10 22:08:23] [DEBUG] Attempting authentication with Connect-CSPTenant...
+VERBOSE: Connecting to tenant 83cf691f-ded3-4441-ad78-e4a088441fc0 using Certificate authentication
+[2025-04-10 22:08:24] [DEBUG] Authentication with Connect-CSPTenant successful
+[2025-04-10 22:08:24] [INFO] Successfully authenticated to tenant Chartered Group
+[2025-04-10 22:08:24] [INFO] Generating MFA report for tenant Chartered Group...
+PS>TerminatingError(): "The term '<' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again."
+[2025-04-10 22:08:24] [ERROR] Error processing tenant Chartered Group: The term '<' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+
+ClientId               : 09a8682e-8cf3-4960-aba2-377a056dc6ef
+TenantId               : 83cf691f-ded3-4441-ad78-e4a088441fc0
+Scopes                 : {Policy.Read.ConditionalAccess, DeviceManagementManagedDevices.Read.All, UserAuthenticationMethod.Read.All, PrivilegedAccess.Read.AzureAD…}
+AuthType               : AppOnly
+TokenCredentialType    : ClientCertificate
+CertificateThumbprint  : 
+CertificateSubjectName : 
+SendCertificateChain   : False
+Account                : 
+AppName                : Netsurit Reporting
+ContextScope           : Process
+Certificate            : [Subject]
+                           CN=cspaudit.netsurit.com
+
+                         [Issuer]
+                           CN=cspaudit.netsurit.com
+
+                         [Serial Number]
+                           18E79363640B46B6BFE8B7A8D30F5978
+
+                         [Not Before]
+                           2025/04/02 10:07:21
+
+                         [Not After]
+                           2027/04/02 10:17:21
+
+                         [Thumbprint]
+                           1D38D5C4A9913CFF21F4AB6B6D3528998E4A6D99
+
+PSHostVersion          : 2025.0.0
+ManagedIdentityId      : 
+ClientSecret           : 
+Environment            : Global
+
+True
+[2025-04-10 22:08:24] [INFO] CSP Reporting process completed at 04/10/2025 22:08:24
+**********************
+PowerShell transcript end
+End time: 20250410220824
+**********************
+**********************
+PowerShell transcript start
+Start time: 20250411084327
+Username: DESKTOP-FK2I144\louis
+RunAs User: DESKTOP-FK2I144\louis
+Configuration Name: 
+Machine: DESKTOP-FK2I144 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\louis\.vscode\extensions\ms-vscode.powershell-2025.0.0\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2025.0.0' -BundledModulesPath 'c:\Users\louis\.vscode\extensions\ms-vscode.powershell-2025.0.0\modules' -EnableConsoleRepl -StartupBanner "PowerShell Extension v2025.0.0
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/vscode-powershell
+Type 'help' to get help.
+" -LogLevel 'Warning' -LogPath 'c:\Users\louis\AppData\Roaming\Code\logs\20250411T072628\window1\exthost\ms-vscode.powershell' -SessionDetailsPath 'c:\Users\louis\AppData\Roaming\Code\User\globalStorage\ms-vscode.powershell\sessions\PSES-VSCode-31336-358903.json' -FeatureFlags @() 
+Process ID: 16936
+PSVersion: 7.5.0
+PSEdition: Core
+GitCommitId: 7.5.0
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is .\Logs\CSPReporting.log
+[2025-04-11 08:43:27] [INFO] Starting CSP Reporting process at 04/11/2025 08:43:27
+[2025-04-11 08:43:27] [INFO] Processing tenant: Chartered Group
+[2025-04-11 08:43:27] [DEBUG] Using ClientId: 09a8682e-8cf3-4960-aba2-377a056dc6ef
+[2025-04-11 08:43:27] [DEBUG] TenantId: 83cf691f-ded3-4441-ad78-e4a088441fc0
+[2025-04-11 08:43:27] [DEBUG] TenantName: Chartered Group
+[2025-04-11 08:43:27] [DEBUG] AuthMethod: Certificate
+[2025-04-11 08:43:27] [DEBUG] CertificatePath: .\Certificates\CSPauditCertPP.pfx
+[2025-04-11 08:43:27] [DEBUG] CertificatePassword: D9)fnQ7C1*P5cd%B5D0)F1y,sB3O
+[2025-04-11 08:43:27] [DEBUG] ClientSecret:
+[2025-04-11 08:43:27] [DEBUG] Attempting authentication with Connect-CSPTenant...
+VERBOSE: Connecting to tenant 83cf691f-ded3-4441-ad78-e4a088441fc0 using Certificate authentication
+[2025-04-11 08:43:28] [DEBUG] Authentication with Connect-CSPTenant successful
+[2025-04-11 08:43:28] [INFO] Successfully authenticated to tenant Chartered Group
+[2025-04-11 08:43:28] [INFO] Starting v2 data extraction for tenant Chartered Group
+[2025-04-11 08:43:28] [ERROR] Error processing tenant Chartered Group: The term 'Get-CSPTenantInfo' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+
+ClientId               : 09a8682e-8cf3-4960-aba2-377a056dc6ef
+TenantId               : 83cf691f-ded3-4441-ad78-e4a088441fc0
+Scopes                 : {Policy.Read.ConditionalAccess, DeviceManagementManagedDevices.Read.All, UserAuthenticationMethod.Read.All, PrivilegedAccess.Read.AzureAD…}
+AuthType               : AppOnly
+TokenCredentialType    : ClientCertificate
+CertificateThumbprint  : 
+CertificateSubjectName : 
+SendCertificateChain   : False
+Account                : 
+AppName                : Netsurit Reporting
+ContextScope           : Process
+Certificate            : [Subject]
+                           CN=cspaudit.netsurit.com
+
+                         [Issuer]
+                           CN=cspaudit.netsurit.com
+
+                         [Serial Number]
+                           18E79363640B46B6BFE8B7A8D30F5978
+
+                         [Not Before]
+                           2025/04/02 10:07:21
+
+                         [Not After]
+                           2027/04/02 10:17:21
+
+                         [Thumbprint]
+                           1D38D5C4A9913CFF21F4AB6B6D3528998E4A6D99
+
+PSHostVersion          : 2025.0.0
+ManagedIdentityId      : 
+ClientSecret           : 
+Environment            : Global
+
+True
+[2025-04-11 08:43:28] [INFO] CSP Reporting process completed at 04/11/2025 08:43:28
+**********************
+PowerShell transcript end
+End time: 20250411084328
+**********************
+**********************
+PowerShell transcript start
+Start time: 20250411084813
+Username: DESKTOP-FK2I144\louis
+RunAs User: DESKTOP-FK2I144\louis
+Configuration Name: 
+Machine: DESKTOP-FK2I144 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll
+Process ID: 31820
+PSVersion: 7.5.0
+PSEdition: Core
+GitCommitId: 7.5.0
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is .\Logs\CSPReporting.log
+[2025-04-11 08:48:14] [INFO] Starting CSP Reporting process at 04/11/2025 08:48:13
+[2025-04-11 08:48:14] [INFO] Processing tenant: Chartered Group
+[2025-04-11 08:48:14] [DEBUG] Using ClientId: 09a8682e-8cf3-4960-aba2-377a056dc6ef
+[2025-04-11 08:48:14] [DEBUG] TenantId: 83cf691f-ded3-4441-ad78-e4a088441fc0
+[2025-04-11 08:48:14] [DEBUG] TenantName: Chartered Group
+[2025-04-11 08:48:14] [DEBUG] AuthMethod: Certificate
+[2025-04-11 08:48:14] [DEBUG] CertificatePath: .\Certificates\CSPauditCertPP.pfx
+[2025-04-11 08:48:14] [DEBUG] CertificatePassword: D9)fnQ7C1*P5cd%B5D0)F1y,sB3O
+[2025-04-11 08:48:14] [DEBUG] ClientSecret:
+[2025-04-11 08:48:14] [DEBUG] Attempting authentication with Connect-CSPTenant...
+VERBOSE: Connecting to tenant 83cf691f-ded3-4441-ad78-e4a088441fc0 using Certificate authentication
+[2025-04-11 08:48:15] [DEBUG] Authentication with Connect-CSPTenant successful
+[2025-04-11 08:48:15] [INFO] Successfully authenticated to tenant Chartered Group
+[2025-04-11 08:48:15] [INFO] Starting v2 data extraction for tenant Chartered Group
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: d94b6b3a-765e-49e2-9deb-e2cf7944aa58
+client-request-id: 252ae327-b40e-47c6-8592-ab9cb10019b1
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF0000116A"}}
+Date: Fri, 11 Apr 2025 06:48:15 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T06:48:15","request-id":"d94b6b3a-765e-49e2-9deb-e2cf7944aa58","client-request-id":"252ae327-b40e-47c6-8592-ab9cb10019b1"}}}"
+>> TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: d94b6b3a-765e-49e2-9deb-e2cf7944aa58
+client-request-id: 252ae327-b40e-47c6-8592-ab9cb10019b1
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF0000116A"}}
+Date: Fri, 11 Apr 2025 06:48:15 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T06:48:15","request-id":"d94b6b3a-765e-49e2-9deb-e2cf7944aa58","client-request-id":"252ae327-b40e-47c6-8592-ab9cb10019b1"}}}"
+[2025-04-11 08:48:15] [ERROR] Non-retryable error in Get Tenant Info. Error: Response status code does not indicate success: BadRequest (Bad Request).
+Write-Error: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority HTTP/2.0 400 Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: d94b6b3a-765e-49e2-9deb-e2cf7944aa58 client-request-id: 252ae327-b40e-47c6-8592-ab9cb10019b1 x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF0000116A"}} Date: Fri, 11 Apr 2025 06:48:15 GMT Content-Type: application/json  {"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T06:48:15","request-id":"d94b6b3a-765e-49e2-9deb-e2cf7944aa58","client-request-id":"252ae327-b40e-47c6-8592-ab9cb10019b1"}}}
+Invoke-CSPWithRetry: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority HTTP/2.0 400
+Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: d94b6b3a-765e-49e2-9deb-e2cf7944aa58 client-request-id: 252ae327-b40e-47c6-8592-ab9cb10019b1 x-ms-ags-diagnostic:
+{"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF0000116A"}} Date: Fri, 11 Apr 2025 06:48:15 GMT Content-Type: application/json 
+{"error":{"code":"BadRequest","message":"Invalid
+version.","innerError":{"date":"2025-04-11T06:48:15","request-id":"d94b6b3a-765e-49e2-9deb-e2cf7944aa58","client-request-id":"252ae327-b40e-47c6-8592-ab9cb10019b1"}}}
+
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: d94b6b3a-765e-49e2-9deb-e2cf7944aa58
+client-request-id: 252ae327-b40e-47c6-8592-ab9cb10019b1
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF0000116A"}}
+Date: Fri, 11 Apr 2025 06:48:15 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T06:48:15","request-id":"d94b6b3a-765e-49e2-9deb-e2cf7944aa58","client-request-id":"252ae327-b40e-47c6-8592-ab9cb10019b1"}}}"
+WARNING: Error retrieving tenant info: Response status code does not indicate success: BadRequest (Bad Request).
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: dd548b8a-9c91-48dc-b844-760b8d9f8427
+client-request-id: 9c491167-6218-472d-87e6-11e560c33c43
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF0000116A"}}
+Date: Fri, 11 Apr 2025 06:48:15 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T06:48:15","request-id":"dd548b8a-9c91-48dc-b844-760b8d9f8427","client-request-id":"9c491167-6218-472d-87e6-11e560c33c43"}}}"
+>> TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: dd548b8a-9c91-48dc-b844-760b8d9f8427
+client-request-id: 9c491167-6218-472d-87e6-11e560c33c43
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF0000116A"}}
+Date: Fri, 11 Apr 2025 06:48:15 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T06:48:15","request-id":"dd548b8a-9c91-48dc-b844-760b8d9f8427","client-request-id":"9c491167-6218-472d-87e6-11e560c33c43"}}}"
+[2025-04-11 08:48:16] [ERROR] Non-retryable error in Get Organization Info. Error: Response status code does not indicate success: BadRequest (Bad Request).
+Write-Error: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile HTTP/2.0 400 Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: dd548b8a-9c91-48dc-b844-760b8d9f8427 client-request-id: 9c491167-6218-472d-87e6-11e560c33c43 x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF0000116A"}} Date: Fri, 11 Apr 2025 06:48:15 GMT Content-Type: application/json  {"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T06:48:15","request-id":"dd548b8a-9c91-48dc-b844-760b8d9f8427","client-request-id":"9c491167-6218-472d-87e6-11e560c33c43"}}}
+Invoke-CSPWithRetry: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile HTTP/2.0 400 Bad Request Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000 request-id: dd548b8a-9c91-48dc-b844-760b8d9f8427 client-request-id: 9c491167-6218-472d-87e6-11e560c33c43 x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South
+Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF0000116A"}} Date: Fri, 11 Apr 2025 06:48:15 GMT Content-Type: application/json  {"error":{"code":"BadRequest","message":"Invalid
+version.","innerError":{"date":"2025-04-11T06:48:15","request-id":"dd548b8a-9c91-48dc-b844-760b8d9f8427","client-request-id":"9c491167-6218-472d-87e6-11e560c33c43"}}}
+
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: dd548b8a-9c91-48dc-b844-760b8d9f8427
+client-request-id: 9c491167-6218-472d-87e6-11e560c33c43
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF0000116A"}}
+Date: Fri, 11 Apr 2025 06:48:15 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T06:48:15","request-id":"dd548b8a-9c91-48dc-b844-760b8d9f8427","client-request-id":"9c491167-6218-472d-87e6-11e560c33c43"}}}"
+WARNING: Error retrieving organization info: Response status code does not indicate success: BadRequest (Bad Request).
+[2025-04-11 08:48:16] [ERROR] Error processing tenant Chartered Group: The term 'Get-CSPUserData' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+
+ClientId               : 09a8682e-8cf3-4960-aba2-377a056dc6ef
+TenantId               : 83cf691f-ded3-4441-ad78-e4a088441fc0
+Scopes                 : {Policy.Read.ConditionalAccess, DeviceManagementManagedDevices.Read.All, UserAuthenticationMethod.Read.All, PrivilegedAccess.Read.AzureAD…}
+AuthType               : AppOnly
+TokenCredentialType    : ClientCertificate
+CertificateThumbprint  : 
+CertificateSubjectName : 
+SendCertificateChain   : False
+Account                : 
+AppName                : Netsurit Reporting
+ContextScope           : Process
+Certificate            : [Subject]
+                           CN=cspaudit.netsurit.com
+
+                         [Issuer]
+                           CN=cspaudit.netsurit.com
+
+                         [Serial Number]
+                           18E79363640B46B6BFE8B7A8D30F5978
+
+                         [Not Before]
+                           2025/04/02 10:07:21
+
+                         [Not After]
+                           2027/04/02 10:17:21
+
+                         [Thumbprint]
+                           1D38D5C4A9913CFF21F4AB6B6D3528998E4A6D99
+
+PSHostVersion          : 7.5.0
+ManagedIdentityId      : 
+ClientSecret           : 
+Environment            : Global
+
+True
+[2025-04-11 08:48:16] [INFO] CSP Reporting process completed at 04/11/2025 08:48:16
+**********************
+PowerShell transcript end
+End time: 20250411084816
+**********************
+**********************
+PowerShell transcript start
+Start time: 20250411085042
+Username: DESKTOP-FK2I144\louis
+RunAs User: DESKTOP-FK2I144\louis
+Configuration Name: 
+Machine: DESKTOP-FK2I144 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll
+Process ID: 31820
+PSVersion: 7.5.0
+PSEdition: Core
+GitCommitId: 7.5.0
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is .\Logs\CSPReporting.log
+[2025-04-11 08:50:42] [INFO] Starting CSP Reporting process at 04/11/2025 08:50:42
+[2025-04-11 08:50:42] [INFO] Processing tenant: Chartered Group
+[2025-04-11 08:50:42] [DEBUG] Using ClientId: 09a8682e-8cf3-4960-aba2-377a056dc6ef
+[2025-04-11 08:50:42] [DEBUG] TenantId: 83cf691f-ded3-4441-ad78-e4a088441fc0
+[2025-04-11 08:50:42] [DEBUG] TenantName: Chartered Group
+[2025-04-11 08:50:42] [DEBUG] AuthMethod: Certificate
+[2025-04-11 08:50:42] [DEBUG] CertificatePath: .\Certificates\CSPauditCertPP.pfx
+[2025-04-11 08:50:42] [DEBUG] CertificatePassword: D9)fnQ7C1*P5cd%B5D0)F1y,sB3O
+[2025-04-11 08:50:42] [DEBUG] ClientSecret:
+[2025-04-11 08:50:42] [DEBUG] Attempting authentication with Connect-CSPTenant...
+VERBOSE: Connecting to tenant 83cf691f-ded3-4441-ad78-e4a088441fc0 using Certificate authentication
+[2025-04-11 08:50:43] [DEBUG] Authentication with Connect-CSPTenant successful
+[2025-04-11 08:50:43] [INFO] Successfully authenticated to tenant Chartered Group
+[2025-04-11 08:50:43] [INFO] Starting v2 data extraction for tenant Chartered Group
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: cbab84f8-0cbb-42c5-8d5e-393e4233c4c1
+client-request-id: 71bf9503-08f8-4d36-9439-154b49e82ee2
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF0000116A"}}
+Date: Fri, 11 Apr 2025 06:50:42 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T06:50:42","request-id":"cbab84f8-0cbb-42c5-8d5e-393e4233c4c1","client-request-id":"71bf9503-08f8-4d36-9439-154b49e82ee2"}}}"
+>> TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: cbab84f8-0cbb-42c5-8d5e-393e4233c4c1
+client-request-id: 71bf9503-08f8-4d36-9439-154b49e82ee2
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF0000116A"}}
+Date: Fri, 11 Apr 2025 06:50:42 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T06:50:42","request-id":"cbab84f8-0cbb-42c5-8d5e-393e4233c4c1","client-request-id":"71bf9503-08f8-4d36-9439-154b49e82ee2"}}}"
+[2025-04-11 08:50:43] [ERROR] Non-retryable error in Get Tenant Info. Error: Response status code does not indicate success: BadRequest (Bad Request).
+Write-Error: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority HTTP/2.0 400 Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: cbab84f8-0cbb-42c5-8d5e-393e4233c4c1 client-request-id: 71bf9503-08f8-4d36-9439-154b49e82ee2 x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF0000116A"}} Date: Fri, 11 Apr 2025 06:50:42 GMT Content-Type: application/json  {"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T06:50:42","request-id":"cbab84f8-0cbb-42c5-8d5e-393e4233c4c1","client-request-id":"71bf9503-08f8-4d36-9439-154b49e82ee2"}}}
+Invoke-CSPWithRetry: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority HTTP/2.0 400
+Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: cbab84f8-0cbb-42c5-8d5e-393e4233c4c1 client-request-id: 71bf9503-08f8-4d36-9439-154b49e82ee2 x-ms-ags-diagnostic:
+{"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF0000116A"}} Date: Fri, 11 Apr 2025 06:50:42 GMT Content-Type: application/json 
+{"error":{"code":"BadRequest","message":"Invalid
+version.","innerError":{"date":"2025-04-11T06:50:42","request-id":"cbab84f8-0cbb-42c5-8d5e-393e4233c4c1","client-request-id":"71bf9503-08f8-4d36-9439-154b49e82ee2"}}}
+
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: cbab84f8-0cbb-42c5-8d5e-393e4233c4c1
+client-request-id: 71bf9503-08f8-4d36-9439-154b49e82ee2
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF0000116A"}}
+Date: Fri, 11 Apr 2025 06:50:42 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T06:50:42","request-id":"cbab84f8-0cbb-42c5-8d5e-393e4233c4c1","client-request-id":"71bf9503-08f8-4d36-9439-154b49e82ee2"}}}"
+WARNING: Error retrieving tenant info: Response status code does not indicate success: BadRequest (Bad Request).
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 5128149a-28b9-4c19-8caa-ef357f24af55
+client-request-id: dddfa3ff-609d-47d8-9622-356d998c69e5
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF0000116A"}}
+Date: Fri, 11 Apr 2025 06:50:42 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T06:50:43","request-id":"5128149a-28b9-4c19-8caa-ef357f24af55","client-request-id":"dddfa3ff-609d-47d8-9622-356d998c69e5"}}}"
+>> TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 5128149a-28b9-4c19-8caa-ef357f24af55
+client-request-id: dddfa3ff-609d-47d8-9622-356d998c69e5
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF0000116A"}}
+Date: Fri, 11 Apr 2025 06:50:42 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T06:50:43","request-id":"5128149a-28b9-4c19-8caa-ef357f24af55","client-request-id":"dddfa3ff-609d-47d8-9622-356d998c69e5"}}}"
+[2025-04-11 08:50:43] [ERROR] Non-retryable error in Get Organization Info. Error: Response status code does not indicate success: BadRequest (Bad Request).
+Write-Error: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile HTTP/2.0 400 Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: 5128149a-28b9-4c19-8caa-ef357f24af55 client-request-id: dddfa3ff-609d-47d8-9622-356d998c69e5 x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF0000116A"}} Date: Fri, 11 Apr 2025 06:50:42 GMT Content-Type: application/json  {"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T06:50:43","request-id":"5128149a-28b9-4c19-8caa-ef357f24af55","client-request-id":"dddfa3ff-609d-47d8-9622-356d998c69e5"}}}
+Invoke-CSPWithRetry: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile HTTP/2.0 400 Bad Request Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000 request-id: 5128149a-28b9-4c19-8caa-ef357f24af55 client-request-id: dddfa3ff-609d-47d8-9622-356d998c69e5 x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South
+Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF0000116A"}} Date: Fri, 11 Apr 2025 06:50:42 GMT Content-Type: application/json  {"error":{"code":"BadRequest","message":"Invalid
+version.","innerError":{"date":"2025-04-11T06:50:43","request-id":"5128149a-28b9-4c19-8caa-ef357f24af55","client-request-id":"dddfa3ff-609d-47d8-9622-356d998c69e5"}}}
+
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 5128149a-28b9-4c19-8caa-ef357f24af55
+client-request-id: dddfa3ff-609d-47d8-9622-356d998c69e5
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF0000116A"}}
+Date: Fri, 11 Apr 2025 06:50:42 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T06:50:43","request-id":"5128149a-28b9-4c19-8caa-ef357f24af55","client-request-id":"dddfa3ff-609d-47d8-9622-356d998c69e5"}}}"
+WARNING: Error retrieving organization info: Response status code does not indicate success: BadRequest (Bad Request).
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: a892687f-3f09-4960-a30b-108708d9b0e3
+client-request-id: 08356495-04f4-4075-991f-3b7c4f186249
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF0000116A"}}
+Date: Fri, 11 Apr 2025 06:50:42 GMT
+Content-Type: application/json
+
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T06:50:43","request-id":"a892687f-3f09-4960-a30b-108708d9b0e3","client-request-id":"08356495-04f4-4075-991f-3b7c4f186249"}}}"
+>> TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: a892687f-3f09-4960-a30b-108708d9b0e3
+client-request-id: 08356495-04f4-4075-991f-3b7c4f186249
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF0000116A"}}
+Date: Fri, 11 Apr 2025 06:50:42 GMT
+Content-Type: application/json
+
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T06:50:43","request-id":"a892687f-3f09-4960-a30b-108708d9b0e3","client-request-id":"08356495-04f4-4075-991f-3b7c4f186249"}}}"
+[2025-04-11 08:50:43] [ERROR] Non-retryable error in Get Users. Error: Response status code does not indicate success: BadRequest (Bad Request).
+Write-Error: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true HTTP/2.0 400 Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: a892687f-3f09-4960-a30b-108708d9b0e3 client-request-id: 08356495-04f4-4075-991f-3b7c4f186249 x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF0000116A"}} Date: Fri, 11 Apr 2025 06:50:42 GMT Content-Type: application/json  {"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T06:50:43","request-id":"a892687f-3f09-4960-a30b-108708d9b0e3","client-request-id":"08356495-04f4-4075-991f-3b7c4f186249"}}}
+Invoke-CSPWithRetry: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true HTTP/2.0 400
+Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: a892687f-3f09-4960-a30b-108708d9b0e3 client-request-id: 08356495-04f4-4075-991f-3b7c4f186249 x-ms-ags-diagnostic:
+{"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF0000116A"}} Date: Fri, 11 Apr 2025 06:50:42 GMT Content-Type: application/json 
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified:
+'\\'.","innerError":{"date":"2025-04-11T06:50:43","request-id":"a892687f-3f09-4960-a30b-108708d9b0e3","client-request-id":"08356495-04f4-4075-991f-3b7c4f186249"}}}
+
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: a892687f-3f09-4960-a30b-108708d9b0e3
+client-request-id: 08356495-04f4-4075-991f-3b7c4f186249
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF0000116A"}}
+Date: Fri, 11 Apr 2025 06:50:42 GMT
+Content-Type: application/json
+
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T06:50:43","request-id":"a892687f-3f09-4960-a30b-108708d9b0e3","client-request-id":"08356495-04f4-4075-991f-3b7c4f186249"}}}"
+WARNING: Error retrieving users: Response status code does not indicate success: BadRequest (Bad Request).
+PS>TerminatingError(Get-CSPUserAuthMethods): "Cannot bind argument to parameter 'Users' because it is null."
+[2025-04-11 08:50:44] [ERROR] Error processing tenant Chartered Group: Cannot bind argument to parameter 'Users' because it is null.
+
+ClientId               : 09a8682e-8cf3-4960-aba2-377a056dc6ef
+TenantId               : 83cf691f-ded3-4441-ad78-e4a088441fc0
+Scopes                 : {Policy.Read.ConditionalAccess, DeviceManagementManagedDevices.Read.All, UserAuthenticationMethod.Read.All, PrivilegedAccess.Read.AzureAD…}
+AuthType               : AppOnly
+TokenCredentialType    : ClientCertificate
+CertificateThumbprint  : 
+CertificateSubjectName : 
+SendCertificateChain   : False
+Account                : 
+AppName                : Netsurit Reporting
+ContextScope           : Process
+Certificate            : [Subject]
+                           CN=cspaudit.netsurit.com
+
+                         [Issuer]
+                           CN=cspaudit.netsurit.com
+
+                         [Serial Number]
+                           18E79363640B46B6BFE8B7A8D30F5978
+
+                         [Not Before]
+                           2025/04/02 10:07:21
+
+                         [Not After]
+                           2027/04/02 10:17:21
+
+                         [Thumbprint]
+                           1D38D5C4A9913CFF21F4AB6B6D3528998E4A6D99
+
+PSHostVersion          : 7.5.0
+ManagedIdentityId      : 
+ClientSecret           : 
+Environment            : Global
+
+True
+[2025-04-11 08:50:44] [INFO] CSP Reporting process completed at 04/11/2025 08:50:44
+**********************
+PowerShell transcript end
+End time: 20250411085044
+**********************
+**********************
+PowerShell transcript start
+Start time: 20250411085525
+Username: DESKTOP-FK2I144\louis
+RunAs User: DESKTOP-FK2I144\louis
+Configuration Name: 
+Machine: DESKTOP-FK2I144 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll
+Process ID: 31820
+PSVersion: 7.5.0
+PSEdition: Core
+GitCommitId: 7.5.0
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is .\Logs\CSPReporting.log
+[2025-04-11 08:55:25] [INFO] Starting CSP Reporting process at 04/11/2025 08:55:25
+[2025-04-11 08:55:25] [INFO] Processing tenant: Chartered Group
+[2025-04-11 08:55:25] [DEBUG] Using ClientId: 09a8682e-8cf3-4960-aba2-377a056dc6ef
+[2025-04-11 08:55:25] [DEBUG] TenantId: 83cf691f-ded3-4441-ad78-e4a088441fc0
+[2025-04-11 08:55:25] [DEBUG] TenantName: Chartered Group
+[2025-04-11 08:55:25] [DEBUG] AuthMethod: Certificate
+[2025-04-11 08:55:25] [DEBUG] CertificatePath: .\Certificates\CSPauditCertPP.pfx
+[2025-04-11 08:55:25] [DEBUG] CertificatePassword: D9)fnQ7C1*P5cd%B5D0)F1y,sB3O
+[2025-04-11 08:55:25] [DEBUG] ClientSecret:
+[2025-04-11 08:55:25] [DEBUG] Attempting authentication with Connect-CSPTenant...
+VERBOSE: Connecting to tenant 83cf691f-ded3-4441-ad78-e4a088441fc0 using Certificate authentication
+[2025-04-11 08:55:26] [DEBUG] Authentication with Connect-CSPTenant successful
+[2025-04-11 08:55:26] [INFO] Successfully authenticated to tenant Chartered Group
+[2025-04-11 08:55:26] [INFO] Starting v2 data extraction for tenant Chartered Group
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 9e6f3b3f-6c44-427d-a6ed-783d9beb83d3
+client-request-id: d6aee2dd-4baa-4d08-ac2b-08d654aaa3f3
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000685"}}
+Date: Fri, 11 Apr 2025 06:55:25 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T06:55:26","request-id":"9e6f3b3f-6c44-427d-a6ed-783d9beb83d3","client-request-id":"d6aee2dd-4baa-4d08-ac2b-08d654aaa3f3"}}}"
+>> TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 9e6f3b3f-6c44-427d-a6ed-783d9beb83d3
+client-request-id: d6aee2dd-4baa-4d08-ac2b-08d654aaa3f3
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000685"}}
+Date: Fri, 11 Apr 2025 06:55:25 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T06:55:26","request-id":"9e6f3b3f-6c44-427d-a6ed-783d9beb83d3","client-request-id":"d6aee2dd-4baa-4d08-ac2b-08d654aaa3f3"}}}"
+[2025-04-11 08:55:26] [ERROR] Non-retryable error in Get Tenant Info. Error: Response status code does not indicate success: BadRequest (Bad Request).
+Write-Error: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority HTTP/2.0 400 Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: 9e6f3b3f-6c44-427d-a6ed-783d9beb83d3 client-request-id: d6aee2dd-4baa-4d08-ac2b-08d654aaa3f3 x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000685"}} Date: Fri, 11 Apr 2025 06:55:25 GMT Content-Type: application/json  {"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T06:55:26","request-id":"9e6f3b3f-6c44-427d-a6ed-783d9beb83d3","client-request-id":"d6aee2dd-4baa-4d08-ac2b-08d654aaa3f3"}}}
+Invoke-CSPWithRetry: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority HTTP/2.0 400
+Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: 9e6f3b3f-6c44-427d-a6ed-783d9beb83d3 client-request-id: d6aee2dd-4baa-4d08-ac2b-08d654aaa3f3 x-ms-ags-diagnostic:
+{"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000685"}} Date: Fri, 11 Apr 2025 06:55:25 GMT Content-Type: application/json 
+{"error":{"code":"BadRequest","message":"Invalid
+version.","innerError":{"date":"2025-04-11T06:55:26","request-id":"9e6f3b3f-6c44-427d-a6ed-783d9beb83d3","client-request-id":"d6aee2dd-4baa-4d08-ac2b-08d654aaa3f3"}}}
+
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 9e6f3b3f-6c44-427d-a6ed-783d9beb83d3
+client-request-id: d6aee2dd-4baa-4d08-ac2b-08d654aaa3f3
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000685"}}
+Date: Fri, 11 Apr 2025 06:55:25 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T06:55:26","request-id":"9e6f3b3f-6c44-427d-a6ed-783d9beb83d3","client-request-id":"d6aee2dd-4baa-4d08-ac2b-08d654aaa3f3"}}}"
+WARNING: Error retrieving tenant info: Response status code does not indicate success: BadRequest (Bad Request).
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: c18565bb-afd2-429e-9e1a-326e82555198
+client-request-id: 5085a411-afd3-4762-a8ff-c88eaeaba4ab
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000685"}}
+Date: Fri, 11 Apr 2025 06:55:25 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T06:55:26","request-id":"c18565bb-afd2-429e-9e1a-326e82555198","client-request-id":"5085a411-afd3-4762-a8ff-c88eaeaba4ab"}}}"
+>> TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: c18565bb-afd2-429e-9e1a-326e82555198
+client-request-id: 5085a411-afd3-4762-a8ff-c88eaeaba4ab
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000685"}}
+Date: Fri, 11 Apr 2025 06:55:25 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T06:55:26","request-id":"c18565bb-afd2-429e-9e1a-326e82555198","client-request-id":"5085a411-afd3-4762-a8ff-c88eaeaba4ab"}}}"
+[2025-04-11 08:55:27] [ERROR] Non-retryable error in Get Organization Info. Error: Response status code does not indicate success: BadRequest (Bad Request).
+Write-Error: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile HTTP/2.0 400 Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: c18565bb-afd2-429e-9e1a-326e82555198 client-request-id: 5085a411-afd3-4762-a8ff-c88eaeaba4ab x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000685"}} Date: Fri, 11 Apr 2025 06:55:25 GMT Content-Type: application/json  {"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T06:55:26","request-id":"c18565bb-afd2-429e-9e1a-326e82555198","client-request-id":"5085a411-afd3-4762-a8ff-c88eaeaba4ab"}}}
+Invoke-CSPWithRetry: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile HTTP/2.0 400 Bad Request Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000 request-id: c18565bb-afd2-429e-9e1a-326e82555198 client-request-id: 5085a411-afd3-4762-a8ff-c88eaeaba4ab x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South
+Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000685"}} Date: Fri, 11 Apr 2025 06:55:25 GMT Content-Type: application/json  {"error":{"code":"BadRequest","message":"Invalid
+version.","innerError":{"date":"2025-04-11T06:55:26","request-id":"c18565bb-afd2-429e-9e1a-326e82555198","client-request-id":"5085a411-afd3-4762-a8ff-c88eaeaba4ab"}}}
+
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: c18565bb-afd2-429e-9e1a-326e82555198
+client-request-id: 5085a411-afd3-4762-a8ff-c88eaeaba4ab
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000685"}}
+Date: Fri, 11 Apr 2025 06:55:25 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T06:55:26","request-id":"c18565bb-afd2-429e-9e1a-326e82555198","client-request-id":"5085a411-afd3-4762-a8ff-c88eaeaba4ab"}}}"
+WARNING: Error retrieving organization info: Response status code does not indicate success: BadRequest (Bad Request).
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: c393dff7-297c-40c8-97b0-0c5ca4c854b7
+client-request-id: 7a6e08cb-b312-4230-b0c3-2833f0b9e9ee
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000685"}}
+Date: Fri, 11 Apr 2025 06:55:25 GMT
+Content-Type: application/json
+
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T06:55:26","request-id":"c393dff7-297c-40c8-97b0-0c5ca4c854b7","client-request-id":"7a6e08cb-b312-4230-b0c3-2833f0b9e9ee"}}}"
+>> TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: c393dff7-297c-40c8-97b0-0c5ca4c854b7
+client-request-id: 7a6e08cb-b312-4230-b0c3-2833f0b9e9ee
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000685"}}
+Date: Fri, 11 Apr 2025 06:55:25 GMT
+Content-Type: application/json
+
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T06:55:26","request-id":"c393dff7-297c-40c8-97b0-0c5ca4c854b7","client-request-id":"7a6e08cb-b312-4230-b0c3-2833f0b9e9ee"}}}"
+[2025-04-11 08:55:27] [ERROR] Non-retryable error in Get Users. Error: Response status code does not indicate success: BadRequest (Bad Request).
+Write-Error: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true HTTP/2.0 400 Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: c393dff7-297c-40c8-97b0-0c5ca4c854b7 client-request-id: 7a6e08cb-b312-4230-b0c3-2833f0b9e9ee x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000685"}} Date: Fri, 11 Apr 2025 06:55:25 GMT Content-Type: application/json  {"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T06:55:26","request-id":"c393dff7-297c-40c8-97b0-0c5ca4c854b7","client-request-id":"7a6e08cb-b312-4230-b0c3-2833f0b9e9ee"}}}
+Invoke-CSPWithRetry: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true HTTP/2.0 400
+Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: c393dff7-297c-40c8-97b0-0c5ca4c854b7 client-request-id: 7a6e08cb-b312-4230-b0c3-2833f0b9e9ee x-ms-ags-diagnostic:
+{"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000685"}} Date: Fri, 11 Apr 2025 06:55:25 GMT Content-Type: application/json 
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified:
+'\\'.","innerError":{"date":"2025-04-11T06:55:26","request-id":"c393dff7-297c-40c8-97b0-0c5ca4c854b7","client-request-id":"7a6e08cb-b312-4230-b0c3-2833f0b9e9ee"}}}
+
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: c393dff7-297c-40c8-97b0-0c5ca4c854b7
+client-request-id: 7a6e08cb-b312-4230-b0c3-2833f0b9e9ee
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000685"}}
+Date: Fri, 11 Apr 2025 06:55:25 GMT
+Content-Type: application/json
+
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T06:55:26","request-id":"c393dff7-297c-40c8-97b0-0c5ca4c854b7","client-request-id":"7a6e08cb-b312-4230-b0c3-2833f0b9e9ee"}}}"
+WARNING: Error retrieving users: Response status code does not indicate success: BadRequest (Bad Request).
+PS>TerminatingError(Get-CSPUserAuthMethods): "Cannot bind argument to parameter 'Users' because it is null."
+[2025-04-11 08:55:27] [ERROR] Error processing tenant Chartered Group: Cannot bind argument to parameter 'Users' because it is null.
+
+ClientId               : 09a8682e-8cf3-4960-aba2-377a056dc6ef
+TenantId               : 83cf691f-ded3-4441-ad78-e4a088441fc0
+Scopes                 : {Policy.Read.ConditionalAccess, DeviceManagementManagedDevices.Read.All, UserAuthenticationMethod.Read.All, PrivilegedAccess.Read.AzureAD…}
+AuthType               : AppOnly
+TokenCredentialType    : ClientCertificate
+CertificateThumbprint  : 
+CertificateSubjectName : 
+SendCertificateChain   : False
+Account                : 
+AppName                : Netsurit Reporting
+ContextScope           : Process
+Certificate            : [Subject]
+                           CN=cspaudit.netsurit.com
+
+                         [Issuer]
+                           CN=cspaudit.netsurit.com
+
+                         [Serial Number]
+                           18E79363640B46B6BFE8B7A8D30F5978
+
+                         [Not Before]
+                           2025/04/02 10:07:21
+
+                         [Not After]
+                           2027/04/02 10:17:21
+
+                         [Thumbprint]
+                           1D38D5C4A9913CFF21F4AB6B6D3528998E4A6D99
+
+PSHostVersion          : 7.5.0
+ManagedIdentityId      : 
+ClientSecret           : 
+Environment            : Global
+
+True
+[2025-04-11 08:55:27] [INFO] CSP Reporting process completed at 04/11/2025 08:55:27
+**********************
+PowerShell transcript end
+End time: 20250411085527
+**********************
+**********************
+PowerShell transcript start
+Start time: 20250411090007
+Username: DESKTOP-FK2I144\louis
+RunAs User: DESKTOP-FK2I144\louis
+Configuration Name: 
+Machine: DESKTOP-FK2I144 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll
+Process ID: 31820
+PSVersion: 7.5.0
+PSEdition: Core
+GitCommitId: 7.5.0
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is .\Logs\CSPReporting.log
+[2025-04-11 09:00:07] [INFO] Starting CSP Reporting process at 04/11/2025 09:00:07
+[2025-04-11 09:00:07] [INFO] Processing tenant: Chartered Group
+[2025-04-11 09:00:07] [DEBUG] Using ClientId: 09a8682e-8cf3-4960-aba2-377a056dc6ef
+[2025-04-11 09:00:07] [DEBUG] TenantId: 83cf691f-ded3-4441-ad78-e4a088441fc0
+[2025-04-11 09:00:07] [DEBUG] TenantName: Chartered Group
+[2025-04-11 09:00:07] [DEBUG] AuthMethod: Certificate
+[2025-04-11 09:00:07] [DEBUG] CertificatePath: .\Certificates\CSPauditCertPP.pfx
+[2025-04-11 09:00:07] [DEBUG] CertificatePassword: D9)fnQ7C1*P5cd%B5D0)F1y,sB3O
+[2025-04-11 09:00:07] [DEBUG] ClientSecret:
+[2025-04-11 09:00:07] [DEBUG] Attempting authentication with Connect-CSPTenant...
+VERBOSE: Connecting to tenant 83cf691f-ded3-4441-ad78-e4a088441fc0 using Certificate authentication
+[2025-04-11 09:00:07] [DEBUG] Authentication with Connect-CSPTenant successful
+[2025-04-11 09:00:07] [INFO] Successfully authenticated to tenant Chartered Group
+[2025-04-11 09:00:07] [INFO] Starting v2 data extraction for tenant Chartered Group
+PS>TerminatingError(Invoke-MgGraphRequest): "Cannot bind argument to parameter 'Uri' because it is null."
+>> TerminatingError(Invoke-MgGraphRequest): "Cannot bind argument to parameter 'Uri' because it is null."
+[2025-04-11 09:00:07] [ERROR] Non-retryable error in Get Tenant Info. Error: Cannot bind argument to parameter 'Uri' because it is null.
+Write-Error: Error in Invoke-CSPWithRetry: Cannot bind argument to parameter 'Uri' because it is null.
+Invoke-CSPWithRetry: Error in Invoke-CSPWithRetry: Cannot bind argument to parameter 'Uri' because it is null.
+
+PS>TerminatingError(Invoke-MgGraphRequest): "Cannot bind argument to parameter 'Uri' because it is null."
+WARNING: Error retrieving tenant info: Cannot bind argument to parameter 'Uri' because it is null.
+PS>TerminatingError(Invoke-MgGraphRequest): "Cannot bind argument to parameter 'Uri' because it is null."
+>> TerminatingError(Invoke-MgGraphRequest): "Cannot bind argument to parameter 'Uri' because it is null."
+[2025-04-11 09:00:08] [ERROR] Non-retryable error in Get Organization Info. Error: Cannot bind argument to parameter 'Uri' because it is null.
+Write-Error: Error in Invoke-CSPWithRetry: Cannot bind argument to parameter 'Uri' because it is null.
+Invoke-CSPWithRetry: Error in Invoke-CSPWithRetry: Cannot bind argument to parameter 'Uri' because it is null.
+
+PS>TerminatingError(Invoke-MgGraphRequest): "Cannot bind argument to parameter 'Uri' because it is null."
+WARNING: Error retrieving organization info: Cannot bind argument to parameter 'Uri' because it is null.
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: d104ecdc-f0dd-4e4d-9e63-1cd9726f0558
+client-request-id: 6ad50c09-890f-4a9d-9dea-34ee36dc8670
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000289"}}
+Date: Fri, 11 Apr 2025 07:00:07 GMT
+Content-Type: application/json
+
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T07:00:08","request-id":"d104ecdc-f0dd-4e4d-9e63-1cd9726f0558","client-request-id":"6ad50c09-890f-4a9d-9dea-34ee36dc8670"}}}"
+>> TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: d104ecdc-f0dd-4e4d-9e63-1cd9726f0558
+client-request-id: 6ad50c09-890f-4a9d-9dea-34ee36dc8670
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000289"}}
+Date: Fri, 11 Apr 2025 07:00:07 GMT
+Content-Type: application/json
+
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T07:00:08","request-id":"d104ecdc-f0dd-4e4d-9e63-1cd9726f0558","client-request-id":"6ad50c09-890f-4a9d-9dea-34ee36dc8670"}}}"
+[2025-04-11 09:00:08] [ERROR] Non-retryable error in Get Users. Error: Response status code does not indicate success: BadRequest (Bad Request).
+Write-Error: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true HTTP/2.0 400 Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: d104ecdc-f0dd-4e4d-9e63-1cd9726f0558 client-request-id: 6ad50c09-890f-4a9d-9dea-34ee36dc8670 x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000289"}} Date: Fri, 11 Apr 2025 07:00:07 GMT Content-Type: application/json  {"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T07:00:08","request-id":"d104ecdc-f0dd-4e4d-9e63-1cd9726f0558","client-request-id":"6ad50c09-890f-4a9d-9dea-34ee36dc8670"}}}
+Invoke-CSPWithRetry: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true HTTP/2.0 400
+Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: d104ecdc-f0dd-4e4d-9e63-1cd9726f0558 client-request-id: 6ad50c09-890f-4a9d-9dea-34ee36dc8670 x-ms-ags-diagnostic:
+{"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000289"}} Date: Fri, 11 Apr 2025 07:00:07 GMT Content-Type: application/json 
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified:
+'\\'.","innerError":{"date":"2025-04-11T07:00:08","request-id":"d104ecdc-f0dd-4e4d-9e63-1cd9726f0558","client-request-id":"6ad50c09-890f-4a9d-9dea-34ee36dc8670"}}}
+
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: d104ecdc-f0dd-4e4d-9e63-1cd9726f0558
+client-request-id: 6ad50c09-890f-4a9d-9dea-34ee36dc8670
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000289"}}
+Date: Fri, 11 Apr 2025 07:00:07 GMT
+Content-Type: application/json
+
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T07:00:08","request-id":"d104ecdc-f0dd-4e4d-9e63-1cd9726f0558","client-request-id":"6ad50c09-890f-4a9d-9dea-34ee36dc8670"}}}"
+WARNING: Error retrieving users: Response status code does not indicate success: BadRequest (Bad Request).
+PS>TerminatingError(Get-CSPUserAuthMethods): "Cannot bind argument to parameter 'Users' because it is null."
+[2025-04-11 09:00:08] [ERROR] Error processing tenant Chartered Group: Cannot bind argument to parameter 'Users' because it is null.
+
+ClientId               : 09a8682e-8cf3-4960-aba2-377a056dc6ef
+TenantId               : 83cf691f-ded3-4441-ad78-e4a088441fc0
+Scopes                 : {Policy.Read.ConditionalAccess, DeviceManagementManagedDevices.Read.All, UserAuthenticationMethod.Read.All, PrivilegedAccess.Read.AzureAD…}
+AuthType               : AppOnly
+TokenCredentialType    : ClientCertificate
+CertificateThumbprint  : 
+CertificateSubjectName : 
+SendCertificateChain   : False
+Account                : 
+AppName                : Netsurit Reporting
+ContextScope           : Process
+Certificate            : [Subject]
+                           CN=cspaudit.netsurit.com
+
+                         [Issuer]
+                           CN=cspaudit.netsurit.com
+
+                         [Serial Number]
+                           18E79363640B46B6BFE8B7A8D30F5978
+
+                         [Not Before]
+                           2025/04/02 10:07:21
+
+                         [Not After]
+                           2027/04/02 10:17:21
+
+                         [Thumbprint]
+                           1D38D5C4A9913CFF21F4AB6B6D3528998E4A6D99
+
+PSHostVersion          : 7.5.0
+ManagedIdentityId      : 
+ClientSecret           : 
+Environment            : Global
+
+True
+[2025-04-11 09:00:08] [INFO] CSP Reporting process completed at 04/11/2025 09:00:08
+**********************
+PowerShell transcript end
+End time: 20250411090008
+**********************
+**********************
+PowerShell transcript start
+Start time: 20250411090626
+Username: DESKTOP-FK2I144\louis
+RunAs User: DESKTOP-FK2I144\louis
+Configuration Name: 
+Machine: DESKTOP-FK2I144 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll
+Process ID: 31820
+PSVersion: 7.5.0
+PSEdition: Core
+GitCommitId: 7.5.0
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is .\Logs\CSPReporting.log
+[2025-04-11 09:06:26] [INFO] Starting CSP Reporting process at 04/11/2025 09:06:26
+[2025-04-11 09:06:26] [INFO] Processing tenant: Chartered Group
+[2025-04-11 09:06:26] [DEBUG] Using ClientId: 09a8682e-8cf3-4960-aba2-377a056dc6ef
+[2025-04-11 09:06:26] [DEBUG] TenantId: 83cf691f-ded3-4441-ad78-e4a088441fc0
+[2025-04-11 09:06:26] [DEBUG] TenantName: Chartered Group
+[2025-04-11 09:06:26] [DEBUG] AuthMethod: Certificate
+[2025-04-11 09:06:26] [DEBUG] CertificatePath: .\Certificates\CSPauditCertPP.pfx
+[2025-04-11 09:06:26] [DEBUG] CertificatePassword: D9)fnQ7C1*P5cd%B5D0)F1y,sB3O
+[2025-04-11 09:06:26] [DEBUG] ClientSecret:
+[2025-04-11 09:06:26] [DEBUG] Attempting authentication with Connect-CSPTenant...
+VERBOSE: Connecting to tenant 83cf691f-ded3-4441-ad78-e4a088441fc0 using Certificate authentication
+[2025-04-11 09:06:26] [DEBUG] Authentication with Connect-CSPTenant successful
+[2025-04-11 09:06:26] [INFO] Successfully authenticated to tenant Chartered Group
+[2025-04-11 09:06:26] [INFO] Starting v2 data extraction for tenant Chartered Group
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 158915ee-7051-47b1-8be8-307065969f01
+client-request-id: c9b50655-d5c2-4667-bb75-d020235a3e21
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138C"}}
+Date: Fri, 11 Apr 2025 07:06:25 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T07:06:26","request-id":"158915ee-7051-47b1-8be8-307065969f01","client-request-id":"c9b50655-d5c2-4667-bb75-d020235a3e21"}}}"
+>> TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 158915ee-7051-47b1-8be8-307065969f01
+client-request-id: c9b50655-d5c2-4667-bb75-d020235a3e21
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138C"}}
+Date: Fri, 11 Apr 2025 07:06:25 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T07:06:26","request-id":"158915ee-7051-47b1-8be8-307065969f01","client-request-id":"c9b50655-d5c2-4667-bb75-d020235a3e21"}}}"
+[2025-04-11 09:06:26] [ERROR] Non-retryable error in Get Tenant Info. Error: Response status code does not indicate success: BadRequest (Bad Request).
+Write-Error: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority HTTP/2.0 400 Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: 158915ee-7051-47b1-8be8-307065969f01 client-request-id: c9b50655-d5c2-4667-bb75-d020235a3e21 x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138C"}} Date: Fri, 11 Apr 2025 07:06:25 GMT Content-Type: application/json  {"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T07:06:26","request-id":"158915ee-7051-47b1-8be8-307065969f01","client-request-id":"c9b50655-d5c2-4667-bb75-d020235a3e21"}}}
+Invoke-CSPWithRetry: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority HTTP/2.0 400
+Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: 158915ee-7051-47b1-8be8-307065969f01 client-request-id: c9b50655-d5c2-4667-bb75-d020235a3e21 x-ms-ags-diagnostic:
+{"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138C"}} Date: Fri, 11 Apr 2025 07:06:25 GMT Content-Type: application/json 
+{"error":{"code":"BadRequest","message":"Invalid
+version.","innerError":{"date":"2025-04-11T07:06:26","request-id":"158915ee-7051-47b1-8be8-307065969f01","client-request-id":"c9b50655-d5c2-4667-bb75-d020235a3e21"}}}
+
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 158915ee-7051-47b1-8be8-307065969f01
+client-request-id: c9b50655-d5c2-4667-bb75-d020235a3e21
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138C"}}
+Date: Fri, 11 Apr 2025 07:06:25 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T07:06:26","request-id":"158915ee-7051-47b1-8be8-307065969f01","client-request-id":"c9b50655-d5c2-4667-bb75-d020235a3e21"}}}"
+WARNING: Error retrieving tenant info: Response status code does not indicate success: BadRequest (Bad Request).
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 93fa6d85-234a-49a9-87e9-f9b4c8b49590
+client-request-id: f19046f9-72e2-4d78-9ab2-d51a43e71c52
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138C"}}
+Date: Fri, 11 Apr 2025 07:06:26 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T07:06:26","request-id":"93fa6d85-234a-49a9-87e9-f9b4c8b49590","client-request-id":"f19046f9-72e2-4d78-9ab2-d51a43e71c52"}}}"
+>> TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 93fa6d85-234a-49a9-87e9-f9b4c8b49590
+client-request-id: f19046f9-72e2-4d78-9ab2-d51a43e71c52
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138C"}}
+Date: Fri, 11 Apr 2025 07:06:26 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T07:06:26","request-id":"93fa6d85-234a-49a9-87e9-f9b4c8b49590","client-request-id":"f19046f9-72e2-4d78-9ab2-d51a43e71c52"}}}"
+[2025-04-11 09:06:27] [ERROR] Non-retryable error in Get Organization Info. Error: Response status code does not indicate success: BadRequest (Bad Request).
+Write-Error: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile HTTP/2.0 400 Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: 93fa6d85-234a-49a9-87e9-f9b4c8b49590 client-request-id: f19046f9-72e2-4d78-9ab2-d51a43e71c52 x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138C"}} Date: Fri, 11 Apr 2025 07:06:26 GMT Content-Type: application/json  {"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T07:06:26","request-id":"93fa6d85-234a-49a9-87e9-f9b4c8b49590","client-request-id":"f19046f9-72e2-4d78-9ab2-d51a43e71c52"}}}
+Invoke-CSPWithRetry: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile HTTP/2.0 400 Bad Request Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000 request-id: 93fa6d85-234a-49a9-87e9-f9b4c8b49590 client-request-id: f19046f9-72e2-4d78-9ab2-d51a43e71c52 x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South
+Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138C"}} Date: Fri, 11 Apr 2025 07:06:26 GMT Content-Type: application/json  {"error":{"code":"BadRequest","message":"Invalid
+version.","innerError":{"date":"2025-04-11T07:06:26","request-id":"93fa6d85-234a-49a9-87e9-f9b4c8b49590","client-request-id":"f19046f9-72e2-4d78-9ab2-d51a43e71c52"}}}
+
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 93fa6d85-234a-49a9-87e9-f9b4c8b49590
+client-request-id: f19046f9-72e2-4d78-9ab2-d51a43e71c52
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138C"}}
+Date: Fri, 11 Apr 2025 07:06:26 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T07:06:26","request-id":"93fa6d85-234a-49a9-87e9-f9b4c8b49590","client-request-id":"f19046f9-72e2-4d78-9ab2-d51a43e71c52"}}}"
+WARNING: Error retrieving organization info: Response status code does not indicate success: BadRequest (Bad Request).
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 2b75bddc-6b5a-4e3b-a22c-4a4bc5e15a33
+client-request-id: 15f921b8-f4fd-4302-9b67-6287cb6e4677
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138C"}}
+Date: Fri, 11 Apr 2025 07:06:26 GMT
+Content-Type: application/json
+
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T07:06:27","request-id":"2b75bddc-6b5a-4e3b-a22c-4a4bc5e15a33","client-request-id":"15f921b8-f4fd-4302-9b67-6287cb6e4677"}}}"
+>> TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 2b75bddc-6b5a-4e3b-a22c-4a4bc5e15a33
+client-request-id: 15f921b8-f4fd-4302-9b67-6287cb6e4677
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138C"}}
+Date: Fri, 11 Apr 2025 07:06:26 GMT
+Content-Type: application/json
+
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T07:06:27","request-id":"2b75bddc-6b5a-4e3b-a22c-4a4bc5e15a33","client-request-id":"15f921b8-f4fd-4302-9b67-6287cb6e4677"}}}"
+[2025-04-11 09:06:27] [ERROR] Non-retryable error in Get Users. Error: Response status code does not indicate success: BadRequest (Bad Request).
+Write-Error: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true HTTP/2.0 400 Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: 2b75bddc-6b5a-4e3b-a22c-4a4bc5e15a33 client-request-id: 15f921b8-f4fd-4302-9b67-6287cb6e4677 x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138C"}} Date: Fri, 11 Apr 2025 07:06:26 GMT Content-Type: application/json  {"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T07:06:27","request-id":"2b75bddc-6b5a-4e3b-a22c-4a4bc5e15a33","client-request-id":"15f921b8-f4fd-4302-9b67-6287cb6e4677"}}}
+Invoke-CSPWithRetry: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true HTTP/2.0 400
+Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: 2b75bddc-6b5a-4e3b-a22c-4a4bc5e15a33 client-request-id: 15f921b8-f4fd-4302-9b67-6287cb6e4677 x-ms-ags-diagnostic:
+{"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138C"}} Date: Fri, 11 Apr 2025 07:06:26 GMT Content-Type: application/json 
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified:
+'\\'.","innerError":{"date":"2025-04-11T07:06:27","request-id":"2b75bddc-6b5a-4e3b-a22c-4a4bc5e15a33","client-request-id":"15f921b8-f4fd-4302-9b67-6287cb6e4677"}}}
+
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 2b75bddc-6b5a-4e3b-a22c-4a4bc5e15a33
+client-request-id: 15f921b8-f4fd-4302-9b67-6287cb6e4677
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138C"}}
+Date: Fri, 11 Apr 2025 07:06:26 GMT
+Content-Type: application/json
+
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T07:06:27","request-id":"2b75bddc-6b5a-4e3b-a22c-4a4bc5e15a33","client-request-id":"15f921b8-f4fd-4302-9b67-6287cb6e4677"}}}"
+WARNING: Error retrieving users: Response status code does not indicate success: BadRequest (Bad Request).
+PS>TerminatingError(Get-CSPUserAuthMethods): "Cannot bind argument to parameter 'Users' because it is null."
+[2025-04-11 09:06:27] [ERROR] Error processing tenant Chartered Group: Cannot bind argument to parameter 'Users' because it is null.
+
+ClientId               : 09a8682e-8cf3-4960-aba2-377a056dc6ef
+TenantId               : 83cf691f-ded3-4441-ad78-e4a088441fc0
+Scopes                 : {Policy.Read.ConditionalAccess, DeviceManagementManagedDevices.Read.All, UserAuthenticationMethod.Read.All, PrivilegedAccess.Read.AzureAD…}
+AuthType               : AppOnly
+TokenCredentialType    : ClientCertificate
+CertificateThumbprint  : 
+CertificateSubjectName : 
+SendCertificateChain   : False
+Account                : 
+AppName                : Netsurit Reporting
+ContextScope           : Process
+Certificate            : [Subject]
+                           CN=cspaudit.netsurit.com
+
+                         [Issuer]
+                           CN=cspaudit.netsurit.com
+
+                         [Serial Number]
+                           18E79363640B46B6BFE8B7A8D30F5978
+
+                         [Not Before]
+                           2025/04/02 10:07:21
+
+                         [Not After]
+                           2027/04/02 10:17:21
+
+                         [Thumbprint]
+                           1D38D5C4A9913CFF21F4AB6B6D3528998E4A6D99
+
+PSHostVersion          : 7.5.0
+ManagedIdentityId      : 
+ClientSecret           : 
+Environment            : Global
+
+True
+[2025-04-11 09:06:27] [INFO] CSP Reporting process completed at 04/11/2025 09:06:27
+**********************
+PowerShell transcript end
+End time: 20250411090627
+**********************
+**********************
+PowerShell transcript start
+Start time: 20250411090834
+Username: DESKTOP-FK2I144\louis
+RunAs User: DESKTOP-FK2I144\louis
+Configuration Name: 
+Machine: DESKTOP-FK2I144 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll
+Process ID: 31820
+PSVersion: 7.5.0
+PSEdition: Core
+GitCommitId: 7.5.0
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is .\Logs\CSPReporting.log
+[2025-04-11 09:08:35] [INFO] Starting CSP Reporting process at 04/11/2025 09:08:35
+[2025-04-11 09:08:35] [INFO] Processing tenant: Chartered Group
+[2025-04-11 09:08:35] [DEBUG] Using ClientId: 09a8682e-8cf3-4960-aba2-377a056dc6ef
+[2025-04-11 09:08:35] [DEBUG] TenantId: 83cf691f-ded3-4441-ad78-e4a088441fc0
+[2025-04-11 09:08:35] [DEBUG] TenantName: Chartered Group
+[2025-04-11 09:08:35] [DEBUG] AuthMethod: Certificate
+[2025-04-11 09:08:35] [DEBUG] CertificatePath: .\Certificates\CSPauditCertPP.pfx
+[2025-04-11 09:08:35] [DEBUG] CertificatePassword: D9)fnQ7C1*P5cd%B5D0)F1y,sB3O
+[2025-04-11 09:08:35] [DEBUG] ClientSecret:
+[2025-04-11 09:08:35] [DEBUG] Attempting authentication with Connect-CSPTenant...
+VERBOSE: Connecting to tenant 83cf691f-ded3-4441-ad78-e4a088441fc0 using Certificate authentication
+[2025-04-11 09:08:35] [DEBUG] Authentication with Connect-CSPTenant successful
+[2025-04-11 09:08:35] [INFO] Successfully authenticated to tenant Chartered Group
+[2025-04-11 09:08:35] [INFO] Starting v2 data extraction for tenant Chartered Group
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: f3b8a33e-a18c-4fcf-838e-39a63ccfc887
+client-request-id: 07920e73-dc33-4ba8-babd-736748d537b0
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138B"}}
+Date: Fri, 11 Apr 2025 07:08:34 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T07:08:35","request-id":"f3b8a33e-a18c-4fcf-838e-39a63ccfc887","client-request-id":"07920e73-dc33-4ba8-babd-736748d537b0"}}}"
+>> TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: f3b8a33e-a18c-4fcf-838e-39a63ccfc887
+client-request-id: 07920e73-dc33-4ba8-babd-736748d537b0
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138B"}}
+Date: Fri, 11 Apr 2025 07:08:34 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T07:08:35","request-id":"f3b8a33e-a18c-4fcf-838e-39a63ccfc887","client-request-id":"07920e73-dc33-4ba8-babd-736748d537b0"}}}"
+[2025-04-11 09:08:35] [ERROR] Non-retryable error in Get Tenant Info. Error: Response status code does not indicate success: BadRequest (Bad Request).
+Write-Error: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority HTTP/2.0 400 Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: f3b8a33e-a18c-4fcf-838e-39a63ccfc887 client-request-id: 07920e73-dc33-4ba8-babd-736748d537b0 x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138B"}} Date: Fri, 11 Apr 2025 07:08:34 GMT Content-Type: application/json  {"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T07:08:35","request-id":"f3b8a33e-a18c-4fcf-838e-39a63ccfc887","client-request-id":"07920e73-dc33-4ba8-babd-736748d537b0"}}}
+Invoke-CSPWithRetry: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority HTTP/2.0 400
+Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: f3b8a33e-a18c-4fcf-838e-39a63ccfc887 client-request-id: 07920e73-dc33-4ba8-babd-736748d537b0 x-ms-ags-diagnostic:
+{"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138B"}} Date: Fri, 11 Apr 2025 07:08:34 GMT Content-Type: application/json 
+{"error":{"code":"BadRequest","message":"Invalid
+version.","innerError":{"date":"2025-04-11T07:08:35","request-id":"f3b8a33e-a18c-4fcf-838e-39a63ccfc887","client-request-id":"07920e73-dc33-4ba8-babd-736748d537b0"}}}
+
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: f3b8a33e-a18c-4fcf-838e-39a63ccfc887
+client-request-id: 07920e73-dc33-4ba8-babd-736748d537b0
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138B"}}
+Date: Fri, 11 Apr 2025 07:08:34 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T07:08:35","request-id":"f3b8a33e-a18c-4fcf-838e-39a63ccfc887","client-request-id":"07920e73-dc33-4ba8-babd-736748d537b0"}}}"
+WARNING: Error retrieving tenant info: Response status code does not indicate success: BadRequest (Bad Request).
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 0322ad99-b6e1-4f1b-a752-a2c61fc97ac7
+client-request-id: 45f109cf-af1c-4bdd-9943-ec5605a2212a
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138B"}}
+Date: Fri, 11 Apr 2025 07:08:35 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T07:08:35","request-id":"0322ad99-b6e1-4f1b-a752-a2c61fc97ac7","client-request-id":"45f109cf-af1c-4bdd-9943-ec5605a2212a"}}}"
+>> TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 0322ad99-b6e1-4f1b-a752-a2c61fc97ac7
+client-request-id: 45f109cf-af1c-4bdd-9943-ec5605a2212a
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138B"}}
+Date: Fri, 11 Apr 2025 07:08:35 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T07:08:35","request-id":"0322ad99-b6e1-4f1b-a752-a2c61fc97ac7","client-request-id":"45f109cf-af1c-4bdd-9943-ec5605a2212a"}}}"
+[2025-04-11 09:08:36] [ERROR] Non-retryable error in Get Organization Info. Error: Response status code does not indicate success: BadRequest (Bad Request).
+Write-Error: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile HTTP/2.0 400 Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: 0322ad99-b6e1-4f1b-a752-a2c61fc97ac7 client-request-id: 45f109cf-af1c-4bdd-9943-ec5605a2212a x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138B"}} Date: Fri, 11 Apr 2025 07:08:35 GMT Content-Type: application/json  {"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T07:08:35","request-id":"0322ad99-b6e1-4f1b-a752-a2c61fc97ac7","client-request-id":"45f109cf-af1c-4bdd-9943-ec5605a2212a"}}}
+Invoke-CSPWithRetry: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile HTTP/2.0 400 Bad Request Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000 request-id: 0322ad99-b6e1-4f1b-a752-a2c61fc97ac7 client-request-id: 45f109cf-af1c-4bdd-9943-ec5605a2212a x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South
+Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138B"}} Date: Fri, 11 Apr 2025 07:08:35 GMT Content-Type: application/json  {"error":{"code":"BadRequest","message":"Invalid
+version.","innerError":{"date":"2025-04-11T07:08:35","request-id":"0322ad99-b6e1-4f1b-a752-a2c61fc97ac7","client-request-id":"45f109cf-af1c-4bdd-9943-ec5605a2212a"}}}
+
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 0322ad99-b6e1-4f1b-a752-a2c61fc97ac7
+client-request-id: 45f109cf-af1c-4bdd-9943-ec5605a2212a
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138B"}}
+Date: Fri, 11 Apr 2025 07:08:35 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T07:08:35","request-id":"0322ad99-b6e1-4f1b-a752-a2c61fc97ac7","client-request-id":"45f109cf-af1c-4bdd-9943-ec5605a2212a"}}}"
+WARNING: Error retrieving organization info: Response status code does not indicate success: BadRequest (Bad Request).
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: a66352ba-d703-4410-b1cd-bfed9a814437
+client-request-id: 7224f1e0-707d-42bb-8a82-668e105c997f
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138B"}}
+Date: Fri, 11 Apr 2025 07:08:35 GMT
+Content-Type: application/json
+
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T07:08:35","request-id":"a66352ba-d703-4410-b1cd-bfed9a814437","client-request-id":"7224f1e0-707d-42bb-8a82-668e105c997f"}}}"
+>> TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: a66352ba-d703-4410-b1cd-bfed9a814437
+client-request-id: 7224f1e0-707d-42bb-8a82-668e105c997f
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138B"}}
+Date: Fri, 11 Apr 2025 07:08:35 GMT
+Content-Type: application/json
+
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T07:08:35","request-id":"a66352ba-d703-4410-b1cd-bfed9a814437","client-request-id":"7224f1e0-707d-42bb-8a82-668e105c997f"}}}"
+[2025-04-11 09:08:36] [ERROR] Non-retryable error in Get Users. Error: Response status code does not indicate success: BadRequest (Bad Request).
+Write-Error: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true HTTP/2.0 400 Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: a66352ba-d703-4410-b1cd-bfed9a814437 client-request-id: 7224f1e0-707d-42bb-8a82-668e105c997f x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138B"}} Date: Fri, 11 Apr 2025 07:08:35 GMT Content-Type: application/json  {"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T07:08:35","request-id":"a66352ba-d703-4410-b1cd-bfed9a814437","client-request-id":"7224f1e0-707d-42bb-8a82-668e105c997f"}}}
+Invoke-CSPWithRetry: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true HTTP/2.0 400
+Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: a66352ba-d703-4410-b1cd-bfed9a814437 client-request-id: 7224f1e0-707d-42bb-8a82-668e105c997f x-ms-ags-diagnostic:
+{"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138B"}} Date: Fri, 11 Apr 2025 07:08:35 GMT Content-Type: application/json 
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified:
+'\\'.","innerError":{"date":"2025-04-11T07:08:35","request-id":"a66352ba-d703-4410-b1cd-bfed9a814437","client-request-id":"7224f1e0-707d-42bb-8a82-668e105c997f"}}}
+
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: a66352ba-d703-4410-b1cd-bfed9a814437
+client-request-id: 7224f1e0-707d-42bb-8a82-668e105c997f
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF0000138B"}}
+Date: Fri, 11 Apr 2025 07:08:35 GMT
+Content-Type: application/json
+
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T07:08:35","request-id":"a66352ba-d703-4410-b1cd-bfed9a814437","client-request-id":"7224f1e0-707d-42bb-8a82-668e105c997f"}}}"
+WARNING: Error retrieving users: Response status code does not indicate success: BadRequest (Bad Request).
+PS>TerminatingError(Get-CSPUserAuthMethods): "Cannot bind argument to parameter 'Users' because it is null."
+[2025-04-11 09:08:36] [ERROR] Error processing tenant Chartered Group: Cannot bind argument to parameter 'Users' because it is null.
+
+ClientId               : 09a8682e-8cf3-4960-aba2-377a056dc6ef
+TenantId               : 83cf691f-ded3-4441-ad78-e4a088441fc0
+Scopes                 : {Policy.Read.ConditionalAccess, DeviceManagementManagedDevices.Read.All, UserAuthenticationMethod.Read.All, PrivilegedAccess.Read.AzureAD…}
+AuthType               : AppOnly
+TokenCredentialType    : ClientCertificate
+CertificateThumbprint  : 
+CertificateSubjectName : 
+SendCertificateChain   : False
+Account                : 
+AppName                : Netsurit Reporting
+ContextScope           : Process
+Certificate            : [Subject]
+                           CN=cspaudit.netsurit.com
+
+                         [Issuer]
+                           CN=cspaudit.netsurit.com
+
+                         [Serial Number]
+                           18E79363640B46B6BFE8B7A8D30F5978
+
+                         [Not Before]
+                           2025/04/02 10:07:21
+
+                         [Not After]
+                           2027/04/02 10:17:21
+
+                         [Thumbprint]
+                           1D38D5C4A9913CFF21F4AB6B6D3528998E4A6D99
+
+PSHostVersion          : 7.5.0
+ManagedIdentityId      : 
+ClientSecret           : 
+Environment            : Global
+
+True
+[2025-04-11 09:08:36] [INFO] CSP Reporting process completed at 04/11/2025 09:08:36
+**********************
+PowerShell transcript end
+End time: 20250411090836
+**********************
+**********************
+PowerShell transcript start
+Start time: 20250411090956
+Username: DESKTOP-FK2I144\louis
+RunAs User: DESKTOP-FK2I144\louis
+Configuration Name: 
+Machine: DESKTOP-FK2I144 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll
+Process ID: 31820
+PSVersion: 7.5.0
+PSEdition: Core
+GitCommitId: 7.5.0
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is .\Logs\CSPReporting.log
+[2025-04-11 09:09:56] [INFO] Starting CSP Reporting process at 04/11/2025 09:09:56
+[2025-04-11 09:09:56] [INFO] Processing tenant: Chartered Group
+[2025-04-11 09:09:56] [DEBUG] Using ClientId: 09a8682e-8cf3-4960-aba2-377a056dc6ef
+[2025-04-11 09:09:56] [DEBUG] TenantId: 83cf691f-ded3-4441-ad78-e4a088441fc0
+[2025-04-11 09:09:56] [DEBUG] TenantName: Chartered Group
+[2025-04-11 09:09:56] [DEBUG] AuthMethod: Certificate
+[2025-04-11 09:09:56] [DEBUG] CertificatePath: .\Certificates\CSPauditCertPP.pfx
+[2025-04-11 09:09:56] [DEBUG] CertificatePassword: D9)fnQ7C1*P5cd%B5D0)F1y,sB3O
+[2025-04-11 09:09:56] [DEBUG] ClientSecret:
+[2025-04-11 09:09:56] [DEBUG] Attempting authentication with Connect-CSPTenant...
+VERBOSE: Connecting to tenant 83cf691f-ded3-4441-ad78-e4a088441fc0 using Certificate authentication
+[2025-04-11 09:09:57] [DEBUG] Authentication with Connect-CSPTenant successful
+[2025-04-11 09:09:57] [INFO] Successfully authenticated to tenant Chartered Group
+[2025-04-11 09:09:57] [INFO] Starting v2 data extraction for tenant Chartered Group
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: a62c1bd6-542e-4add-9f2b-3fe7dbe66fcd
+client-request-id: 091d050a-1037-4a2c-8126-e5573350efb8
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000286"}}
+Date: Fri, 11 Apr 2025 07:09:56 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T07:09:57","request-id":"a62c1bd6-542e-4add-9f2b-3fe7dbe66fcd","client-request-id":"091d050a-1037-4a2c-8126-e5573350efb8"}}}"
+>> TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: a62c1bd6-542e-4add-9f2b-3fe7dbe66fcd
+client-request-id: 091d050a-1037-4a2c-8126-e5573350efb8
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000286"}}
+Date: Fri, 11 Apr 2025 07:09:56 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T07:09:57","request-id":"a62c1bd6-542e-4add-9f2b-3fe7dbe66fcd","client-request-id":"091d050a-1037-4a2c-8126-e5573350efb8"}}}"
+[2025-04-11 09:09:57] [ERROR] Non-retryable error in Get Tenant Info. Error: Response status code does not indicate success: BadRequest (Bad Request).
+Write-Error: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority HTTP/2.0 400 Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: a62c1bd6-542e-4add-9f2b-3fe7dbe66fcd client-request-id: 091d050a-1037-4a2c-8126-e5573350efb8 x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000286"}} Date: Fri, 11 Apr 2025 07:09:56 GMT Content-Type: application/json  {"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T07:09:57","request-id":"a62c1bd6-542e-4add-9f2b-3fe7dbe66fcd","client-request-id":"091d050a-1037-4a2c-8126-e5573350efb8"}}}
+Invoke-CSPWithRetry: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority HTTP/2.0 400
+Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: a62c1bd6-542e-4add-9f2b-3fe7dbe66fcd client-request-id: 091d050a-1037-4a2c-8126-e5573350efb8 x-ms-ags-diagnostic:
+{"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000286"}} Date: Fri, 11 Apr 2025 07:09:56 GMT Content-Type: application/json 
+{"error":{"code":"BadRequest","message":"Invalid
+version.","innerError":{"date":"2025-04-11T07:09:57","request-id":"a62c1bd6-542e-4add-9f2b-3fe7dbe66fcd","client-request-id":"091d050a-1037-4a2c-8126-e5573350efb8"}}}
+
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: a62c1bd6-542e-4add-9f2b-3fe7dbe66fcd
+client-request-id: 091d050a-1037-4a2c-8126-e5573350efb8
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000286"}}
+Date: Fri, 11 Apr 2025 07:09:56 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T07:09:57","request-id":"a62c1bd6-542e-4add-9f2b-3fe7dbe66fcd","client-request-id":"091d050a-1037-4a2c-8126-e5573350efb8"}}}"
+WARNING: Error retrieving tenant info: Response status code does not indicate success: BadRequest (Bad Request).
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 4bc4ec4a-45fb-4998-80cf-ff350f86bb5d
+client-request-id: d189c379-2613-483c-8af1-4f2af109bd06
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000286"}}
+Date: Fri, 11 Apr 2025 07:09:58 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T07:09:58","request-id":"4bc4ec4a-45fb-4998-80cf-ff350f86bb5d","client-request-id":"d189c379-2613-483c-8af1-4f2af109bd06"}}}"
+>> TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 4bc4ec4a-45fb-4998-80cf-ff350f86bb5d
+client-request-id: d189c379-2613-483c-8af1-4f2af109bd06
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000286"}}
+Date: Fri, 11 Apr 2025 07:09:58 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T07:09:58","request-id":"4bc4ec4a-45fb-4998-80cf-ff350f86bb5d","client-request-id":"d189c379-2613-483c-8af1-4f2af109bd06"}}}"
+[2025-04-11 09:09:59] [ERROR] Non-retryable error in Get Organization Info. Error: Response status code does not indicate success: BadRequest (Bad Request).
+Write-Error: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile HTTP/2.0 400 Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: 4bc4ec4a-45fb-4998-80cf-ff350f86bb5d client-request-id: d189c379-2613-483c-8af1-4f2af109bd06 x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000286"}} Date: Fri, 11 Apr 2025 07:09:58 GMT Content-Type: application/json  {"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T07:09:58","request-id":"4bc4ec4a-45fb-4998-80cf-ff350f86bb5d","client-request-id":"d189c379-2613-483c-8af1-4f2af109bd06"}}}
+Invoke-CSPWithRetry: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile HTTP/2.0 400 Bad Request Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000 request-id: 4bc4ec4a-45fb-4998-80cf-ff350f86bb5d client-request-id: d189c379-2613-483c-8af1-4f2af109bd06 x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South
+Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000286"}} Date: Fri, 11 Apr 2025 07:09:58 GMT Content-Type: application/json  {"error":{"code":"BadRequest","message":"Invalid
+version.","innerError":{"date":"2025-04-11T07:09:58","request-id":"4bc4ec4a-45fb-4998-80cf-ff350f86bb5d","client-request-id":"d189c379-2613-483c-8af1-4f2af109bd06"}}}
+
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/$select=id,displayName,branding,marketingNotificationEmails,privacyProfile
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 4bc4ec4a-45fb-4998-80cf-ff350f86bb5d
+client-request-id: d189c379-2613-483c-8af1-4f2af109bd06
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000286"}}
+Date: Fri, 11 Apr 2025 07:09:58 GMT
+Content-Type: application/json
+
+{"error":{"code":"BadRequest","message":"Invalid version.","innerError":{"date":"2025-04-11T07:09:58","request-id":"4bc4ec4a-45fb-4998-80cf-ff350f86bb5d","client-request-id":"d189c379-2613-483c-8af1-4f2af109bd06"}}}"
+WARNING: Error retrieving organization info: Response status code does not indicate success: BadRequest (Bad Request).
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: b2466917-879e-48ab-a6b4-b136a51a6b55
+client-request-id: 5b44d063-32a3-46ca-960e-1ebcc6794bcc
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000286"}}
+Date: Fri, 11 Apr 2025 07:09:58 GMT
+Content-Type: application/json
+
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T07:09:59","request-id":"b2466917-879e-48ab-a6b4-b136a51a6b55","client-request-id":"5b44d063-32a3-46ca-960e-1ebcc6794bcc"}}}"
+>> TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: b2466917-879e-48ab-a6b4-b136a51a6b55
+client-request-id: 5b44d063-32a3-46ca-960e-1ebcc6794bcc
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000286"}}
+Date: Fri, 11 Apr 2025 07:09:58 GMT
+Content-Type: application/json
+
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T07:09:59","request-id":"b2466917-879e-48ab-a6b4-b136a51a6b55","client-request-id":"5b44d063-32a3-46ca-960e-1ebcc6794bcc"}}}"
+[2025-04-11 09:09:59] [ERROR] Non-retryable error in Get Users. Error: Response status code does not indicate success: BadRequest (Bad Request).
+Write-Error: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true HTTP/2.0 400 Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: b2466917-879e-48ab-a6b4-b136a51a6b55 client-request-id: 5b44d063-32a3-46ca-960e-1ebcc6794bcc x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000286"}} Date: Fri, 11 Apr 2025 07:09:58 GMT Content-Type: application/json  {"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T07:09:59","request-id":"b2466917-879e-48ab-a6b4-b136a51a6b55","client-request-id":"5b44d063-32a3-46ca-960e-1ebcc6794bcc"}}}
+Invoke-CSPWithRetry: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true HTTP/2.0 400
+Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: b2466917-879e-48ab-a6b4-b136a51a6b55 client-request-id: 5b44d063-32a3-46ca-960e-1ebcc6794bcc x-ms-ags-diagnostic:
+{"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000286"}} Date: Fri, 11 Apr 2025 07:09:58 GMT Content-Type: application/json 
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified:
+'\\'.","innerError":{"date":"2025-04-11T07:09:59","request-id":"b2466917-879e-48ab-a6b4-b136a51a6b55","client-request-id":"5b44d063-32a3-46ca-960e-1ebcc6794bcc"}}}
+
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: b2466917-879e-48ab-a6b4-b136a51a6b55
+client-request-id: 5b44d063-32a3-46ca-960e-1ebcc6794bcc
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000286"}}
+Date: Fri, 11 Apr 2025 07:09:58 GMT
+Content-Type: application/json
+
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T07:09:59","request-id":"b2466917-879e-48ab-a6b4-b136a51a6b55","client-request-id":"5b44d063-32a3-46ca-960e-1ebcc6794bcc"}}}"
+WARNING: Error retrieving users: Response status code does not indicate success: BadRequest (Bad Request).
+PS>TerminatingError(Get-CSPUserAuthMethods): "Cannot bind argument to parameter 'Users' because it is null."
+[2025-04-11 09:10:00] [ERROR] Error processing tenant Chartered Group: Cannot bind argument to parameter 'Users' because it is null.
+
+ClientId               : 09a8682e-8cf3-4960-aba2-377a056dc6ef
+TenantId               : 83cf691f-ded3-4441-ad78-e4a088441fc0
+Scopes                 : {Policy.Read.ConditionalAccess, DeviceManagementManagedDevices.Read.All, UserAuthenticationMethod.Read.All, PrivilegedAccess.Read.AzureAD…}
+AuthType               : AppOnly
+TokenCredentialType    : ClientCertificate
+CertificateThumbprint  : 
+CertificateSubjectName : 
+SendCertificateChain   : False
+Account                : 
+AppName                : Netsurit Reporting
+ContextScope           : Process
+Certificate            : [Subject]
+                           CN=cspaudit.netsurit.com
+
+                         [Issuer]
+                           CN=cspaudit.netsurit.com
+
+                         [Serial Number]
+                           18E79363640B46B6BFE8B7A8D30F5978
+
+                         [Not Before]
+                           2025/04/02 10:07:21
+
+                         [Not After]
+                           2027/04/02 10:17:21
+
+                         [Thumbprint]
+                           1D38D5C4A9913CFF21F4AB6B6D3528998E4A6D99
+
+PSHostVersion          : 7.5.0
+ManagedIdentityId      : 
+ClientSecret           : 
+Environment            : Global
+
+True
+[2025-04-11 09:10:00] [INFO] CSP Reporting process completed at 04/11/2025 09:10:00
+**********************
+PowerShell transcript end
+End time: 20250411091000
+**********************
+**********************
+PowerShell transcript start
+Start time: 20250411091130
+Username: DESKTOP-FK2I144\louis
+RunAs User: DESKTOP-FK2I144\louis
+Configuration Name: 
+Machine: DESKTOP-FK2I144 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll
+Process ID: 31820
+PSVersion: 7.5.0
+PSEdition: Core
+GitCommitId: 7.5.0
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is .\Logs\CSPReporting.log
+[2025-04-11 09:11:30] [INFO] Starting CSP Reporting process at 04/11/2025 09:11:30
+[2025-04-11 09:11:30] [INFO] Processing tenant: Chartered Group
+[2025-04-11 09:11:30] [DEBUG] Using ClientId: 09a8682e-8cf3-4960-aba2-377a056dc6ef
+[2025-04-11 09:11:30] [DEBUG] TenantId: 83cf691f-ded3-4441-ad78-e4a088441fc0
+[2025-04-11 09:11:30] [DEBUG] TenantName: Chartered Group
+[2025-04-11 09:11:30] [DEBUG] AuthMethod: Certificate
+[2025-04-11 09:11:30] [DEBUG] CertificatePath: .\Certificates\CSPauditCertPP.pfx
+[2025-04-11 09:11:30] [DEBUG] CertificatePassword: D9)fnQ7C1*P5cd%B5D0)F1y,sB3O
+[2025-04-11 09:11:30] [DEBUG] ClientSecret:
+[2025-04-11 09:11:30] [DEBUG] Attempting authentication with Connect-CSPTenant...
+VERBOSE: Connecting to tenant 83cf691f-ded3-4441-ad78-e4a088441fc0 using Certificate authentication
+[2025-04-11 09:11:31] [DEBUG] Authentication with Connect-CSPTenant successful
+[2025-04-11 09:11:31] [INFO] Successfully authenticated to tenant Chartered Group
+[2025-04-11 09:11:31] [INFO] Starting v2 data extraction for tenant Chartered Group
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: d74558c1-0acb-49ec-9966-2cd7cbb1e96c
+client-request-id: d3a944db-c911-41a9-896d-ff3436c5a33e
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000287"}}
+Date: Fri, 11 Apr 2025 07:11:31 GMT
+Content-Type: application/json
+
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T07:11:31","request-id":"d74558c1-0acb-49ec-9966-2cd7cbb1e96c","client-request-id":"d3a944db-c911-41a9-896d-ff3436c5a33e"}}}"
+>> TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: d74558c1-0acb-49ec-9966-2cd7cbb1e96c
+client-request-id: d3a944db-c911-41a9-896d-ff3436c5a33e
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000287"}}
+Date: Fri, 11 Apr 2025 07:11:31 GMT
+Content-Type: application/json
+
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T07:11:31","request-id":"d74558c1-0acb-49ec-9966-2cd7cbb1e96c","client-request-id":"d3a944db-c911-41a9-896d-ff3436c5a33e"}}}"
+[2025-04-11 09:11:32] [ERROR] Non-retryable error in Get Users. Error: Response status code does not indicate success: BadRequest (Bad Request).
+Write-Error: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true HTTP/2.0 400 Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: d74558c1-0acb-49ec-9966-2cd7cbb1e96c client-request-id: d3a944db-c911-41a9-896d-ff3436c5a33e x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000287"}} Date: Fri, 11 Apr 2025 07:11:31 GMT Content-Type: application/json  {"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T07:11:31","request-id":"d74558c1-0acb-49ec-9966-2cd7cbb1e96c","client-request-id":"d3a944db-c911-41a9-896d-ff3436c5a33e"}}}
+Invoke-CSPWithRetry: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true HTTP/2.0 400
+Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: d74558c1-0acb-49ec-9966-2cd7cbb1e96c client-request-id: d3a944db-c911-41a9-896d-ff3436c5a33e x-ms-ags-diagnostic:
+{"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000287"}} Date: Fri, 11 Apr 2025 07:11:31 GMT Content-Type: application/json 
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified:
+'\\'.","innerError":{"date":"2025-04-11T07:11:31","request-id":"d74558c1-0acb-49ec-9966-2cd7cbb1e96c","client-request-id":"d3a944db-c911-41a9-896d-ff3436c5a33e"}}}
+
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/users?%5C=id,userPrincipalName,displayName,accountEnabled,userType,creationDateTime,assignedLicenses,signInActivity&$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: d74558c1-0acb-49ec-9966-2cd7cbb1e96c
+client-request-id: d3a944db-c911-41a9-896d-ff3436c5a33e
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000287"}}
+Date: Fri, 11 Apr 2025 07:11:31 GMT
+Content-Type: application/json
+
+{"error":{"code":"Request_BadRequest","message":"Unrecognized query argument specified: '\\'.","innerError":{"date":"2025-04-11T07:11:31","request-id":"d74558c1-0acb-49ec-9966-2cd7cbb1e96c","client-request-id":"d3a944db-c911-41a9-896d-ff3436c5a33e"}}}"
+WARNING: Error retrieving users: Response status code does not indicate success: BadRequest (Bad Request).
+PS>TerminatingError(Get-CSPUserAuthMethods): "Cannot bind argument to parameter 'Users' because it is null."
+[2025-04-11 09:11:32] [ERROR] Error processing tenant Chartered Group: Cannot bind argument to parameter 'Users' because it is null.
+
+ClientId               : 09a8682e-8cf3-4960-aba2-377a056dc6ef
+TenantId               : 83cf691f-ded3-4441-ad78-e4a088441fc0
+Scopes                 : {Policy.Read.ConditionalAccess, DeviceManagementManagedDevices.Read.All, UserAuthenticationMethod.Read.All, PrivilegedAccess.Read.AzureAD…}
+AuthType               : AppOnly
+TokenCredentialType    : ClientCertificate
+CertificateThumbprint  : 
+CertificateSubjectName : 
+SendCertificateChain   : False
+Account                : 
+AppName                : Netsurit Reporting
+ContextScope           : Process
+Certificate            : [Subject]
+                           CN=cspaudit.netsurit.com
+
+                         [Issuer]
+                           CN=cspaudit.netsurit.com
+
+                         [Serial Number]
+                           18E79363640B46B6BFE8B7A8D30F5978
+
+                         [Not Before]
+                           2025/04/02 10:07:21
+
+                         [Not After]
+                           2027/04/02 10:17:21
+
+                         [Thumbprint]
+                           1D38D5C4A9913CFF21F4AB6B6D3528998E4A6D99
+
+PSHostVersion          : 7.5.0
+ManagedIdentityId      : 
+ClientSecret           : 
+Environment            : Global
+
+True
+[2025-04-11 09:11:32] [INFO] CSP Reporting process completed at 04/11/2025 09:11:32
+**********************
+PowerShell transcript end
+End time: 20250411091132
+**********************
+**********************
+PowerShell transcript start
+Start time: 20250411091244
+Username: DESKTOP-FK2I144\louis
+RunAs User: DESKTOP-FK2I144\louis
+Configuration Name: 
+Machine: DESKTOP-FK2I144 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll
+Process ID: 31820
+PSVersion: 7.5.0
+PSEdition: Core
+GitCommitId: 7.5.0
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is .\Logs\CSPReporting.log
+[2025-04-11 09:12:44] [INFO] Starting CSP Reporting process at 04/11/2025 09:12:44
+[2025-04-11 09:12:44] [INFO] Processing tenant: Chartered Group
+[2025-04-11 09:12:45] [DEBUG] Using ClientId: 09a8682e-8cf3-4960-aba2-377a056dc6ef
+[2025-04-11 09:12:45] [DEBUG] TenantId: 83cf691f-ded3-4441-ad78-e4a088441fc0
+[2025-04-11 09:12:45] [DEBUG] TenantName: Chartered Group
+[2025-04-11 09:12:45] [DEBUG] AuthMethod: Certificate
+[2025-04-11 09:12:45] [DEBUG] CertificatePath: .\Certificates\CSPauditCertPP.pfx
+[2025-04-11 09:12:45] [DEBUG] CertificatePassword: D9)fnQ7C1*P5cd%B5D0)F1y,sB3O
+[2025-04-11 09:12:45] [DEBUG] ClientSecret:
+[2025-04-11 09:12:45] [DEBUG] Attempting authentication with Connect-CSPTenant...
+VERBOSE: Connecting to tenant 83cf691f-ded3-4441-ad78-e4a088441fc0 using Certificate authentication
+[2025-04-11 09:12:45] [DEBUG] Authentication with Connect-CSPTenant successful
+[2025-04-11 09:12:45] [INFO] Successfully authenticated to tenant Chartered Group
+[2025-04-11 09:12:45] [INFO] Starting v2 data extraction for tenant Chartered Group
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/roleManagement/directory/roleEligibilityScheduleInstances?$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: c5dd0837-8bc1-40b0-94d6-4f83bd79f363
+client-request-id: 2cce754c-2107-4460-8a3a-c39d0090cfde
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF00001389"}}
+Date: Fri, 11 Apr 2025 07:15:45 GMT
+Content-Type: application/json
+
+{"error":{"code":"AadPremiumLicenseRequired","message":"The tenant needs to have Microsoft Entra ID P2 or Microsoft Entra ID Governance license.","innerError":{"date":"2025-04-11T07:15:45","request-id":"c5dd0837-8bc1-40b0-94d6-4f83bd79f363","client-request-id":"2cce754c-2107-4460-8a3a-c39d0090cfde"}}}"
+>> TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/roleManagement/directory/roleEligibilityScheduleInstances?$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: c5dd0837-8bc1-40b0-94d6-4f83bd79f363
+client-request-id: 2cce754c-2107-4460-8a3a-c39d0090cfde
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF00001389"}}
+Date: Fri, 11 Apr 2025 07:15:45 GMT
+Content-Type: application/json
+
+{"error":{"code":"AadPremiumLicenseRequired","message":"The tenant needs to have Microsoft Entra ID P2 or Microsoft Entra ID Governance license.","innerError":{"date":"2025-04-11T07:15:45","request-id":"c5dd0837-8bc1-40b0-94d6-4f83bd79f363","client-request-id":"2cce754c-2107-4460-8a3a-c39d0090cfde"}}}"
+[2025-04-11 09:15:46] [ERROR] Non-retryable error in Get PIM Eligible Assignments. Error: Response status code does not indicate success: BadRequest (Bad Request).
+Write-Error: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/v1.0/roleManagement/directory/roleEligibilityScheduleInstances?$count=true HTTP/2.0 400 Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: c5dd0837-8bc1-40b0-94d6-4f83bd79f363 client-request-id: 2cce754c-2107-4460-8a3a-c39d0090cfde x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF00001389"}} Date: Fri, 11 Apr 2025 07:15:45 GMT Content-Type: application/json  {"error":{"code":"AadPremiumLicenseRequired","message":"The tenant needs to have Microsoft Entra ID P2 or Microsoft Entra ID Governance license.","innerError":{"date":"2025-04-11T07:15:45","request-id":"c5dd0837-8bc1-40b0-94d6-4f83bd79f363","client-request-id":"2cce754c-2107-4460-8a3a-c39d0090cfde"}}}
+Invoke-CSPWithRetry: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/v1.0/roleManagement/directory/roleEligibilityScheduleInstances?$count=true HTTP/2.0 400 Bad Request Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000 request-id: c5dd0837-8bc1-40b0-94d6-4f83bd79f363 client-request-id: 2cce754c-2107-4460-8a3a-c39d0090cfde x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South
+Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF00001389"}} Date: Fri, 11 Apr 2025 07:15:45 GMT Content-Type: application/json 
+{"error":{"code":"AadPremiumLicenseRequired","message":"The tenant needs to have Microsoft Entra ID P2 or Microsoft Entra ID Governance
+license.","innerError":{"date":"2025-04-11T07:15:45","request-id":"c5dd0837-8bc1-40b0-94d6-4f83bd79f363","client-request-id":"2cce754c-2107-4460-8a3a-c39d0090cfde"}}}
+
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/roleManagement/directory/roleEligibilityScheduleInstances?$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: c5dd0837-8bc1-40b0-94d6-4f83bd79f363
+client-request-id: 2cce754c-2107-4460-8a3a-c39d0090cfde
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"001","RoleInstance":"JN2PEPF00001389"}}
+Date: Fri, 11 Apr 2025 07:15:45 GMT
+Content-Type: application/json
+
+{"error":{"code":"AadPremiumLicenseRequired","message":"The tenant needs to have Microsoft Entra ID P2 or Microsoft Entra ID Governance license.","innerError":{"date":"2025-04-11T07:15:45","request-id":"c5dd0837-8bc1-40b0-94d6-4f83bd79f363","client-request-id":"2cce754c-2107-4460-8a3a-c39d0090cfde"}}}"
+WARNING: Error retrieving PIM assignments: Response status code does not indicate success: BadRequest (Bad Request).
+[2025-04-11 09:15:46] [ERROR] Error processing tenant Chartered Group: The term 'Get-CSPConditionalAccessPolicies' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+
+ClientId               : 09a8682e-8cf3-4960-aba2-377a056dc6ef
+TenantId               : 83cf691f-ded3-4441-ad78-e4a088441fc0
+Scopes                 : {Policy.Read.ConditionalAccess, DeviceManagementManagedDevices.Read.All, UserAuthenticationMethod.Read.All, PrivilegedAccess.Read.AzureAD…}
+AuthType               : AppOnly
+TokenCredentialType    : ClientCertificate
+CertificateThumbprint  : 
+CertificateSubjectName : 
+SendCertificateChain   : False
+Account                : 
+AppName                : Netsurit Reporting
+ContextScope           : Process
+Certificate            : [Subject]
+                           CN=cspaudit.netsurit.com
+
+                         [Issuer]
+                           CN=cspaudit.netsurit.com
+
+                         [Serial Number]
+                           18E79363640B46B6BFE8B7A8D30F5978
+
+                         [Not Before]
+                           2025/04/02 10:07:21
+
+                         [Not After]
+                           2027/04/02 10:17:21
+
+                         [Thumbprint]
+                           1D38D5C4A9913CFF21F4AB6B6D3528998E4A6D99
+
+PSHostVersion          : 7.5.0
+ManagedIdentityId      : 
+ClientSecret           : 
+Environment            : Global
+
+True
+[2025-04-11 09:15:46] [INFO] CSP Reporting process completed at 04/11/2025 09:15:46
+**********************
+PowerShell transcript end
+End time: 20250411091546
+**********************
+**********************
+PowerShell transcript start
+Start time: 20250411092506
+Username: DESKTOP-FK2I144\louis
+RunAs User: DESKTOP-FK2I144\louis
+Configuration Name: 
+Machine: DESKTOP-FK2I144 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll
+Process ID: 31820
+PSVersion: 7.5.0
+PSEdition: Core
+GitCommitId: 7.5.0
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is .\Logs\CSPReporting.log
+[2025-04-11 09:25:06] [INFO] Starting CSP Reporting process at 04/11/2025 09:25:06
+[2025-04-11 09:25:06] [INFO] Processing tenant: Chartered Group
+[2025-04-11 09:25:06] [DEBUG] Using ClientId: 09a8682e-8cf3-4960-aba2-377a056dc6ef
+[2025-04-11 09:25:06] [DEBUG] TenantId: 83cf691f-ded3-4441-ad78-e4a088441fc0
+[2025-04-11 09:25:06] [DEBUG] TenantName: Chartered Group
+[2025-04-11 09:25:06] [DEBUG] AuthMethod: Certificate
+[2025-04-11 09:25:06] [DEBUG] CertificatePath: .\Certificates\CSPauditCertPP.pfx
+[2025-04-11 09:25:06] [DEBUG] CertificatePassword: D9)fnQ7C1*P5cd%B5D0)F1y,sB3O
+[2025-04-11 09:25:06] [DEBUG] ClientSecret:
+[2025-04-11 09:25:06] [DEBUG] Attempting authentication with Connect-CSPTenant...
+VERBOSE: Connecting to tenant 83cf691f-ded3-4441-ad78-e4a088441fc0 using Certificate authentication
+[2025-04-11 09:25:06] [DEBUG] Authentication with Connect-CSPTenant successful
+[2025-04-11 09:25:06] [INFO] Successfully authenticated to tenant Chartered Group
+[2025-04-11 09:25:06] [INFO] Starting v2 data extraction for tenant Chartered Group
+[2025-04-11 09:25:06] [INFO] Extracting tenant info...
+[2025-04-11 09:25:07] [INFO] Extracting domain info...
+[2025-04-11 09:25:07] [INFO] Extracting organization info...
+[2025-04-11 09:25:08] [INFO] Extracting users...
+[2025-04-11 09:25:09] [INFO] Extracting user authentication methods...
+[2025-04-11 09:27:50] [INFO] Extracting directory roles...
+[2025-04-11 09:27:55] [INFO] Extracting PIM assignments...
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/roleManagement/directory/roleEligibilityScheduleInstances?$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 84e26e91-2844-482a-a562-5dfdb5bb8870
+client-request-id: 7badfe8c-52d4-4806-b1a7-36280cf2a4b6
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000289"}}
+Date: Fri, 11 Apr 2025 07:27:58 GMT
+Content-Type: application/json
+
+{"error":{"code":"AadPremiumLicenseRequired","message":"The tenant needs to have Microsoft Entra ID P2 or Microsoft Entra ID Governance license.","innerError":{"date":"2025-04-11T07:27:58","request-id":"84e26e91-2844-482a-a562-5dfdb5bb8870","client-request-id":"7badfe8c-52d4-4806-b1a7-36280cf2a4b6"}}}"
+>> TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/roleManagement/directory/roleEligibilityScheduleInstances?$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 84e26e91-2844-482a-a562-5dfdb5bb8870
+client-request-id: 7badfe8c-52d4-4806-b1a7-36280cf2a4b6
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000289"}}
+Date: Fri, 11 Apr 2025 07:27:58 GMT
+Content-Type: application/json
+
+{"error":{"code":"AadPremiumLicenseRequired","message":"The tenant needs to have Microsoft Entra ID P2 or Microsoft Entra ID Governance license.","innerError":{"date":"2025-04-11T07:27:58","request-id":"84e26e91-2844-482a-a562-5dfdb5bb8870","client-request-id":"7badfe8c-52d4-4806-b1a7-36280cf2a4b6"}}}"
+[2025-04-11 09:27:58] [ERROR] Non-retryable error in Get PIM Eligible Assignments. Error: Response status code does not indicate success: BadRequest (Bad Request).
+Write-Error: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/v1.0/roleManagement/directory/roleEligibilityScheduleInstances?$count=true HTTP/2.0 400 Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: 84e26e91-2844-482a-a562-5dfdb5bb8870 client-request-id: 7badfe8c-52d4-4806-b1a7-36280cf2a4b6 x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000289"}} Date: Fri, 11 Apr 2025 07:27:58 GMT Content-Type: application/json  {"error":{"code":"AadPremiumLicenseRequired","message":"The tenant needs to have Microsoft Entra ID P2 or Microsoft Entra ID Governance license.","innerError":{"date":"2025-04-11T07:27:58","request-id":"84e26e91-2844-482a-a562-5dfdb5bb8870","client-request-id":"7badfe8c-52d4-4806-b1a7-36280cf2a4b6"}}}
+Invoke-CSPWithRetry: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/v1.0/roleManagement/directory/roleEligibilityScheduleInstances?$count=true HTTP/2.0 400 Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: 84e26e91-2844-482a-a562-5dfdb5bb8870
+client-request-id: 7badfe8c-52d4-4806-b1a7-36280cf2a4b6 x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000289"}} Date: Fri, 11 Apr 2025 07:27:58 GMT Content-Type: application/json 
+{"error":{"code":"AadPremiumLicenseRequired","message":"The tenant needs to have Microsoft Entra ID P2 or Microsoft Entra ID Governance
+license.","innerError":{"date":"2025-04-11T07:27:58","request-id":"84e26e91-2844-482a-a562-5dfdb5bb8870","client-request-id":"7badfe8c-52d4-4806-b1a7-36280cf2a4b6"}}}
+
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/roleManagement/directory/roleEligibilityScheduleInstances?$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 84e26e91-2844-482a-a562-5dfdb5bb8870
+client-request-id: 7badfe8c-52d4-4806-b1a7-36280cf2a4b6
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"002","RoleInstance":"JN3PEPF00000289"}}
+Date: Fri, 11 Apr 2025 07:27:58 GMT
+Content-Type: application/json
+
+{"error":{"code":"AadPremiumLicenseRequired","message":"The tenant needs to have Microsoft Entra ID P2 or Microsoft Entra ID Governance license.","innerError":{"date":"2025-04-11T07:27:58","request-id":"84e26e91-2844-482a-a562-5dfdb5bb8870","client-request-id":"7badfe8c-52d4-4806-b1a7-36280cf2a4b6"}}}"
+WARNING: Error retrieving PIM assignments: Response status code does not indicate success: BadRequest (Bad Request).
+[2025-04-11 09:27:58] [INFO] Extracting conditional access policies...
+[2025-04-11 09:27:58] [ERROR] Error processing tenant Chartered Group: The term 'Get-CSPConditionalAccessPolicies' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+
+ClientId               : 09a8682e-8cf3-4960-aba2-377a056dc6ef
+TenantId               : 83cf691f-ded3-4441-ad78-e4a088441fc0
+Scopes                 : {Policy.Read.ConditionalAccess, DeviceManagementManagedDevices.Read.All, UserAuthenticationMethod.Read.All, PrivilegedAccess.Read.AzureAD…}
+AuthType               : AppOnly
+TokenCredentialType    : ClientCertificate
+CertificateThumbprint  : 
+CertificateSubjectName : 
+SendCertificateChain   : False
+Account                : 
+AppName                : Netsurit Reporting
+ContextScope           : Process
+Certificate            : [Subject]
+                           CN=cspaudit.netsurit.com
+
+                         [Issuer]
+                           CN=cspaudit.netsurit.com
+
+                         [Serial Number]
+                           18E79363640B46B6BFE8B7A8D30F5978
+
+                         [Not Before]
+                           2025/04/02 10:07:21
+
+                         [Not After]
+                           2027/04/02 10:17:21
+
+                         [Thumbprint]
+                           1D38D5C4A9913CFF21F4AB6B6D3528998E4A6D99
+
+PSHostVersion          : 7.5.0
+ManagedIdentityId      : 
+ClientSecret           : 
+Environment            : Global
+
+True
+[2025-04-11 09:27:58] [INFO] CSP Reporting process completed at 04/11/2025 09:27:58
+**********************
+PowerShell transcript end
+End time: 20250411092758
+**********************
+**********************
+PowerShell transcript start
+Start time: 20250411100850
+Username: DESKTOP-FK2I144\louis
+RunAs User: DESKTOP-FK2I144\louis
+Configuration Name: 
+Machine: DESKTOP-FK2I144 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll
+Process ID: 31820
+PSVersion: 7.5.0
+PSEdition: Core
+GitCommitId: 7.5.0
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is .\Logs\CSPReporting.log
+[2025-04-11 10:08:50] [INFO] Starting CSP Reporting process at 04/11/2025 10:08:50
+[2025-04-11 10:08:50] [INFO] Processing tenant: Chartered Group
+[2025-04-11 10:08:50] [DEBUG] Using ClientId: 09a8682e-8cf3-4960-aba2-377a056dc6ef
+[2025-04-11 10:08:50] [DEBUG] TenantId: 83cf691f-ded3-4441-ad78-e4a088441fc0
+[2025-04-11 10:08:50] [DEBUG] TenantName: Chartered Group
+[2025-04-11 10:08:50] [DEBUG] AuthMethod: Certificate
+[2025-04-11 10:08:50] [DEBUG] CertificatePath: .\Certificates\CSPauditCertPP.pfx
+[2025-04-11 10:08:50] [DEBUG] CertificatePassword: D9)fnQ7C1*P5cd%B5D0)F1y,sB3O
+[2025-04-11 10:08:50] [DEBUG] ClientSecret:
+[2025-04-11 10:08:50] [DEBUG] Attempting authentication with Connect-CSPTenant...
+VERBOSE: Connecting to tenant 83cf691f-ded3-4441-ad78-e4a088441fc0 using Certificate authentication
+[2025-04-11 10:08:51] [DEBUG] Authentication with Connect-CSPTenant successful
+[2025-04-11 10:08:51] [INFO] Successfully authenticated to tenant Chartered Group
+[2025-04-11 10:08:51] [INFO] Starting v2 data extraction for tenant Chartered Group
+[2025-04-11 10:08:51] [INFO] Extracting tenant info...
+[2025-04-11 10:08:51] [INFO] Saved extracted tenant info for Chartered Group to .\Reports\_Cache\2025-04-11\Chartered Group\TenantInfo.json
+[2025-04-11 10:08:51] [INFO] Extracting domain info...
+[2025-04-11 10:08:51] [INFO] Saved extracted domain info for Chartered Group to .\Reports\_Cache\2025-04-11\Chartered Group\DomainInfo.json
+[2025-04-11 10:08:51] [INFO] Extracting organization info...
+[2025-04-11 10:08:51] [INFO] Saved extracted organization info for Chartered Group to .\Reports\_Cache\2025-04-11\Chartered Group\OrganizationInfo.json
+[2025-04-11 10:08:51] [INFO] Extracting users...
+[2025-04-11 10:08:53] [INFO] Saved extracted users for Chartered Group to .\Reports\_Cache\2025-04-11\Chartered Group\Users.json
+[2025-04-11 10:08:53] [INFO] Extracting user authentication methods...
+[2025-04-11 10:11:49] [INFO] Saved extracted user auth methods for Chartered Group to .\Reports\_Cache\2025-04-11\Chartered Group\UserAuthMethods.json
+[2025-04-11 10:11:49] [INFO] Extracting directory roles...
+[2025-04-11 10:11:55] [INFO] Saved extracted directory roles for Chartered Group to .\Reports\_Cache\2025-04-11\Chartered Group\DirectoryRoles.json
+[2025-04-11 10:11:55] [INFO] Extracting PIM assignments...
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/roleManagement/directory/roleEligibilityScheduleInstances?$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 5c48a287-d505-43dd-af46-3c0e2c38f636
+client-request-id: 9fc1eff2-09b6-4309-8dc1-9464fa7d7e6f
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF000038BA"}}
+Date: Fri, 11 Apr 2025 08:11:56 GMT
+Content-Type: application/json
+
+{"error":{"code":"AadPremiumLicenseRequired","message":"The tenant needs to have Microsoft Entra ID P2 or Microsoft Entra ID Governance license.","innerError":{"date":"2025-04-11T08:11:56","request-id":"5c48a287-d505-43dd-af46-3c0e2c38f636","client-request-id":"9fc1eff2-09b6-4309-8dc1-9464fa7d7e6f"}}}"
+>> TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/roleManagement/directory/roleEligibilityScheduleInstances?$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 5c48a287-d505-43dd-af46-3c0e2c38f636
+client-request-id: 9fc1eff2-09b6-4309-8dc1-9464fa7d7e6f
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF000038BA"}}
+Date: Fri, 11 Apr 2025 08:11:56 GMT
+Content-Type: application/json
+
+{"error":{"code":"AadPremiumLicenseRequired","message":"The tenant needs to have Microsoft Entra ID P2 or Microsoft Entra ID Governance license.","innerError":{"date":"2025-04-11T08:11:56","request-id":"5c48a287-d505-43dd-af46-3c0e2c38f636","client-request-id":"9fc1eff2-09b6-4309-8dc1-9464fa7d7e6f"}}}"
+[2025-04-11 10:11:57] [ERROR] Non-retryable error in Get PIM Eligible Assignments. Error: Response status code does not indicate success: BadRequest (Bad Request).
+Write-Error: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/v1.0/roleManagement/directory/roleEligibilityScheduleInstances?$count=true HTTP/2.0 400 Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: 5c48a287-d505-43dd-af46-3c0e2c38f636 client-request-id: 9fc1eff2-09b6-4309-8dc1-9464fa7d7e6f x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF000038BA"}} Date: Fri, 11 Apr 2025 08:11:56 GMT Content-Type: application/json  {"error":{"code":"AadPremiumLicenseRequired","message":"The tenant needs to have Microsoft Entra ID P2 or Microsoft Entra ID Governance license.","innerError":{"date":"2025-04-11T08:11:56","request-id":"5c48a287-d505-43dd-af46-3c0e2c38f636","client-request-id":"9fc1eff2-09b6-4309-8dc1-9464fa7d7e6f"}}}
+Invoke-CSPWithRetry: Error in Invoke-CSPWithRetry: GET https://graph.microsoft.com/v1.0/roleManagement/directory/roleEligibilityScheduleInstances?$count=true HTTP/2.0 400 Bad Request Vary: Accept-Encoding Strict-Transport-Security: max-age=31536000 request-id: 5c48a287-d505-43dd-af46-3c0e2c38f636
+client-request-id: 9fc1eff2-09b6-4309-8dc1-9464fa7d7e6f x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF000038BA"}} Date: Fri, 11 Apr 2025 08:11:56 GMT Content-Type: application/json 
+{"error":{"code":"AadPremiumLicenseRequired","message":"The tenant needs to have Microsoft Entra ID P2 or Microsoft Entra ID Governance
+license.","innerError":{"date":"2025-04-11T08:11:56","request-id":"5c48a287-d505-43dd-af46-3c0e2c38f636","client-request-id":"9fc1eff2-09b6-4309-8dc1-9464fa7d7e6f"}}}
+
+PS>TerminatingError(Invoke-MgGraphRequest): "GET https://graph.microsoft.com/v1.0/roleManagement/directory/roleEligibilityScheduleInstances?$count=true
+HTTP/2.0 400 Bad Request
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000
+request-id: 5c48a287-d505-43dd-af46-3c0e2c38f636
+client-request-id: 9fc1eff2-09b6-4309-8dc1-9464fa7d7e6f
+x-ms-ags-diagnostic: {"ServerInfo":{"DataCenter":"South Africa North","Slice":"E","Ring":"2","ScaleUnit":"000","RoleInstance":"JN1PEPF000038BA"}}
+Date: Fri, 11 Apr 2025 08:11:56 GMT
+Content-Type: application/json
+
+{"error":{"code":"AadPremiumLicenseRequired","message":"The tenant needs to have Microsoft Entra ID P2 or Microsoft Entra ID Governance license.","innerError":{"date":"2025-04-11T08:11:56","request-id":"5c48a287-d505-43dd-af46-3c0e2c38f636","client-request-id":"9fc1eff2-09b6-4309-8dc1-9464fa7d7e6f"}}}"
+WARNING: Error retrieving PIM assignments: Response status code does not indicate success: BadRequest (Bad Request).
+[2025-04-11 10:11:57] [INFO] Saved extracted PIM assignments for Chartered Group to .\Reports\_Cache\2025-04-11\Chartered Group\PIMAssignments.json
+[2025-04-11 10:11:57] [INFO] Extracting conditional access policies...
+[2025-04-11 10:11:57] [ERROR] Error processing tenant Chartered Group: The term 'Get-CSPConditionalAccessPolicies' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+
+ClientId               : 09a8682e-8cf3-4960-aba2-377a056dc6ef
+TenantId               : 83cf691f-ded3-4441-ad78-e4a088441fc0
+Scopes                 : {Policy.Read.ConditionalAccess, DeviceManagementManagedDevices.Read.All, UserAuthenticationMethod.Read.All, PrivilegedAccess.Read.AzureAD…}
+AuthType               : AppOnly
+TokenCredentialType    : ClientCertificate
+CertificateThumbprint  : 
+CertificateSubjectName : 
+SendCertificateChain   : False
+Account                : 
+AppName                : Netsurit Reporting
+ContextScope           : Process
+Certificate            : [Subject]
+                           CN=cspaudit.netsurit.com
+
+                         [Issuer]
+                           CN=cspaudit.netsurit.com
+
+                         [Serial Number]
+                           18E79363640B46B6BFE8B7A8D30F5978
+
+                         [Not Before]
+                           2025/04/02 10:07:21
+
+                         [Not After]
+                           2027/04/02 10:17:21
+
+                         [Thumbprint]
+                           1D38D5C4A9913CFF21F4AB6B6D3528998E4A6D99
+
+PSHostVersion          : 7.5.0
+ManagedIdentityId      : 
+ClientSecret           : 
+Environment            : Global
+
+True
+[2025-04-11 10:11:57] [INFO] CSP Reporting process completed at 04/11/2025 10:11:57
+**********************
+PowerShell transcript end
+End time: 20250411101157
+**********************
+**********************
+PowerShell transcript start
+Start time: 20250411101758
+Username: DESKTOP-FK2I144\louis
+RunAs User: DESKTOP-FK2I144\louis
+Configuration Name: 
+Machine: DESKTOP-FK2I144 (Microsoft Windows NT 10.0.26100.0)
+Host Application: C:\Program Files\PowerShell\7\pwsh.dll
+Process ID: 31820
+PSVersion: 7.5.0
+PSEdition: Core
+GitCommitId: 7.5.0
+OS: Microsoft Windows 10.0.26100
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is .\Logs\CSPReporting.log
+[2025-04-11 10:17:58] [INFO] Starting CSP Reporting process at 04/11/2025 10:17:58
+[2025-04-11 10:17:58] [INFO] Processing tenant: Chartered Group
+[2025-04-11 10:17:58] [DEBUG] Using ClientId: 09a8682e-8cf3-4960-aba2-377a056dc6ef
+[2025-04-11 10:17:58] [DEBUG] TenantId: 83cf691f-ded3-4441-ad78-e4a088441fc0
+[2025-04-11 10:17:58] [DEBUG] TenantName: Chartered Group
+[2025-04-11 10:17:58] [DEBUG] AuthMethod: Certificate
+[2025-04-11 10:17:58] [DEBUG] CertificatePath: .\Certificates\CSPauditCertPP.pfx
+[2025-04-11 10:17:58] [DEBUG] CertificatePassword: D9)fnQ7C1*P5cd%B5D0)F1y,sB3O
+[2025-04-11 10:17:58] [DEBUG] ClientSecret:
+[2025-04-11 10:17:58] [DEBUG] Attempting authentication with Connect-CSPTenant...
+VERBOSE: Connecting to tenant 83cf691f-ded3-4441-ad78-e4a088441fc0 using Certificate authentication
+[2025-04-11 10:17:59] [DEBUG] Authentication with Connect-CSPTenant successful
+[2025-04-11 10:17:59] [INFO] Successfully authenticated to tenant Chartered Group
+[2025-04-11 10:17:59] [INFO] Starting v2 data extraction for tenant Chartered Group
+[2025-04-11 10:17:59] [INFO] Loading cached tenant info for Chartered Group from .\Reports\_Cache\2025-04-11\Chartered Group\TenantInfo.json
+[2025-04-11 10:17:59] [INFO] Loading cached domain info for Chartered Group from .\Reports\_Cache\2025-04-11\Chartered Group\DomainInfo.json
+[2025-04-11 10:17:59] [INFO] Loading cached organization info for Chartered Group from .\Reports\_Cache\2025-04-11\Chartered Group\OrganizationInfo.json
+[2025-04-11 10:17:59] [INFO] Loading cached users for Chartered Group from .\Reports\_Cache\2025-04-11\Chartered Group\Users.json
+[2025-04-11 10:17:59] [INFO] Loading cached user auth methods for Chartered Group from .\Reports\_Cache\2025-04-11\Chartered Group\UserAuthMethods.json
+[2025-04-11 10:17:59] [INFO] Loading cached directory roles for Chartered Group from .\Reports\_Cache\2025-04-11\Chartered Group\DirectoryRoles.json
+[2025-04-11 10:17:59] [INFO] Loading cached PIM assignments for Chartered Group from .\Reports\_Cache\2025-04-11\Chartered Group\PIMAssignments.json
+[2025-04-11 10:17:59] [INFO] Extracting conditional access policies...
+[2025-04-11 10:18:00] [INFO] Saved extracted conditional access policies for Chartered Group to .\Reports\_Cache\2025-04-11\Chartered Group\ConditionalAccessPolicies.json
+[2025-04-11 10:18:00] [INFO] Extracting applications...
+[2025-04-11 10:18:00] [ERROR] Error processing tenant Chartered Group: The term 'Get-CSPApplicationData' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+
+ClientId               : 09a8682e-8cf3-4960-aba2-377a056dc6ef
+TenantId               : 83cf691f-ded3-4441-ad78-e4a088441fc0
+Scopes                 : {Policy.Read.ConditionalAccess, DeviceManagementManagedDevices.Read.All, UserAuthenticationMethod.Read.All, PrivilegedAccess.Read.AzureAD…}
+AuthType               : AppOnly
+TokenCredentialType    : ClientCertificate
+CertificateThumbprint  : 
+CertificateSubjectName : 
+SendCertificateChain   : False
+Account                : 
+AppName                : Netsurit Reporting
+ContextScope           : Process
+Certificate            : [Subject]
+                           CN=cspaudit.netsurit.com
+
+                         [Issuer]
+                           CN=cspaudit.netsurit.com
+
+                         [Serial Number]
+                           18E79363640B46B6BFE8B7A8D30F5978
+
+                         [Not Before]
+                           2025/04/02 10:07:21
+
+                         [Not After]
+                           2027/04/02 10:17:21
+
+                         [Thumbprint]
+                           1D38D5C4A9913CFF21F4AB6B6D3528998E4A6D99
+
+PSHostVersion          : 7.5.0
+ManagedIdentityId      : 
+ClientSecret           : 
+Environment            : Global
+
+True
+[2025-04-11 10:18:00] [INFO] CSP Reporting process completed at 04/11/2025 10:18:00
+**********************
+PowerShell transcript end
+End time: 20250411101801
+**********************

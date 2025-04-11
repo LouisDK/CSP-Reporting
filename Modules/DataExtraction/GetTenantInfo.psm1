@@ -15,10 +15,11 @@ function Get-CSPTenantInfo {
     param ()
     Write-Verbose "Starting Get-CSPTenantInfo"
 
-    $url = "https://graph.microsoft.com/v1.0/organization"
-    $selectProps = "id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority"
-    $url = "$url?`$select=$selectProps"
+    [string]$url = "https://graph.microsoft.com/v1.0/organization"
+    [string]$selectProps = "id,displayName,verifiedDomains,technicalNotificationMails,securityComplianceNotificationMails,mobileDeviceManagementAuthority"
+    $url = "$url`?$select=$selectProps"
 
+    Write-Verbose "Request URL: $url"
     try {
         $response = Invoke-CSPWithRetry -ScriptBlock {
             Invoke-MgGraphRequest -Method GET -Uri $url
@@ -73,13 +74,14 @@ function Get-CSPOrganizationInfo {
     param ()
     Write-Verbose "Starting Get-CSPOrganizationInfo"
 
-    $url = "https://graph.microsoft.com/v1.0/organization"
-    $selectProps = "id,displayName,branding,marketingNotificationEmails,privacyProfile"
-    $url = "$url?`$select=$selectProps"
+    [string]$orgInfoUrl = "https://graph.microsoft.com/v1.0/organization"
+    [string]$selectProps = "id,displayName,branding,marketingNotificationEmails,privacyProfile"
+    $orgInfoUrl = "$orgInfoUrl`?$select=$selectProps"
+    Write-Verbose "Request URL: $orgInfoUrl"
 
     try {
         $response = Invoke-CSPWithRetry -ScriptBlock {
-            Invoke-MgGraphRequest -Method GET -Uri $url
+            Invoke-MgGraphRequest -Method GET -Uri $orgInfoUrl
         } -ActivityName "Get Organization Info" -MaxRetries 3
 
         if ($response.value) {

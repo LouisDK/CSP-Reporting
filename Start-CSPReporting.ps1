@@ -45,7 +45,9 @@ param (
     [switch]$Resume,
     
     [Parameter(Mandatory = $false)]
-    [switch]$Force
+    [switch]$Force,
+    [Parameter(Mandatory = $false)]
+    [switch]$ForceFresh
 )
 
 #region Script Initialization
@@ -76,8 +78,10 @@ try {
     Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "DataExtraction/PrivilegedAccess.psm1") -Force
     Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "DataExtraction/Applications.psm1") -Force
     Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "DataExtraction/DeviceManagement.psm1") -Force
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "DataExtraction/GetPolicyData.psm1") -Force
     Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "DataExtraction/RiskAndAudit.psm1") -Force
     Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "DataExtraction/Usage.psm1") -Force
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "DataExtraction/GetTenantInfo.psm1") -Force
 
     # Check if Microsoft Graph module is installed using our utility function
     $requiredModules = @("Microsoft.Graph")
@@ -390,37 +394,280 @@ try {
                 $tenantRawData.TenantName = $tenantConfig.TenantName
 
                 Write-CSPLog -Message "Starting v2 data extraction for tenant $($tenantConfig.TenantName)" -Level "INFO"
+# --- Enhanced Restartability: Setup Cache Paths ---
+$cacheBase = Join-Path $Config.OutputPath "_Cache"
+$runDate = Get-Date -Format "yyyy-MM-dd"
+# Sanitize tenant name for filesystem (replace invalid chars with _)
+$sanitizedTenantName = $tenantConfig.TenantName -replace '[\\/:*?"<>|]', '_'
+$tenantCacheDir = Join-Path $cacheBase $runDate | Join-Path -ChildPath $sanitizedTenantName
+if (-not (Test-Path $tenantCacheDir)) {
+    New-Item -Path $tenantCacheDir -ItemType Directory -Force | Out-Null
+}
 
-                # Tenant Info
-                $tenantRawData.TenantInfo = Get-CSPTenantInfo
-                $tenantRawData.DomainInfo = Get-CSPDomainInfo
-                $tenantRawData.OrganizationInfo = Get-CSPOrganizationInfo
+# Tenant Info (with cache)
+$tenantInfoCache = Join-Path $tenantCacheDir "TenantInfo.json"
+if (-not $ForceFresh -and (Test-Path $tenantInfoCache)) {
+    Write-CSPLog -Message "Loading cached tenant info for $($tenantConfig.TenantName) from $tenantInfoCache" -Level "INFO"
+    $tenantRawData.TenantInfo = Get-Content -Path $tenantInfoCache | ConvertFrom-Json
+} else {
+    Write-CSPLog -Message "Extracting tenant info..." -Level "INFO"
+    $tenantRawData.TenantInfo = Get-CSPTenantInfo
+    if ($tenantRawData.TenantInfo) {
+        $tenantRawData.TenantInfo | ConvertTo-Json -Depth 10 | Out-File -FilePath $tenantInfoCache -Encoding UTF8
+        Write-CSPLog -Message "Saved extracted tenant info for $($tenantConfig.TenantName) to $tenantInfoCache" -Level "INFO"
+    }
+}
+                # Domain Info (with cache)
+                $domainInfoCache = Join-Path $tenantCacheDir "DomainInfo.json"
+                if (-not $ForceFresh -and (Test-Path $domainInfoCache)) {
+                    Write-CSPLog -Message "Loading cached domain info for $($tenantConfig.TenantName) from $domainInfoCache" -Level "INFO"
+                    $tenantRawData.DomainInfo = Get-Content -Path $domainInfoCache | ConvertFrom-Json
+                } else {
+                    Write-CSPLog -Message "Extracting domain info..." -Level "INFO"
+                    $tenantRawData.DomainInfo = Get-CSPDomainInfo
+                    if ($tenantRawData.DomainInfo) {
+                        $tenantRawData.DomainInfo | ConvertTo-Json -Depth 10 | Out-File -FilePath $domainInfoCache -Encoding UTF8
+                        Write-CSPLog -Message "Saved extracted domain info for $($tenantConfig.TenantName) to $domainInfoCache" -Level "INFO"
+                    }
+                }
 
-                # Users and related
-                $tenantRawData.Users = Get-CSPUserData
-                $tenantRawData.UserAuthMethods = Get-CSPUserAuthMethods -Users $tenantRawData.Users
-                $tenantRawData.DirectoryRoles = Get-CSPDirectoryRoles
-                $tenantRawData.PIMAssignments = Get-CSPPIMAssignments
+                # Organization Info (with cache)
+                $orgInfoCache = Join-Path $tenantCacheDir "OrganizationInfo.json"
+                if (-not $ForceFresh -and (Test-Path $orgInfoCache)) {
+                    Write-CSPLog -Message "Loading cached organization info for $($tenantConfig.TenantName) from $orgInfoCache" -Level "INFO"
+                    $tenantRawData.OrganizationInfo = Get-Content -Path $orgInfoCache | ConvertFrom-Json
+                } else {
+                    Write-CSPLog -Message "Extracting organization info..." -Level "INFO"
+                    $tenantRawData.OrganizationInfo = Get-CSPOrganizationInfo
+                    if ($tenantRawData.OrganizationInfo) {
+                        $tenantRawData.OrganizationInfo | ConvertTo-Json -Depth 10 | Out-File -FilePath $orgInfoCache -Encoding UTF8
+                        Write-CSPLog -Message "Saved extracted organization info for $($tenantConfig.TenantName) to $orgInfoCache" -Level "INFO"
+                    }
+                }
+                
+                # Users and related (with cache)
+                $usersCache = Join-Path $tenantCacheDir "Users.json"
+                if (-not $ForceFresh -and (Test-Path $usersCache)) {
+                    Write-CSPLog -Message "Loading cached users for $($tenantConfig.TenantName) from $usersCache" -Level "INFO"
+                    $tenantRawData.Users = Get-Content -Path $usersCache | ConvertFrom-Json
+                } else {
+                    Write-CSPLog -Message "Extracting users..." -Level "INFO"
+                    $tenantRawData.Users = Get-CSPUserData
+                    if ($tenantRawData.Users) {
+                        $tenantRawData.Users | ConvertTo-Json -Depth 10 | Out-File -FilePath $usersCache -Encoding UTF8
+                        Write-CSPLog -Message "Saved extracted users for $($tenantConfig.TenantName) to $usersCache" -Level "INFO"
+                    }
+                }
 
-                # Policies
-                $tenantRawData.ConditionalAccessPolicies = Get-CSPConditionalAccessPolicies
-                # TODO: Add Auth Method Policies, Auth Strengths, Authorization Policy
+                # User Auth Methods (with cache) - Depends on Users data
+                $userAuthMethodsCache = Join-Path $tenantCacheDir "UserAuthMethods.json"
+                if (-not $ForceFresh -and (Test-Path $userAuthMethodsCache)) {
+                    Write-CSPLog -Message "Loading cached user auth methods for $($tenantConfig.TenantName) from $userAuthMethodsCache" -Level "INFO"
+                    $tenantRawData.UserAuthMethods = Get-Content -Path $userAuthMethodsCache | ConvertFrom-Json
+                } else {
+                    # Ensure Users data is available before calling
+                    if ($null -ne $tenantRawData.Users) {
+                        Write-CSPLog -Message "Extracting user authentication methods..." -Level "INFO"
+                        $tenantRawData.UserAuthMethods = Get-CSPUserAuthMethods -Users $tenantRawData.Users
+                        if ($tenantRawData.UserAuthMethods) {
+                            $tenantRawData.UserAuthMethods | ConvertTo-Json -Depth 10 | Out-File -FilePath $userAuthMethodsCache -Encoding UTF8
+                            Write-CSPLog -Message "Saved extracted user auth methods for $($tenantConfig.TenantName) to $userAuthMethodsCache" -Level "INFO"
+                        }
+                    } else {
+                        Write-CSPLog -Message "Skipping user authentication methods extraction because user data is missing." -Level "WARNING"
+                        $tenantRawData.UserAuthMethods = @{} # Or appropriate empty value
+                    }
+                }
 
-                # Applications
-                $tenantRawData.Applications = Get-CSPApplicationData
-                $tenantRawData.ServicePrincipals = Get-CSPServicePrincipalData
+                # Directory Roles (with cache)
+                $dirRolesCache = Join-Path $tenantCacheDir "DirectoryRoles.json"
+                if (-not $ForceFresh -and (Test-Path $dirRolesCache)) {
+                    Write-CSPLog -Message "Loading cached directory roles for $($tenantConfig.TenantName) from $dirRolesCache" -Level "INFO"
+                    $tenantRawData.DirectoryRoles = Get-Content -Path $dirRolesCache | ConvertFrom-Json
+                } else {
+                    Write-CSPLog -Message "Extracting directory roles..." -Level "INFO"
+                    $tenantRawData.DirectoryRoles = Get-CSPDirectoryRoles
+                    if ($tenantRawData.DirectoryRoles) {
+                        $tenantRawData.DirectoryRoles | ConvertTo-Json -Depth 10 | Out-File -FilePath $dirRolesCache -Encoding UTF8
+                        Write-CSPLog -Message "Saved extracted directory roles for $($tenantConfig.TenantName) to $dirRolesCache" -Level "INFO"
+                    }
+                }
+
+                # PIM Assignments (with cache)
+                $pimCache = Join-Path $tenantCacheDir "PIMAssignments.json"
+                if (-not $ForceFresh -and (Test-Path $pimCache)) {
+                    Write-CSPLog -Message "Loading cached PIM assignments for $($tenantConfig.TenantName) from $pimCache" -Level "INFO"
+                    $tenantRawData.PIMAssignments = Get-Content -Path $pimCache | ConvertFrom-Json
+                } else {
+                    Write-CSPLog -Message "Extracting PIM assignments..." -Level "INFO"
+                    $tenantRawData.PIMAssignments = Get-CSPPIMAssignments
+                    # Save even if skipped, to cache the skip reason
+                    if ($tenantRawData.PIMAssignments) {
+                        $tenantRawData.PIMAssignments | ConvertTo-Json -Depth 10 | Out-File -FilePath $pimCache -Encoding UTF8
+                        # Log differently if skipped
+                        if ($tenantRawData.PIMAssignments.PSObject.Properties.Name -contains 'SkippedReason') {
+                             Write-CSPLog -Message "Saved PIM assignment skip status for $($tenantConfig.TenantName) to $pimCache" -Level "INFO"
+                        } else {
+                             Write-CSPLog -Message "Saved extracted PIM assignments for $($tenantConfig.TenantName) to $pimCache" -Level "INFO"
+                        }
+                    }
+                }
+                
+                # Policies (with cache)
+                $caPoliciesCache = Join-Path $tenantCacheDir "ConditionalAccessPolicies.json"
+                if (-not $ForceFresh -and (Test-Path $caPoliciesCache)) {
+                    Write-CSPLog -Message "Loading cached conditional access policies for $($tenantConfig.TenantName) from $caPoliciesCache" -Level "INFO"
+                    $tenantRawData.ConditionalAccessPolicies = Get-Content -Path $caPoliciesCache | ConvertFrom-Json
+                } else {
+                    Write-CSPLog -Message "Extracting conditional access policies..." -Level "INFO"
+                    $tenantRawData.ConditionalAccessPolicies = Get-CSPConditionalAccessPolicies
+                    if ($tenantRawData.ConditionalAccessPolicies) {
+                        $tenantRawData.ConditionalAccessPolicies | ConvertTo-Json -Depth 10 | Out-File -FilePath $caPoliciesCache -Encoding UTF8
+                        Write-CSPLog -Message "Saved extracted conditional access policies for $($tenantConfig.TenantName) to $caPoliciesCache" -Level "INFO"
+                    }
+                }
+                # TODO: Add Auth Method Policies, Auth Strengths, Authorization Policy (with caching)
+                
+                # Applications (with cache)
+                $appsCache = Join-Path $tenantCacheDir "Applications.json"
+                if (-not $ForceFresh -and (Test-Path $appsCache)) {
+                    Write-CSPLog -Message "Loading cached applications for $($tenantConfig.TenantName) from $appsCache" -Level "INFO"
+                    $tenantRawData.Applications = Get-Content -Path $appsCache | ConvertFrom-Json
+                } else {
+                    Write-CSPLog -Message "Extracting applications..." -Level "INFO"
+                    $tenantRawData.Applications = Get-CSPApplicationData
+                    if ($tenantRawData.Applications) {
+                        $tenantRawData.Applications | ConvertTo-Json -Depth 10 | Out-File -FilePath $appsCache -Encoding UTF8
+                        Write-CSPLog -Message "Saved extracted applications for $($tenantConfig.TenantName) to $appsCache" -Level "INFO"
+                    }
+                }
+# Service Principals (with cache)
+$spCache = Join-Path $tenantCacheDir "ServicePrincipals.json"
+if (-not $ForceFresh -and (Test-Path $spCache)) {
+    Write-CSPLog -Message "Loading cached service principals for $($tenantConfig.TenantName) from $spCache" -Level "INFO"
+    $tenantRawData.ServicePrincipals = Get-Content -Path $spCache | ConvertFrom-Json
+} else {
+    Write-CSPLog -Message "Extracting service principals..." -Level "INFO"
+    $tenantRawData.ServicePrincipals = Get-CSPServicePrincipalData
+    if ($tenantRawData.ServicePrincipals) {
+        $tenantRawData.ServicePrincipals | ConvertTo-Json -Depth 10 | Out-File -FilePath $spCache -Encoding UTF8
+        Write-CSPLog -Message "Saved extracted service principals for $($tenantConfig.TenantName) to $spCache" -Level "INFO"
+    }
+}
+# TODO: Add App Role Assignments (with caching)
                 # TODO: Add App Role Assignments
+                
+                # Devices (with cache)
+                $devicesCache = Join-Path $tenantCacheDir "ManagedDevices.json"
+                if (-not $ForceFresh -and (Test-Path $devicesCache)) {
+                    Write-CSPLog -Message "Loading cached managed devices for $($tenantConfig.TenantName) from $devicesCache" -Level "INFO"
+                    $tenantRawData.Devices = Get-Content -Path $devicesCache | ConvertFrom-Json
+                } else {
+                    Write-CSPLog -Message "Extracting managed devices..." -Level "INFO"
+                    $tenantRawData.Devices = Get-CSPManagedDeviceData
+                    # Handle potential license issues for Intune data gracefully
+                    if ($tenantRawData.Devices) {
+                         if ($tenantRawData.Devices.PSObject.Properties.Name -contains 'SkippedReason') {
+                             $tenantRawData.Devices | ConvertTo-Json -Depth 10 | Out-File -FilePath $devicesCache -Encoding UTF8
+                             Write-CSPLog -Message "Saved managed devices skip status for $($tenantConfig.TenantName) to $devicesCache" -Level "INFO"
+                         } else {
+                             $tenantRawData.Devices | ConvertTo-Json -Depth 10 | Out-File -FilePath $devicesCache -Encoding UTF8
+                             Write-CSPLog -Message "Saved extracted managed devices for $($tenantConfig.TenantName) to $devicesCache" -Level "INFO"
+                         }
+                    } else {
+                         # Handle cases where function might return $null or empty on error/skip
+                         Write-CSPLog -Message "No managed device data extracted or saved for $($tenantConfig.TenantName)." -Level "INFO"
+                         # Optionally save an empty marker to cache
+                         @{ SkippedReason = "No data returned" } | ConvertTo-Json -Depth 10 | Out-File -FilePath $devicesCache -Encoding UTF8
+                    }
+                }
+                
+                # Security (with cache)
+                $riskyUsersCache = Join-Path $tenantCacheDir "RiskyUsers.json"
+                if (-not $ForceFresh -and (Test-Path $riskyUsersCache)) {
+                    Write-CSPLog -Message "Loading cached risky users for $($tenantConfig.TenantName) from $riskyUsersCache" -Level "INFO"
+                    $tenantRawData.RiskyUsers = Get-Content -Path $riskyUsersCache | ConvertFrom-Json
+                } else {
+                    Write-CSPLog -Message "Extracting risky users..." -Level "INFO"
+                    $tenantRawData.RiskyUsers = Get-CSPRiskyUsers
+                    # Handle potential license issues for Identity Protection data gracefully
+                    if ($tenantRawData.RiskyUsers) {
+                         if ($tenantRawData.RiskyUsers.PSObject.Properties.Name -contains 'SkippedReason') {
+                             $tenantRawData.RiskyUsers | ConvertTo-Json -Depth 10 | Out-File -FilePath $riskyUsersCache -Encoding UTF8
+                             Write-CSPLog -Message "Saved risky users skip status for $($tenantConfig.TenantName) to $riskyUsersCache" -Level "INFO"
+                         } else {
+                             $tenantRawData.RiskyUsers | ConvertTo-Json -Depth 10 | Out-File -FilePath $riskyUsersCache -Encoding UTF8
+                             Write-CSPLog -Message "Saved extracted risky users for $($tenantConfig.TenantName) to $riskyUsersCache" -Level "INFO"
+                         }
+                    } else {
+                         Write-CSPLog -Message "No risky user data extracted or saved for $($tenantConfig.TenantName)." -Level "INFO"
+                         @{ SkippedReason = "No data returned" } | ConvertTo-Json -Depth 10 | Out-File -FilePath $riskyUsersCache -Encoding UTF8
+                    }
+                }
 
-                # Devices
-                $tenantRawData.Devices = Get-CSPManagedDeviceData
+                # Risk Detections (with cache)
+                $riskDetectionsCache = Join-Path $tenantCacheDir "RiskDetections.json"
+                if (-not $ForceFresh -and (Test-Path $riskDetectionsCache)) {
+                    Write-CSPLog -Message "Loading cached risk detections for $($tenantConfig.TenantName) from $riskDetectionsCache" -Level "INFO"
+                    $tenantRawData.RiskDetections = Get-Content -Path $riskDetectionsCache | ConvertFrom-Json
+                } else {
+                    Write-CSPLog -Message "Extracting risk detections..." -Level "INFO"
+                    $tenantRawData.RiskDetections = Get-CSPRiskDetections
+                    # Handle potential license issues for Identity Protection data gracefully
+                    if ($tenantRawData.RiskDetections) {
+                         if ($tenantRawData.RiskDetections.PSObject.Properties.Name -contains 'SkippedReason') {
+                             $tenantRawData.RiskDetections | ConvertTo-Json -Depth 10 | Out-File -FilePath $riskDetectionsCache -Encoding UTF8
+                             Write-CSPLog -Message "Saved risk detections skip status for $($tenantConfig.TenantName) to $riskDetectionsCache" -Level "INFO"
+                         } else {
+                             $tenantRawData.RiskDetections | ConvertTo-Json -Depth 10 | Out-File -FilePath $riskDetectionsCache -Encoding UTF8
+                             Write-CSPLog -Message "Saved extracted risk detections for $($tenantConfig.TenantName) to $riskDetectionsCache" -Level "INFO"
+                         }
+                    } else {
+                         Write-CSPLog -Message "No risk detection data extracted or saved for $($tenantConfig.TenantName)." -Level "INFO"
+                         @{ SkippedReason = "No data returned" } | ConvertTo-Json -Depth 10 | Out-File -FilePath $riskDetectionsCache -Encoding UTF8
+                    }
+                }
 
-                # Security
-                $tenantRawData.RiskyUsers = Get-CSPRiskyUsers
-                $tenantRawData.RiskDetections = Get-CSPRiskDetections
-                $tenantRawData.SecurityDefaults = Get-CSPSecurityDefaults
-
-                # Audit Logs
-                $tenantRawData.DirectoryAuditLogs = Get-CSPDirectoryAuditLogs -DaysBack $Config.ReportSettings.DaysBack
+                # Security Defaults (with cache)
+                $secDefaultsCache = Join-Path $tenantCacheDir "SecurityDefaults.json"
+                if (-not $ForceFresh -and (Test-Path $secDefaultsCache)) {
+                    Write-CSPLog -Message "Loading cached security defaults for $($tenantConfig.TenantName) from $secDefaultsCache" -Level "INFO"
+                    $tenantRawData.SecurityDefaults = Get-Content -Path $secDefaultsCache | ConvertFrom-Json
+                } else {
+                    Write-CSPLog -Message "Extracting security defaults..." -Level "INFO"
+                    $tenantRawData.SecurityDefaults = Get-CSPSecurityDefaults
+                    if ($tenantRawData.SecurityDefaults) {
+                        $tenantRawData.SecurityDefaults | ConvertTo-Json -Depth 10 | Out-File -FilePath $secDefaultsCache -Encoding UTF8
+                        Write-CSPLog -Message "Saved extracted security defaults for $($tenantConfig.TenantName) to $secDefaultsCache" -Level "INFO"
+                    }
+                }
+                
+                # Audit Logs (with cache)
+                $dirAuditCache = Join-Path $tenantCacheDir "DirectoryAuditLogs.json"
+                if (-not $ForceFresh -and (Test-Path $dirAuditCache)) {
+                    Write-CSPLog -Message "Loading cached directory audit logs for $($tenantConfig.TenantName) from $dirAuditCache" -Level "INFO"
+                    $tenantRawData.DirectoryAuditLogs = Get-Content -Path $dirAuditCache | ConvertFrom-Json
+                } else {
+                    Write-CSPLog -Message "Extracting directory audit logs (DaysBack: $($Config.ReportSettings.DaysBack))..." -Level "INFO"
+                    $tenantRawData.DirectoryAuditLogs = Get-CSPDirectoryAuditLogs -DaysBack $Config.ReportSettings.DaysBack
+                    if ($tenantRawData.DirectoryAuditLogs) {
+                        $tenantRawData.DirectoryAuditLogs | ConvertTo-Json -Depth 10 | Out-File -FilePath $dirAuditCache -Encoding UTF8
+                        Write-CSPLog -Message "Saved extracted directory audit logs for $($tenantConfig.TenantName) to $dirAuditCache" -Level "INFO"
+                    }
+                }
+# Sign-In Logs (with cache)
+$signInCache = Join-Path $tenantCacheDir "SignInLogs.json"
+if (-not $ForceFresh -and (Test-Path $signInCache)) {
+    Write-CSPLog -Message "Loading cached sign-in logs for $($tenantConfig.TenantName) from $signInCache" -Level "INFO"
+    $tenantRawData.SignInLogs = Get-Content -Path $signInCache | ConvertFrom-Json
+} else {
+    Write-CSPLog -Message "Extracting sign-in logs (DaysBack: $($Config.ReportSettings.DaysBack))..." -Level "INFO"
+    $tenantRawData.SignInLogs = Get-CSPSignInLogs -DaysBack $Config.ReportSettings.DaysBack
+    if ($tenantRawData.SignInLogs) {
+        $tenantRawData.SignInLogs | ConvertTo-Json -Depth 10 | Out-File -FilePath $signInCache -Encoding UTF8
+        Write-CSPLog -Message "Saved extracted sign-in logs for $($tenantConfig.TenantName) to $signInCache" -Level "INFO"
+    }
+}
                 $tenantRawData.SignInLogs = Get-CSPSignInLogs -DaysBack $Config.ReportSettings.DaysBack
 
                 # Optionally save raw data to disk (future enhancement)
