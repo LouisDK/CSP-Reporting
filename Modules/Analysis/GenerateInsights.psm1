@@ -90,7 +90,10 @@ function Invoke-CSPTenantAnalysis {
     if ($RawData.Users) {
         $totalUsers = ($RawData.Users).Count
         $enabledUsers = ($RawData.Users | Where-Object { $_.accountEnabled }).Count
-        $guestUsers = ($RawData.Users | Where-Object { $_.userType -eq "Guest" }).Count
+        $guestUsers = ($RawData.Users | Where-Object {
+            ($_.userType -eq "Guest") -or
+            ($_.userPrincipalName -match "#EXT#")
+        }).Count
         foreach ($user in $RawData.Users) {
             $authMethods = $RawData.UserAuthMethods[$user.id]
             $hasMFA = $false
