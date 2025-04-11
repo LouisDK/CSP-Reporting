@@ -120,6 +120,11 @@ function Connect-CSPTenant {
                 if (-not $ClientSecretCredential) {
                     throw "Client secret credential is required for client secret authentication"
                 }
+                if ($ClientSecretCredential -isnot [System.Management.Automation.PSCredential]) {
+                    $actualType = $ClientSecretCredential.GetType().FullName
+                    Write-Error "ClientSecretCredential is not a PSCredential. Actual type: $actualType. Value: $ClientSecretCredential"
+                    throw "ClientSecretCredential must be a PSCredential object, not $actualType"
+                }
                 
                 try {
                     # Extract client ID and secret from the credential
@@ -128,14 +133,8 @@ function Connect-CSPTenant {
                     
                     Write-Verbose "Connecting with Client Secret: TenantId=$TenantId, ClientId=$clientId"
                     
-                    # Create a secure string from the client secret
-                    $secureClientSecret = ConvertTo-SecureString -String $clientSecret -AsPlainText -Force
-                    
-                    # Create a PSCredential object with the client ID as the username and the client secret as the password
-                    $credential = New-Object System.Management.Automation.PSCredential($clientId, $secureClientSecret)
-                    
-                    # Connect to Microsoft Graph using the credential
-                    $connection = Connect-MgGraph -TenantId $TenantId -ClientSecretCredential $credential -Scopes $requiredScopes
+                    # Connect to Microsoft Graph using client secret (non-interactive, application authentication)
+                    $connection = Connect-MgGraph -TenantId $TenantId -ClientId $clientId -ClientSecret $clientSecret -Scopes $requiredScopes
                     
                     $result.Success = $true
                     $result.Connection = $connection

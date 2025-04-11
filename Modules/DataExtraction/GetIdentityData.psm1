@@ -22,6 +22,7 @@ function Get-CSPUserData {
     $headers = @{ "ConsistencyLevel" = "eventual" }
 
     try {
+        $firstPage = $true
         do {
             Write-Verbose "Requesting users from: $url"
             $response = Invoke-CSPWithRetry -ScriptBlock {
@@ -31,6 +32,17 @@ function Get-CSPUserData {
             if ($response.value) {
                 $allUsers += $response.value
                 Write-Verbose "Retrieved $($response.value.Count) users, total so far: $($allUsers.Count)"
+                if ($firstPage) {
+                    # Debug: Output the first user object and save the raw response to a file
+                    if ($response.value.Count -gt 0) {
+                        Write-Host "[DEBUG] First user object from API response:"
+                        Write-Host ($response.value[0] | ConvertTo-Json -Depth 10)
+                    }
+                    $debugPath = Join-Path -Path $env:TEMP -ChildPath "Users_raw_debug.json"
+                    $response | ConvertTo-Json -Depth 10 | Out-File -FilePath $debugPath -Encoding UTF8
+                    Write-Host "[DEBUG] Raw API response for first page of users saved to: $debugPath"
+                    $firstPage = $false
+                }
             } else {
                 Write-Verbose "No users returned in this page."
             }

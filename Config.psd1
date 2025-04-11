@@ -48,6 +48,15 @@
             ReportsToRun = @("MFA")
         }
         
+        @{
+            TenantId = "5da736f8-138e-4b36-adab-2236f975b6f1"
+            TenantName = "Netsurit"
+            AuthMethod = "Certificate"
+            ClientId = "08616068-6348-4055-9c17-f04d332f23fc"
+            CertificatePath = ".\Certificates\Netsurit_CSPLDK.pfx"
+            CertificatePassword = "King123!@#"
+        } 
+
         #@{
         #     TenantId = "harith.onmicrosoft.com"
         #     TenantName = "Harith"

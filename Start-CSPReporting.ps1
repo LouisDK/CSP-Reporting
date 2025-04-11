@@ -71,6 +71,12 @@ try {
     Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "ModuleManagement.psm1") -Force
     Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "ConsentUtils.psm1") -Force
     Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "ReportingUtils.psm1") -Force
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "Analysis/GenerateInsights.psm1") -Force
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "Analysis/AnalyzeIdentity.psm1") -Force
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "Analysis/AnalyzePolicies.psm1") -Force
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "Analysis/AnalyzeApplications.psm1") -Force
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "Analysis/AnalyzeDevices.psm1") -Force
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "Analysis/AnalyzeSecurity.psm1") -Force
 
     # Import data extraction modules
     Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "DataExtraction/Identity.psm1") -Force
@@ -277,29 +283,28 @@ try {
             }
             
             if (-not $skipTenant) {
-                # Authenticate to the tenant
-                $authParams = @{
-                    TenantId = $tenantConfig.TenantId
-                    ClientId = $tenantConfig.ClientId
-                    Verbose = $true  # Add verbose output for debugging
+                # Determine authentication method before logging or parameter construction
+                $authMethod = if ($tenantConfig.ContainsKey("AuthMethod")) {
+                    $tenantConfig.AuthMethod
+                } else {
+                    $Config.DefaultAuthMethod
                 }
-                
+
+                # Authenticate to the tenant
                 Write-CSPLog -Message "Using ClientId: $($tenantConfig.ClientId)" -Level "DEBUG"
                 Write-CSPLog -Message "TenantId: $($tenantConfig.TenantId)" -Level "DEBUG"
                 Write-CSPLog -Message "TenantName: $($tenantConfig.TenantName)" -Level "DEBUG"
                 Write-CSPLog -Message "AuthMethod: $authMethod" -Level "DEBUG"
-                Write-CSPLog -Message "CertificatePath: $($tenantConfig.CertificatePath)" -Level "DEBUG"
-                Write-CSPLog -Message "CertificatePassword: $($tenantConfig.CertificatePassword)" -Level "DEBUG"
-                Write-CSPLog -Message "ClientSecret: $($tenantConfig.ClientSecret)" -Level "DEBUG"
-                
-                # Add authentication method parameters
-                $authMethod = if ($tenantConfig.ContainsKey("AuthMethod")) { 
-                    $tenantConfig.AuthMethod 
-                } else { 
-                    $Config.DefaultAuthMethod 
-                }
-                
+
                 if ($authMethod -eq "Certificate") {
+                    $authParams = @{
+                        TenantId = $tenantConfig.TenantId
+                        ClientId = $tenantConfig.ClientId
+                        Verbose = $true  # Add verbose output for debugging
+                    }
+                    Write-CSPLog -Message "CertificatePath: $($tenantConfig.CertificatePath)" -Level "DEBUG"
+                    Write-CSPLog -Message "CertificatePassword: $($tenantConfig.CertificatePassword)" -Level "DEBUG"
+
                     $authParams.CertificatePath = $tenantConfig.CertificatePath
 
                     # Convert plain text password to SecureString if necessary
@@ -314,17 +319,12 @@ try {
 
                     $authParams.AuthMethod = "Certificate"
                 }
+                elseif ($authMethod -eq "ClientSecret") {
+                    # Do not log the client secret for security reasons
+                    # No need to construct $authParams for ClientSecret
+                }
                 else {
-                    # Create a PSCredential object for client secret authentication
-                    if ($tenantConfig.ClientSecret -is [string]) {
-                        $secureSecret = ConvertTo-SecureString -String $tenantConfig.ClientSecret -AsPlainText -Force
-                        $authParams.ClientSecretCredential = New-Object System.Management.Automation.PSCredential($tenantConfig.ClientId, $secureSecret)
-                    } elseif ($tenantConfig.ClientSecret -is [SecureString]) {
-                        $authParams.ClientSecretCredential = New-Object System.Management.Automation.PSCredential($Config.AppRegistration.ClientId, $tenantConfig.ClientSecret)
-                    } else {
-                        throw "ClientSecret must be either a string or a SecureString"
-                    }
-                    $authParams.AuthMethod = "ClientSecret"
+                    throw "Invalid authentication method specified for tenant $($tenantConfig.TenantName): $authMethod. Valid values are 'Certificate' or 'ClientSecret'."
                 }
                 
                 # For ClientSecret authentication, bypass Connect-CSPTenant and use Connect-MgGraph directly
@@ -333,11 +333,11 @@ try {
                         Write-CSPLog -Message "Attempting direct authentication with Connect-MgGraph using ClientId method..." -Level "DEBUG"
                         
                         # Based on our test, Method 2 (using ClientId parameter directly) works best
-                        $clientId = $Config.AppRegistration.ClientId
+                        $clientId = $tenantConfig.ClientId
                         $tenantId = $tenantConfig.TenantId
                         
                         Write-CSPLog -Message "Connecting with ClientId=$clientId, TenantId=$tenantId" -Level "DEBUG"
-                        Connect-MgGraph -ClientId $clientId -TenantId $tenantId
+                        Microsoft.Graph.Authentication\Connect-MgGraph -ClientId $clientId -TenantId $tenantId -ClientSecret $tenantConfig.ClientSecret
                         
                         # Create success result
                         $authResult = @{

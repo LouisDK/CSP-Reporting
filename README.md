@@ -24,8 +24,6 @@ Created by Louis de Klerk (Netsurit), April 2025.
   - [Resilient Operations](#resilient-operations)
   - [Troubleshooting](#troubleshooting)
   - [Security Considerations](#security-considerations)
-  - [Additional Documentation](#additional-documentation)
-  - [Contributing](#contributing)
 
 ---
 
@@ -141,7 +139,8 @@ See example in repo.
   - Checks device compliance
   - Reviews tenant config (Security Defaults, domains)
 - **Configurable rules** drive findings
-- **Outputs** structured JSON ready for LLM summarization
+- **Simple Output** CSV file that lists all users, indicating who has MFA configured
+- **Advanced Outputs** structured JSON ready for LLM summarization
 
 ---
 
@@ -229,17 +228,3 @@ Use `Schedule-CSPReporting.ps1` to automate runs via Windows Task Scheduler.
 - Enable Security Defaults or equivalent CA policies
 
 ---
-
-## Additional Documentation
-
-- [App Registration Guide](AppRegistration-Guide.md)
-- [Setup-CSPCertificates.ps1](Setup-CSPCertificates.ps1)
-- [Grant-CSPAdminConsent.ps1](Grant-CSPAdminConsent.ps1)
-- [Initialize-CSPModules.ps1](Initialize-CSPModules.ps1)
-- [Design Documents](Design/)
-
----
-
-## Contributing
-
-Contributions welcome! Fork, improve, and submit PRs.

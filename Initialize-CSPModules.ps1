@@ -64,18 +64,18 @@ try {
     
     # Define required modules
     $requiredModules = @(
-        "Microsoft.Graph.Authentication",
-        "Microsoft.Graph.Applications", 
-        "Microsoft.Graph.Identity.DirectoryManagement",
-        "Microsoft.Graph.Users",
-        "Microsoft.Graph.Reports",
-        "Microsoft.Graph.Identity.SignIns"
+        @{ ModuleName = "Microsoft.Graph.Authentication"; RequiredVersion = "2.25.0" },
+        @{ ModuleName = "Microsoft.Graph.Applications"; RequiredVersion = "2.25.0" },
+        @{ ModuleName = "Microsoft.Graph.Identity.DirectoryManagement"; RequiredVersion = "2.25.0" },
+        @{ ModuleName = "Microsoft.Graph.Users"; RequiredVersion = "2.25.0" },
+        @{ ModuleName = "Microsoft.Graph.Reports"; RequiredVersion = "2.25.0" },
+        @{ ModuleName = "Microsoft.Graph.Identity.SignIns"; RequiredVersion = "2.25.0" }
     )
     
     Write-CSPLog -Message "Checking for $($requiredModules.Count) required modules..." -Level "INFO" -UseColor
     
     # Initialize modules
-    $moduleResults = Initialize-CSPModules -ModuleNames $requiredModules -Force:$Force
+    $moduleResults = Initialize-CSPModules -ModuleSpecs $requiredModules -Force:$Force
     
     # Display results
     Write-CSPColorMessage -Message "`n===== Module Initialization Results =====" -Type Info
