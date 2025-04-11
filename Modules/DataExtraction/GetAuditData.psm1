@@ -20,7 +20,7 @@ function Get-CSPDirectoryAuditLogs {
 
     $startDate = (Get-Date).AddDays(-$DaysBack).ToString("yyyy-MM-ddTHH:mm:ssZ")
     $filter = "activityDateTime ge $startDate"
-    $url = "https://graph.microsoft.com/v1.0/auditLogs/directoryAudits?`$filter=$filter&`$count=true"
+    $url = "https://graph.microsoft.com/v1.0/auditLogs/directoryAudits?`$filter=$filter"
     $headers = @{ "ConsistencyLevel" = "eventual" }
 
     $allLogs = @()
@@ -62,7 +62,7 @@ function Get-CSPSignInLogs {
 
     $startDate = (Get-Date).AddDays(-$DaysBack).ToString("yyyy-MM-ddTHH:mm:ssZ")
     $filter = "createdDateTime ge $startDate"
-    $url = "https://graph.microsoft.com/v1.0/auditLogs/signIns?`$filter=$filter&`$count=true"
+    $url = "https://graph.microsoft.com/v1.0/auditLogs/signIns?`$filter=$filter"
     $headers = @{ "ConsistencyLevel" = "eventual" }
 
     $allLogs = @()

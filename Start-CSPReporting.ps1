@@ -79,6 +79,10 @@ try {
     Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "DataExtraction/Applications.psm1") -Force
     Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "DataExtraction/DeviceManagement.psm1") -Force
     Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "DataExtraction/GetPolicyData.psm1") -Force
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "DataExtraction/GetApplicationData.psm1") -Force
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "DataExtraction/GetDeviceData.psm1") -Force
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "DataExtraction/GetSecurityData.psm1") -Force
+    Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "DataExtraction/GetAuditData.psm1") -Force
     Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "DataExtraction/RiskAndAudit.psm1") -Force
     Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "DataExtraction/Usage.psm1") -Force
     Import-Module -Name (Join-Path -Path $ModulesPath -ChildPath "DataExtraction/GetTenantInfo.psm1") -Force

@@ -13,8 +13,37 @@ function Get-CSPApplicationData {
     #>
     [CmdletBinding()]
     param ()
-    Write-Verbose "Called Get-CSPApplicationData"
-    # Implementation to be added
+    Write-Verbose "Starting Get-CSPApplicationData"
+
+    [array]$allApps = @()
+    [string]$baseUrl = "https://graph.microsoft.com/v1.0/applications"
+    [string]$selectProps = "id,appId,displayName,createdDateTime,signInAudience,appRoles,requiredResourceAccess,keyCredentials,passwordCredentials,createdBy,owners"
+    [string]$url = "$baseUrl`?$select=$selectProps&$count=true"
+    $headers = @{ "ConsistencyLevel" = "eventual" }
+
+    try {
+        do {
+            Write-Verbose "Requesting applications from: $url"
+            $response = Invoke-CSPWithRetry -ScriptBlock {
+                Invoke-MgGraphRequest -Method GET -Uri $url -Headers $headers
+            } -ActivityName "Get Applications" -MaxRetries 3
+
+            if ($response.value) {
+                $allApps += $response.value
+                Write-Verbose "Retrieved $($response.value.Count) applications, total so far: $($allApps.Count)"
+            } else {
+                Write-Verbose "No applications returned in this page."
+            }
+
+            $url = $response.'@odata.nextLink'
+        } while ($url)
+        Write-Verbose "Total applications retrieved: $($allApps.Count)"
+        return $allApps
+    }
+    catch {
+        Write-Warning "Error retrieving applications: $($_.Exception.Message)"
+        return @()
+    }
 }
 
 function Get-CSPServicePrincipalData {
@@ -24,8 +53,37 @@ function Get-CSPServicePrincipalData {
     #>
     [CmdletBinding()]
     param ()
-    Write-Verbose "Called Get-CSPServicePrincipalData"
-    # Implementation to be added
+    Write-Verbose "Starting Get-CSPServicePrincipalData"
+
+    [array]$allSPs = @()
+    [string]$baseUrl = "https://graph.microsoft.com/v1.0/servicePrincipals"
+    [string]$selectProps = "id,appId,displayName,createdDateTime,accountEnabled,appOwnerOrganizationId,appRoles,servicePrincipalType,signInAudience,owners,keyCredentials,passwordCredentials"
+    [string]$url = "$baseUrl`?$select=$selectProps&$count=true"
+    $headers = @{ "ConsistencyLevel" = "eventual" }
+
+    try {
+        do {
+            Write-Verbose "Requesting service principals from: $url"
+            $response = Invoke-CSPWithRetry -ScriptBlock {
+                Invoke-MgGraphRequest -Method GET -Uri $url -Headers $headers
+            } -ActivityName "Get Service Principals" -MaxRetries 3
+
+            if ($response.value) {
+                $allSPs += $response.value
+                Write-Verbose "Retrieved $($response.value.Count) service principals, total so far: $($allSPs.Count)"
+            } else {
+                Write-Verbose "No service principals returned in this page."
+            }
+
+            $url = $response.'@odata.nextLink'
+        } while ($url)
+        Write-Verbose "Total service principals retrieved: $($allSPs.Count)"
+        return $allSPs
+    }
+    catch {
+        Write-Warning "Error retrieving service principals: $($_.Exception.Message)"
+        return @()
+    }
 }
 
 function Get-CSPAppRoleAssignments {
