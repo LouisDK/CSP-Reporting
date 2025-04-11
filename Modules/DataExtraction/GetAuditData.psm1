@@ -14,7 +14,7 @@ function Get-CSPDirectoryAuditLogs {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $false)]
-        [int]$DaysBack = 30
+        [int]$DaysBack = 2
     )
     Write-Verbose "Starting Get-CSPDirectoryAuditLogs"
 
@@ -56,7 +56,7 @@ function Get-CSPSignInLogs {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $false)]
-        [int]$DaysBack = 30
+        [int]$DaysBack = 2
     )
     Write-Verbose "Starting Get-CSPSignInLogs"
 

@@ -78,7 +78,7 @@
     # Report Settings
     ReportSettings = @{
         # Number of days back to retrieve audit logs
-        DaysBack = 30
+        DaysBack = 1
         
         # Include disabled users in MFA report
         IncludeDisabledUsers = $false
